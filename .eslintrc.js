@@ -28,6 +28,7 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'react/button-has-type': 'off',
     'react/default-props-match-prop-type': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'react/destructuring-assignment': [
       'error',
       'always',
