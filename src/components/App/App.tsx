@@ -1,8 +1,8 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 
-import client from './configuration/client';
-import logo from './logo.svg';
+import client from '../../configuration/client';
+import logo from '../../logo.svg';
 import './App.css';
 
 const App: React.FC = () => (
