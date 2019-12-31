@@ -1,9 +1,6 @@
-import React, { ReactChild } from 'react';
+import React, { ReactChild, FunctionComponent } from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-  HeaderMenu,
-  SideNavigation,
-} from '@f-design/component-library';
+import { HeaderMenu, SideNavigation } from '@f-design/component-library';
 
 import './NavigationContainer.scss';
 
@@ -11,7 +8,9 @@ type NavigationContainerProps = {
   children: ReactChild | ReactChild[];
 };
 
-const NavigationContainer = ({ children }: NavigationContainerProps) => {
+const NavigationContainer: FunctionComponent<NavigationContainerProps> = ({
+  children,
+}: NavigationContainerProps) => {
   const history = useHistory();
 
   const sideNavigationMenuOptions = {
@@ -33,9 +32,12 @@ const NavigationContainer = ({ children }: NavigationContainerProps) => {
   };
 
   console.log({ history });
+  console.log(process.env);
   return (
     <div className="dx-navigation-container">
       <SideNavigation
+        logoTitle="DevelopmentalFX"
+        logoAssetPath={`${process.env.PUBLIC_URL}/assets/dfx-1.png`}
         currentlyViewing={currentlyViewing}
         menuOptions={sideNavigationMenuOptions}
         defaultSelected={{

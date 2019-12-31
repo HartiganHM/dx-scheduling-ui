@@ -1,18 +1,14 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import React, { ReactElement, FunctionComponent } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { IntakeForm, Permissions } from 'pages';
 import NavigationContainer from '../NavigationContainer/NavigationContainer';
 
-const Routes = () => (
+const Routes: FunctionComponent = () => (
   <Router>
     <Route
       path="/"
-      render={() => (
+      render={(): ReactElement => (
         <NavigationContainer>
           <Switch>
             <Route path="/permissions" component={Permissions} />
