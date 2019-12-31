@@ -1,14 +1,12 @@
 import React from 'react';
-import { ApolloProvider } from '@apollo/react-hooks';
 
-import client from '../../configuration/client';
 import Routes from '../Routes/Routes';
-import './App.css';
+import './App.scss';
 
 const App: React.FC = () => (
-  <ApolloProvider client={client}>
+  <div className="dx-app">
     <Routes />
-  </ApolloProvider>
+  </div>
 );
 
 export default App;
