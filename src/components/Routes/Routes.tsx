@@ -1,30 +1,23 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  // Switch,
+  Switch,
   Route,
 } from 'react-router-dom';
 
+import { IntakeForm, Permissions } from 'pages';
 import NavigationContainer from '../NavigationContainer/NavigationContainer';
 
 const Routes = () => (
   <Router>
     <Route
       path="/"
-      render={({ history }) => (
-        <NavigationContainer history={history}>
-          <div className="App">
-            <header className="App-header">
-              <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn React
-              </a>
-            </header>
-          </div>
+      render={() => (
+        <NavigationContainer>
+          <Switch>
+            <Route path="/permissions" component={Permissions} />
+            <Route path="/intake" component={IntakeForm} />
+          </Switch>
         </NavigationContainer>
       )}
     />
