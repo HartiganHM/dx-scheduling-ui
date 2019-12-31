@@ -17,8 +17,11 @@ module.exports = {
   rules: {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
-    'no-use-before-define': ['error', { variables: false }],
-    '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
+    'no-use-before-define': ['error', { variables: false, functions: false }],
+    '@typescript-eslint/no-use-before-define': [
+      'error',
+      { variables: false, functions: false },
+    ],
     'react-hooks/rules-of-hooks': 'error',
   },
   settings: {
