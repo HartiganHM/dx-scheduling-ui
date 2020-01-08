@@ -1,15 +1,13 @@
 import { Reducer } from 'react';
 
-import { Actions, ActionTypeEnum, InitialState } from 'shared/types/types';
+import { Actions, ActionTypesEnum, InitialState } from 'shared/types/types';
 
 const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
   switch (action.type) {
-    case ActionTypeEnum.UpdateCurrentlyViewing: {
-      const { currentlyViewing } = action;
-
+    case ActionTypesEnum.UpdateCurrentlyViewing: {
       return {
         ...state,
-        currentlyViewing,
+        currentlyViewing: action.currentlyViewing,
       };
     }
 
