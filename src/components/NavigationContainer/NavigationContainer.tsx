@@ -1,7 +1,11 @@
-import React, { ReactChild, FunctionComponent } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { ReactChild, FunctionComponent, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { HeaderMenu, SideNavigation } from '@f-design/component-library';
 
+import { useStateValue } from 'components';
+import { headerMenuOptions, sideNavigationMenuOptions } from 'shared/data';
+import currentlyViewingByPathEnum from 'shared/enums/currentlyViewingByPathEnum';
+import { ActionTypesEnum, CurrentlyViewing } from 'shared/types/types';
 import './NavigationContainer.scss';
 
 type NavigationContainerProps = {
@@ -12,27 +16,21 @@ const NavigationContainer: FunctionComponent<NavigationContainerProps> = ({
   children,
 }: NavigationContainerProps) => {
   const history = useHistory();
+  const location = useLocation();
 
-  const sideNavigationMenuOptions = {
-    user: {
-      icon: 'person',
-      titleType: 'subOption option',
-      subOptions: ['my info', 'notifications', 'logout'],
-    },
-    settings: {
-      icon: 'settings_applications',
-      titleType: 'subOption',
-      subOptions: ['preferences', 'help', 'feedback'],
-    },
-  };
+  const [{ currentlyViewing }, dispatch] = useStateValue();
 
-  const currentlyViewing = {
-    path: '/user/my info',
-    title: 'user',
-  };
+  useEffect(() => {
+    const { pathname } = location;
+    dispatch({
+      type: ActionTypesEnum.UpdateCurrentlyViewing,
+      currentlyViewing: {
+        path: pathname,
+        ...currentlyViewingByPathEnum[pathname],
+      },
+    });
+  }, [location]);
 
-  console.log({ history });
-  console.log(process.env);
   return (
     <div className="dx-navigation-container">
       <SideNavigation
@@ -48,25 +46,12 @@ const NavigationContainer: FunctionComponent<NavigationContainerProps> = ({
 
       <div className="dx-navigation-container__content">
         <HeaderMenu
-          currentlyViewing={{
-            title: 'Development FX',
-            subTitle: 'Scheduling Application',
-            path: '/best-site',
-          }}
-          menuOptions={{
-            settings: {
-              icon: 'settings',
-              path: '/settings',
-            },
-            notifications: {
-              icon: 'notifications',
-              path: '/notifications',
-            },
-            search: {
-              icon: 'search',
-            },
-          }}
+          currentlyViewing={currentlyViewing}
+          menuOptions={headerMenuOptions}
           defaultTitle="Dashboard"
+          onNavigate={(currentlyViewing: CurrentlyViewing): void =>
+            history.push(currentlyViewing.path)
+          }
         />
         {children}
       </div>
