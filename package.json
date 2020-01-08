@@ -60,7 +60,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "yarn run lint",
-      "pre-push": "yarn run lint && CI=true react-scripts test --collectCoverage"
+      "pre-push": "yarn run lint"
     }
   }
 }
