@@ -1,4 +1,13 @@
 import globalReducer from './globalReducer';
 import initialState from './initialState';
+import {
+  headerMenuOptions,
+  sideNavigationMenuOptions,
+} from './navigationProperties';
 
-export { globalReducer, initialState };
+export {
+  globalReducer,
+  headerMenuOptions,
+  initialState,
+  sideNavigationMenuOptions,
+};

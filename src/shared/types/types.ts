@@ -1,15 +1,15 @@
 // Global State
 export type Actions = {
-  type: ActionTypeEnum;
-  currentlyViewing?: CurrentlyViewing;
+  type: ActionTypesEnum;
+  currentlyViewing: CurrentlyViewing;
 };
 
-export enum ActionTypeEnum {
+export enum ActionTypesEnum {
   UpdateCurrentlyViewing = 'UPDATE_CURRENTLY_VIEWING',
 }
 
 export interface InitialState {
-  currentlyViewing?: CurrentlyViewing;
+  currentlyViewing: CurrentlyViewing;
 }
 
 // Navigation
