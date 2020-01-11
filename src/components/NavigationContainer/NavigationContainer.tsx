@@ -56,7 +56,7 @@ const NavigationContainer: FunctionComponent<NavigationContainerProps> = ({
             history.push(currentlyViewing.path)
           }
         />
-        {children}
+        <main className="dx-navigation-container__main">{children}</main>
       </div>
     </div>
   );
