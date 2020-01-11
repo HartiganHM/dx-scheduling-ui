@@ -21,14 +21,14 @@ const headerMenuOptions = {
 
 const sideNavigationMenuOptions = {
   user: {
-    icon: 'person',
-    titleType: 'subOption option',
-    subOptions: ['my info', 'notifications', 'logout'],
-  },
-  settings: {
-    icon: 'settings_applications',
+    icon: 'account_circle',
     titleType: 'subOption',
-    subOptions: ['preferences', 'help', 'feedback'],
+    subOptions: ['profile', 'calendar', 'settings'],
+  },
+  client: {
+    icon: 'people',
+    titleType: 'subOption option',
+    subOptions: ['intake'],
   },
 };
 

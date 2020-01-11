@@ -2,7 +2,7 @@ const currentlyViewingByPathEnum: any = {
   '/administration': {
     title: 'User Administration',
   },
-  '/intake': {
+  '/client/intake': {
     title: 'Intake Form',
   },
   '/permissions': {
