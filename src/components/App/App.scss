@@ -1,3 +1,5 @@
+@import '../../styles/main';
+
 html,
 body,
 #root {
@@ -13,6 +15,7 @@ body {
 #root {
   display: flex;
   flex-direction: column;
+  color: $gray-19;
   & > :first-child {
     flex: 1;
   }
