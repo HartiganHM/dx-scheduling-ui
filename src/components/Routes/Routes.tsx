@@ -12,7 +12,7 @@ const Routes: FunctionComponent = () => (
         <NavigationContainer>
           <Switch>
             <Route path="/permissions" component={Permissions} />
-            <Route path="/intake" component={IntakeForm} />
+            <Route path="/client/intake" component={IntakeForm} />
           </Switch>
         </NavigationContainer>
       )}
