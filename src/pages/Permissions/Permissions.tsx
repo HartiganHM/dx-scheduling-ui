@@ -29,7 +29,7 @@ const Permissions: FunctionComponent<PermissionsProps> = (
 
   return (
     <div className="permissions">
-      <Button type="destructive" onClick={() => console.log('butt')}>
+      <Button type="destructive" onClick={(): void => console.log('butt')}>
         Hi!
       </Button>
     </div>
