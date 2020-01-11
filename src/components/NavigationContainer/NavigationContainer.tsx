@@ -29,7 +29,7 @@ const NavigationContainer: FunctionComponent<NavigationContainerProps> = ({
         ...currentlyViewingByPathEnum[pathname],
       },
     });
-  }, [location]);
+  }, [location, dispatch]);
 
   return (
     <div className="dx-navigation-container">
@@ -38,6 +38,9 @@ const NavigationContainer: FunctionComponent<NavigationContainerProps> = ({
         logoAssetPath={`${process.env.PUBLIC_URL}/assets/dfx-1.png`}
         currentlyViewing={currentlyViewing}
         menuOptions={sideNavigationMenuOptions}
+        onNavigate={(currentlyViewing: CurrentlyViewing): void =>
+          history.push(currentlyViewing.path)
+        }
         defaultSelected={{
           option: 'user',
           subOption: 'my info',
