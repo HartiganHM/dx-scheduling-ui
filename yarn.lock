@@ -1009,10 +1009,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
-"@f-design/component-library@^0.1.22":
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/@f-design/component-library/-/component-library-0.1.22.tgz#4bc9e809ab38994edb0c869bfe574a56184af5d7"
-  integrity sha512-+qjY5ln8SwIBfTtE0eG0j42lFaF988eSakpPAU3Zl0Y5ow9saEOH6DkCaVKRl0x5D+vpt50v2L5dIA6nx/q6nw==
+"@f-design/component-library@^0.1.25":
+  version "0.1.25"
+  resolved "https://registry.yarnpkg.com/@f-design/component-library/-/component-library-0.1.25.tgz#6f23e153866954a0c02496b2572174a0831b8610"
+  integrity sha512-3bUk+tI1mOMWKRtaVVfIe9oNPkzXwdG9Yx9yltU42Hmmm7hz3xUDQbqBKXxU+XC1/bNTjN5LpDN6+RNXdS1N8Q==
   dependencies:
     "@babel/core" "^7.7.5"
     core-js "^3.5.0"
