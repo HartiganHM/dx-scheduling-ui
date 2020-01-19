@@ -19,17 +19,37 @@ const headerMenuOptions = {
   },
 };
 
-const sideNavigationMenuOptions = {
-  user: {
+const sideNavigationMenuOptions = [
+  {
+    label: 'user',
     icon: 'account_circle',
     titleType: 'subOption',
-    subOptions: ['profile', 'calendar', 'settings'],
+    subOptions: [
+      {
+        path: '/user/profile',
+        title: 'Profile',
+      },
+      {
+        path: '/user/calendar',
+        title: 'Calendar',
+      },
+      {
+        path: '/user/settings',
+        title: 'Settings',
+      },
+    ],
   },
-  client: {
+  {
+    label: 'client',
     icon: 'people',
     titleType: 'subOption option',
-    subOptions: ['intake'],
+    subOptions: [
+      {
+        path: '/client/intake',
+        title: 'intake',
+      },
+    ],
   },
-};
+];
 
 export { headerMenuOptions, sideNavigationMenuOptions };
