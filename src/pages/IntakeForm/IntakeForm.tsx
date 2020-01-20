@@ -371,7 +371,9 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
     index: number
   ): ReactElement => {
     const { provider, id, groupNumber, insured } = insurance;
-    const parentNames = parents.map(({ firstName }) => firstName);
+    const parentNames = parents
+      .filter(({ firstName }) => firstName)
+      .map(({ firstName }) => firstName);
     const matchingParent = parents.find(
       ({ firstName }) => firstName === insured
     );
@@ -383,7 +385,7 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
         <div className="intake-form__field-container">
           <Input
             name="id"
-            label="Insurance ID #"
+            label="ID #"
             value={id}
             onChange={(event): void =>
               handleUpdateInsuranceInputValues(event, index)
@@ -392,7 +394,7 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
 
           <Input
             name="groupNumber"
-            label="Insurance ID #"
+            label="Group #"
             value={groupNumber}
             onChange={(event): void =>
               handleUpdateInsuranceInputValues(event, index)
