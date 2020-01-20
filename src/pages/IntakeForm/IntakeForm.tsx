@@ -12,6 +12,7 @@ import {
   ExpansionPanel,
   Input,
   Radio,
+  Select,
 } from '@f-design/component-library';
 
 import './IntakeForm.scss';
@@ -352,15 +353,12 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
     handleUpdateInsurances(newInsurance);
   };
 
-  const handleUpdateInsured = (
-    { target: { name } }: ChangeEvent<HTMLInputElement>,
-    index: number
-  ): void => {
+  const handleUpdateInsured = (value: string, index: number): void => {
     const newInsurance = handleUpdateInsuranceByIndex(
       insurances,
       index,
       'insured',
-      name
+      value
     );
 
     handleUpdateInsurances(newInsurance);
@@ -371,12 +369,21 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
     index: number
   ): ReactElement => {
     const { provider, id, groupNumber, insured } = insurance;
-    const parentNames = parents
+    const parentOptions = parents
       .filter(({ firstName }) => firstName)
-      .map(({ firstName }) => firstName);
+      .map(({ firstName, lastName }) => ({
+        value: firstName,
+        label: `${firstName} ${lastName}`,
+      }));
+    const parentNames = parentOptions.map(({ value }) => value);
+
     const matchingParent = parents.find(
       ({ firstName }) => firstName === insured
     );
+    const selectedOption = matchingParent && {
+      value: insured,
+      label: `${matchingParent.firstName} ${matchingParent.lastName}`,
+    };
 
     return (
       <>
@@ -401,11 +408,11 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
             }
           />
 
-          <Radio
+          <Select
             label="Insured"
-            selected={insured}
-            options={parentNames}
-            onChange={(event): void => handleUpdateInsured(event, index)}
+            selected={selectedOption}
+            options={parentOptions}
+            onSelect={({ value }): void => handleUpdateInsured(value, index)}
           />
 
           <Input

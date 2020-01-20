@@ -15,14 +15,16 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 1rem;
-    margin-bottom: 1rem;
     padding: 1rem;
   }
-  &__parent-controls {
+  &__parent-controls-container {
     display: flex;
     padding: 1rem;
   }
   &__add-button-icon {
     margin-right: 0.5rem;
+  }
+  &__delete-button {
+    margin-left: 1rem;
   }
 }
