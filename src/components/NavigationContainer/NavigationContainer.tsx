@@ -43,7 +43,7 @@ const NavigationContainer: FunctionComponent<NavigationContainerProps> = ({
         }
         defaultSelected={{
           option: 'user',
-          subOption: 'my info',
+          subOption: 'profile',
         }}
       />
 
