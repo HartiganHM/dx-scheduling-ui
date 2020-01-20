@@ -2,3 +2,13 @@
 @import './mixins';
 
 @import '~@f-design/component-library/dist/scss/components/all.scss';
+
+* {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  color: $gray-19;
+  font-size: 1rem;
+}
