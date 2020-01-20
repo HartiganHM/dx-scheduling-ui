@@ -1,5 +1,13 @@
 import React, { useState, FunctionComponent, ChangeEvent } from 'react';
-import { Checkbox, Input, Radio } from '@f-design/component-library';
+import classnames from 'classnames';
+
+import {
+  Button,
+  Checkbox,
+  ExpansionPanel,
+  Input,
+  Radio,
+} from '@f-design/component-library';
 
 import './IntakeForm.scss';
 
@@ -9,7 +17,7 @@ type IntakeFormType = {
   date: string;
   servicesRequested: ServicesType[];
   client: ClientType;
-  parentGuardian: ParentGuardianType[];
+  parents: ParentType[];
   sameHousehold: boolean | undefined;
   physician: PhysicianType;
   insurance: InsuranceType[];
@@ -37,11 +45,12 @@ type ClientType = PersonalInformationType & {
 
 type GenderType = 'Female' | 'Male' | 'Prefer not to say' | string;
 
-type ParentGuardianType = PersonalInformationType & {
+type ParentType = PersonalInformationType & {
   gender: string;
   phoneNumber: string;
   email: string;
   address: AddressType;
+  isInSameHousehold: boolean;
   dob?: string;
 };
 
@@ -49,7 +58,7 @@ type AddressType = {
   street: string;
   city: string;
   state: string;
-  zip: number;
+  zip: string;
 };
 
 type PhysicianType = PersonalInformationType & {
@@ -65,6 +74,21 @@ type InsuranceType = {
 
 type ProviderType = 'Kaiser' | 'Medicaid' | 'United' | string;
 
+const defaultParentValues = {
+  firstName: '',
+  lastName: '',
+  gender: '',
+  phoneNumber: '',
+  email: '',
+  address: {
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
+  },
+  isInSameHousehold: false,
+};
+
 const defaultFormValues = {
   date: '',
   servicesRequested: [],
@@ -76,7 +100,7 @@ const defaultFormValues = {
     school: '',
     grade: '',
   },
-  parentGuardian: [],
+  parents: [defaultParentValues],
   sameHousehold: undefined,
   physician: {
     firstName: '',
@@ -124,9 +148,10 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
   const [formValues, updateFormValues] = useState<IntakeFormType>(
     defaultFormValues
   );
+  const [otherGenderValue, updateOtherGender] = useState('');
   const [formChecklist, updateFormChecklist] = useState(defaultChecklistValues);
 
-  const { date, servicesRequested, client, insurance } = formValues;
+  const { date, servicesRequested, client, parents, insurance } = formValues;
 
   const handleUpdateFormValue = ({
     target: { name, value },
@@ -181,6 +206,10 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
       },
     });
 
+  const handleChangeOtherGender = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>): void => updateOtherGender(value);
+
   const handleUpdateClientGender = ({
     target: { name },
   }: ChangeEvent<HTMLInputElement>): void =>
@@ -190,6 +219,74 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
         ...client,
         gender: name,
       },
+    });
+
+  const handleUpdateParents = (newParents: ParentType[]): void =>
+    updateFormValues({
+      ...formValues,
+      parents: newParents,
+    });
+
+  const handleUpdateParentsByIndex = (
+    parents: ParentType[],
+    index: number,
+    property: string,
+    value: string | boolean | AddressType
+  ): ParentType[] =>
+    parents.map((parent, idx) => {
+      if (index === idx) {
+        return {
+          ...parent,
+          [property]: value,
+        };
+      }
+
+      return parent;
+    });
+
+  const handleUpdateParentInputValues = (
+    { target: { name, value } }: ChangeEvent<HTMLInputElement>,
+    index: number
+  ): void => {
+    const newParents = handleUpdateParentsByIndex(parents, index, name, value);
+
+    handleUpdateParents(newParents);
+  };
+
+  const handleToggleIsInSameHousehold = (
+    { target: { checked } }: ChangeEvent<HTMLInputElement>,
+    index: number
+  ): void => {
+    const newParents = handleUpdateParentsByIndex(
+      parents,
+      index,
+      'isInSameHousehold',
+      checked
+    );
+
+    handleUpdateParents(newParents);
+  };
+
+  const handleUpdateParentAddress = (
+    { target: { name, value } }: ChangeEvent<HTMLInputElement>,
+    index: number
+  ): void => {
+    const newAddress = { ...parents[index].address, [name]: value };
+
+    const newParents = handleUpdateParentsByIndex(
+      parents,
+      index,
+      'address',
+      newAddress
+    );
+
+    handleUpdateParents(newParents);
+  };
+
+  const handleAddParent = (): void =>
+    updateFormValues({
+      ...formValues,
+      parents: [...parents, defaultParentValues],
     });
 
   const services = [
@@ -207,21 +304,31 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
   }));
 
   return (
-    <div className="dx-intake-form">
-      <Input
-        type="date"
-        name="date"
-        label="Date"
-        value={date}
-        onChange={handleUpdateFormValue}
-      />
+    <div className="intake-form">
+      <div className="intake-form__container">
+        <Input
+          type="date"
+          name="date"
+          label="Date"
+          value={date}
+          onChange={handleUpdateFormValue}
+        />
 
-      <h4>Services Requested</h4>
-      <Checkbox onChange={handleSelectServices} options={serviceOptions} />
+        <h4>Services Requested</h4>
+        <Checkbox onChange={handleSelectServices} options={serviceOptions} />
+      </div>
 
-      <div className="dx-intake-form__card">
-        <h4 className="dx-intake-form__card-heading">Client Information</h4>
-        <div className="dx-intake-form__field-container">
+      <ExpansionPanel
+        title={
+          client.firstName || client.lastName
+            ? `${client.firstName} ${client.lastName}`
+            : 'Client Information'
+        }
+        expanded
+      >
+        <p className="intake-form__field-title">General Information</p>
+
+        <div className="intake-form__field-container">
           <Input
             name="firstName"
             label="First"
@@ -257,13 +364,157 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
             value={client.grade}
             onChange={handleUpdateClientInputValues}
           />
-        </div>
 
-        <Radio
-          selected={client.gender}
-          options={['Female', 'Male', 'Prefer not to say', 'Other']}
-          onChange={handleUpdateClientGender}
-        />
+          <Radio
+            label="Gender"
+            selected={client.gender}
+            options={['Female', 'Male', 'Prefer not to say', 'Other']}
+            onChange={handleUpdateClientGender}
+            other={{
+              value: otherGenderValue,
+              onChange: handleChangeOtherGender,
+            }}
+          />
+        </div>
+      </ExpansionPanel>
+
+      {parents.map(
+        (
+          {
+            firstName,
+            lastName,
+            phoneNumber,
+            email,
+            address,
+            isInSameHousehold,
+          },
+          index
+        ) => (
+          <ExpansionPanel
+            key={`dfx-pg-${index}`}
+            title={`${
+              firstName || lastName
+                ? `${firstName} ${lastName}`
+                : `Parent ${index + 1} Information`
+            }`}
+          >
+            <p className="intake-form__field-title">Contact</p>
+
+            <div className="intake-form__field-container">
+              <Input
+                name="firstName"
+                label="First"
+                value={firstName}
+                onChange={(event): void =>
+                  handleUpdateParentInputValues(event, index)
+                }
+              />
+
+              <Input
+                name="lastName"
+                label="Last"
+                value={lastName}
+                onChange={(event): void =>
+                  handleUpdateParentInputValues(event, index)
+                }
+              />
+
+              <Input
+                type="tel"
+                name="phoneNumber"
+                label="Phone Number"
+                value={phoneNumber}
+                onChange={(event): void =>
+                  handleUpdateParentInputValues(event, index)
+                }
+              />
+
+              <Input
+                type="email"
+                name="email"
+                label="Email"
+                value={email}
+                onChange={(event): void =>
+                  handleUpdateParentInputValues(event, index)
+                }
+              />
+            </div>
+
+            <p className="intake-form__field-title">Address</p>
+
+            <>
+              {index !== 0 && (
+                <div className="intake-form__field-container">
+                  <Checkbox
+                    onChange={(event): void =>
+                      handleToggleIsInSameHousehold(event, index)
+                    }
+                    options={[
+                      {
+                        label: 'In same household?',
+                        checked: isInSameHousehold,
+                      },
+                    ]}
+                  />
+                </div>
+              )}
+            </>
+
+            <ExpansionPanel expanded={!isInSameHousehold}>
+              <div className="intake-form__field-container">
+                <Input
+                  name="street"
+                  label="Street"
+                  value={address.street}
+                  onChange={(event): void =>
+                    handleUpdateParentAddress(event, index)
+                  }
+                />
+
+                <Input
+                  name="city"
+                  label="City"
+                  value={address.city}
+                  onChange={(event): void =>
+                    handleUpdateParentAddress(event, index)
+                  }
+                />
+
+                <Input
+                  name="state"
+                  label="State"
+                  value={address.state}
+                  onChange={(event): void =>
+                    handleUpdateParentAddress(event, index)
+                  }
+                />
+
+                <Input
+                  name="zip"
+                  label="Zip"
+                  value={address.zip}
+                  onChange={(event): void =>
+                    handleUpdateParentAddress(event, index)
+                  }
+                />
+              </div>
+            </ExpansionPanel>
+          </ExpansionPanel>
+        )
+      )}
+
+      <div className="intake-form__parent-controls">
+        <Button onClick={handleAddParent} type="outline">
+          <i
+            className={classnames({
+              'material-icons': true,
+              'intake-form__add-button-icon': true,
+            })}
+          >
+            add_circle_outline
+          </i>
+          Add Parent/Guardian
+        </Button>
       </div>
     </div>
   );
