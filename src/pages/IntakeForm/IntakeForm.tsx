@@ -284,6 +284,12 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
       parents: [...parents, defaultParentValues],
     });
 
+  const handleRemoveParent = (index: number): void => {
+    const newParents = parents.filter((parent, idx) => idx !== index);
+
+    handleUpdateParents(newParents);
+  };
+
   const handleUpdatePhysicianInputValues = ({
     target: { name, value },
   }: ChangeEvent<HTMLInputElement>): void =>
@@ -651,6 +657,16 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
                   />
                 </div>
               </ExpansionPanel>
+
+              {parents.length > 1 && (
+                <Button
+                  className="intake-form__delete-button"
+                  type="default-destructive"
+                  onClick={(): void => handleRemoveParent(index)}
+                >
+                  Delete
+                </Button>
+              )}
             </ExpansionPanel>
           )
         )}
@@ -698,7 +714,7 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
         </ExpansionPanel>
       </div>
 
-      <div className="intake-form__parent-controls">
+      <div className="intake-form__parent-controls-container">
         <Button onClick={handleAddParent} type="outline">
           <i
             className={classnames({
