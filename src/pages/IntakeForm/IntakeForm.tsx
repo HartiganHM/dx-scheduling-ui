@@ -1,4 +1,9 @@
-import React, { useState, FunctionComponent, ChangeEvent } from 'react';
+import React, {
+  useState,
+  FunctionComponent,
+  ChangeEvent,
+  ReactElement,
+} from 'react';
 import classnames from 'classnames';
 
 import {
@@ -20,7 +25,7 @@ type IntakeFormType = {
   parents: ParentType[];
   sameHousehold: boolean | undefined;
   physician: PhysicianType;
-  insurance: InsuranceType[];
+  insurances: InsuranceType[];
 };
 
 type ServicesType =
@@ -51,7 +56,7 @@ type ParentType = PersonalInformationType & {
   email: string;
   address: AddressType;
   isInSameHousehold: boolean;
-  dob?: string;
+  dob: string;
 };
 
 type AddressType = {
@@ -69,6 +74,7 @@ type PhysicianType = PersonalInformationType & {
 type InsuranceType = {
   id: string;
   groupNumber: string;
+  insured: string;
   provider: ProviderType;
 };
 
@@ -87,6 +93,14 @@ const defaultParentValues = {
     zip: '',
   },
   isInSameHousehold: false,
+  dob: '',
+};
+
+const defaultInsuranceValues = {
+  id: '',
+  groupNumber: '',
+  provider: '',
+  insured: '',
 };
 
 const defaultFormValues = {
@@ -108,7 +122,7 @@ const defaultFormValues = {
     practice: '',
     phoneNumber: '',
   },
-  insurance: [],
+  insurances: [],
 };
 
 const defaultChecklistValues = {
@@ -136,12 +150,6 @@ const defaultChecklistValues = {
   priorTreatments: '',
 };
 
-const defaultInsuranceValues = {
-  id: '',
-  groupNumber: '',
-  provider: '',
-};
-
 const IntakeForm: FunctionComponent<IntakeFormProps> = (
   props: IntakeFormProps
 ) => {
@@ -157,7 +165,7 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
     client,
     parents,
     physician,
-    insurance,
+    insurances,
   } = formValues;
 
   const handleUpdateFormValue = ({
@@ -178,27 +186,6 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
     updateFormValues({
       ...formValues,
       servicesRequested: newServices as ServicesType[],
-    });
-  };
-
-  const handleSelectInsurance = ({
-    target: { name, checked },
-  }: ChangeEvent<HTMLInputElement>): void => {
-    console.log({ name, checked });
-
-    const newInsurance = checked
-      ? [
-          ...insurance,
-          {
-            ...defaultInsuranceValues,
-            provider: name,
-          },
-        ]
-      : insurance.filter(({ provider }) => provider !== name);
-
-    updateFormValues({
-      ...formValues,
-      insurance: newInsurance,
     });
   };
 
@@ -307,6 +294,133 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
       },
     });
 
+  const handleSelectInsurance = ({
+    target: { name, checked },
+  }: ChangeEvent<HTMLInputElement>): void => {
+    console.log({ name, checked });
+
+    const newInsurance = checked
+      ? [
+          ...insurances,
+          {
+            ...defaultInsuranceValues,
+            provider: name,
+          },
+        ]
+      : insurances.filter(({ provider }) => provider !== name);
+
+    updateFormValues({
+      ...formValues,
+      insurances: newInsurance,
+    });
+  };
+
+  const handleUpdateInsurances = (newInsurances: InsuranceType[]): void =>
+    updateFormValues({
+      ...formValues,
+      insurances: newInsurances,
+    });
+
+  const handleUpdateInsuranceByIndex = (
+    insurances: InsuranceType[],
+    index: number,
+    property: string,
+    value: string | boolean | ParentType
+  ): InsuranceType[] =>
+    insurances.map((parent, idx) => {
+      if (index === idx) {
+        return {
+          ...parent,
+          [property]: value,
+        };
+      }
+
+      return parent;
+    });
+
+  const handleUpdateInsuranceInputValues = (
+    { target: { name, value } }: ChangeEvent<HTMLInputElement>,
+    index: number
+  ): void => {
+    const newInsurance = handleUpdateInsuranceByIndex(
+      insurances,
+      index,
+      name,
+      value
+    );
+
+    handleUpdateInsurances(newInsurance);
+  };
+
+  const handleUpdateInsured = (
+    { target: { name } }: ChangeEvent<HTMLInputElement>,
+    index: number
+  ): void => {
+    const newInsurance = handleUpdateInsuranceByIndex(
+      insurances,
+      index,
+      'insured',
+      name
+    );
+
+    handleUpdateInsurances(newInsurance);
+  };
+
+  const renderInsurance = (
+    insurance: InsuranceType,
+    index: number
+  ): ReactElement => {
+    const { provider, id, groupNumber, insured } = insurance;
+    const parentNames = parents.map(({ firstName }) => firstName);
+    const matchingParent = parents.find(
+      ({ firstName }) => firstName === insured
+    );
+
+    return (
+      <>
+        <p className="intake-form__field-title">{provider}</p>
+
+        <div className="intake-form__field-container">
+          <Input
+            name="id"
+            label="Insurance ID #"
+            value={id}
+            onChange={(event): void =>
+              handleUpdateInsuranceInputValues(event, index)
+            }
+          />
+
+          <Input
+            name="groupNumber"
+            label="Insurance ID #"
+            value={groupNumber}
+            onChange={(event): void =>
+              handleUpdateInsuranceInputValues(event, index)
+            }
+          />
+
+          <Radio
+            label="Insured"
+            selected={insured}
+            options={parentNames}
+            onChange={(event): void => handleUpdateInsured(event, index)}
+          />
+
+          <Input
+            type="date"
+            name="dob"
+            label="Insured DOB"
+            value={(matchingParent && matchingParent.dob) || ''}
+            disabled={!insured}
+            onChange={(event): void =>
+              handleUpdateParentInputValues(event, parentNames.indexOf(insured))
+            }
+          />
+        </div>
+      </>
+    );
+  };
+
   const services = [
     'Psych Evaluation',
     'Psych Therapy',
@@ -319,6 +433,13 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
   const serviceOptions = services.map(service => ({
     label: service,
     checked: servicesRequested.includes(service as ServicesType),
+  }));
+
+  const providers = ['Kaiser', 'Medicaid', 'United', 'Other'];
+
+  const insuranceOptions = providers.map(provider => ({
+    label: provider,
+    checked: !!insurances.find(insurance => insurance.provider === provider),
   }));
 
   return (
@@ -549,6 +670,22 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
               onChange={handleUpdatePhysicianInputValues}
             />
           </div>
+        </ExpansionPanel>
+
+        <ExpansionPanel title="Insurance">
+          <div className="intake-form__field-container">
+            <Checkbox
+              label="Providers"
+              onChange={handleSelectInsurance}
+              options={insuranceOptions}
+            />
+          </div>
+
+          <>
+            {insurances.map((insurance, index) =>
+              renderInsurance(insurance, index)
+            )}
+          </>
         </ExpansionPanel>
       </div>
 
