@@ -4,6 +4,7 @@ import React, {
   ChangeEvent,
   ReactElement,
 } from 'react';
+
 import classnames from 'classnames';
 
 import {
@@ -15,71 +16,17 @@ import {
   Select,
 } from '@f-design/component-library';
 
+import {
+  AddressType,
+  InsuranceType,
+  IntakeFormType,
+  ParentType,
+  ServicesType,
+} from 'shared/types/types';
+
 import './IntakeForm.scss';
 
 type IntakeFormProps = {};
-
-type IntakeFormType = {
-  date: string;
-  servicesRequested: ServicesType[];
-  client: ClientType;
-  parents: ParentType[];
-  sameHousehold: boolean | undefined;
-  physician: PhysicianType;
-  insurances: InsuranceType[];
-};
-
-type ServicesType =
-  | 'Psych Evaluation'
-  | 'Psych Therapy'
-  | 'OT Evaluation'
-  | 'OT Treatment'
-  | 'ST Evaluation'
-  | 'ST Treatment';
-
-type PersonalInformationType = {
-  firstName: string;
-  lastName: string;
-};
-
-type ClientType = PersonalInformationType & {
-  dob: string;
-  gender: GenderType;
-  school: string;
-  grade: string;
-};
-
-type GenderType = 'Female' | 'Male' | 'Prefer not to say' | string;
-
-type ParentType = PersonalInformationType & {
-  gender: string;
-  phoneNumber: string;
-  email: string;
-  address: AddressType;
-  isInSameHousehold: boolean;
-  dob: string;
-};
-
-type AddressType = {
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-};
-
-type PhysicianType = PersonalInformationType & {
-  practice: string;
-  phoneNumber: string;
-};
-
-type InsuranceType = {
-  id: string;
-  groupNumber: string;
-  insured: string;
-  provider: ProviderType;
-};
-
-type ProviderType = 'Kaiser' | 'Medicaid' | 'United' | string;
 
 const defaultParentValues = {
   firstName: '',
