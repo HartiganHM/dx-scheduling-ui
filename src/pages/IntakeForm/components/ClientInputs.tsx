@@ -1,9 +1,4 @@
-import React, {
-  FunctionComponent,
-  ReactElement,
-  ChangeEvent,
-  useState,
-} from 'react';
+import React, { FunctionComponent, ReactElement, ChangeEvent } from 'react';
 import { ExpansionPanel, Input, Radio } from '@f-design/component-library';
 
 import { useStateValue } from 'components';
@@ -11,41 +6,33 @@ import { ActionTypesEnum } from 'shared/types/types';
 
 const ClientInputs: FunctionComponent = (): ReactElement => {
   const [{ intakeFormValues }, dispatch] = useStateValue();
-  const [otherGenderValue, updateOtherGender] = useState('');
 
   const { client } = intakeFormValues;
 
-  const handleUpdateClientInputValues = ({
-    target: { name, value },
-  }: ChangeEvent<HTMLInputElement>): void =>
+  const handleUpdateClient = (field: string, value: string): void =>
     dispatch({
       type: ActionTypesEnum.UpdateIntakeValues,
       intakeFormValues: {
         ...intakeFormValues,
         client: {
           ...client,
-          [name]: value,
+          [field]: value,
         },
       },
     });
+
+  const handleUpdateClientInputValues = ({
+    target: { name, value },
+  }: ChangeEvent<HTMLInputElement>): void => handleUpdateClient(name, value);
 
   const handleChangeOtherGender = ({
     target: { value },
-  }: ChangeEvent<HTMLInputElement>): void => updateOtherGender(value);
+  }: ChangeEvent<HTMLInputElement>): void =>
+    handleUpdateClient('otherGender', value);
 
   const handleUpdateClientGender = ({
     target: { name },
-  }: ChangeEvent<HTMLInputElement>): void =>
-    dispatch({
-      type: ActionTypesEnum.UpdateIntakeValues,
-      intakeFormValues: {
-        ...intakeFormValues,
-        client: {
-          ...client,
-          gender: name,
-        },
-      },
-    });
+  }: ChangeEvent<HTMLInputElement>): void => handleUpdateClient('gender', name);
 
   return (
     <ExpansionPanel
@@ -105,7 +92,7 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
           options={['Female', 'Male', 'Prefer not to say', 'Other']}
           onChange={handleUpdateClientGender}
           other={{
-            value: otherGenderValue,
+            value: client.otherGender || '',
             onChange: handleChangeOtherGender,
           }}
         />

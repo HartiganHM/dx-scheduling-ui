@@ -45,6 +45,7 @@ export interface ClientType extends PersonalInformationType {
   gender: GenderType;
   school: string;
   grade: string;
+  otherGender?: string;
 }
 
 export type GenderType = 'Female' | 'Male' | 'Prefer not to say' | string;
