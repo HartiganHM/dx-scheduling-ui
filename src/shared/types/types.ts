@@ -1,11 +1,13 @@
 // Global State
 export type Actions = {
   type: ActionTypesEnum;
-  currentlyViewing: CurrentlyViewing;
+  currentlyViewing?: CurrentlyViewing;
+  intakeFormValues?: IntakeFormType;
 };
 
 export enum ActionTypesEnum {
   UpdateCurrentlyViewing = 'UPDATE_CURRENTLY_VIEWING',
+  UpdateIntakeValues = 'UPDATE_INTAKE_VALUES',
 }
 
 export interface InitialState {
