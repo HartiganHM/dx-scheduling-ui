@@ -2,7 +2,7 @@
 export type Actions = {
   type: ActionTypesEnum;
   currentlyViewing?: CurrentlyViewing;
-  intakeFormValues?: IntakeFormType;
+  intakeFormValues?: IntakeFormValuesType;
 };
 
 export enum ActionTypesEnum {
@@ -12,12 +12,12 @@ export enum ActionTypesEnum {
 
 export interface InitialState {
   currentlyViewing: CurrentlyViewing;
-  intakeFormValues: IntakeFormType;
-  formChecklist: string;
+  intakeFormValues: IntakeFormValuesType;
+  intakeFormChecklist: IntakeFormCheckListType;
 }
 
-// Intake Form
-export interface IntakeFormType {
+// Intake Form Values
+export interface IntakeFormValuesType {
   date: string;
   servicesRequested: ServicesType[];
   client: ClientType;
@@ -78,6 +78,36 @@ export interface InsuranceType {
 }
 
 type ProviderType = 'Kaiser' | 'Medicaid' | 'United' | string;
+
+// Intake Form Checklist
+export interface IntakeFormCheckListType {
+  creditCardInfoSaved: boolean;
+  ratesDiscussed: boolean;
+  preferredTimes: string;
+  needs: string;
+  referral?: string;
+  referralConcernMatch?: string;
+  diagnosis?: DiagnosisType;
+  concerns?: ConcernType;
+  priorTherapy?: string;
+  schoolSupport?: string;
+  priorTreatments?: string;
+}
+
+export interface ConcernType {
+  areas?: string;
+  communications?: string;
+  motor?: string;
+  sensory?: string;
+  cognitive?: string;
+}
+
+export interface DiagnosisType {
+  name: string;
+  date: string;
+  provider: string;
+  comments: string;
+}
 
 // Navigation
 export interface CurrentlyViewing {

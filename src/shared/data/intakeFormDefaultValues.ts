@@ -44,7 +44,7 @@ export const defaultFormValues = {
 };
 
 export const defaultChecklistValues = {
-  creditCardInfoSave: false,
+  creditCardInfoSaved: false,
   ratesDiscussed: false,
   preferredTimes: '',
   needs: '',

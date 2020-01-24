@@ -1,5 +1,8 @@
 import { InitialState } from 'shared/types/types';
-import { defaultFormValues } from './intakeFormDefaultValues';
+import {
+  defaultChecklistValues,
+  defaultFormValues,
+} from './intakeFormDefaultValues';
 
 const initialState: InitialState = {
   currentlyViewing: {
@@ -7,7 +10,7 @@ const initialState: InitialState = {
     title: 'Dashboard',
   },
   intakeFormValues: defaultFormValues,
-  formChecklist: '',
+  intakeFormChecklist: defaultChecklistValues,
 };
 
 export default initialState;
