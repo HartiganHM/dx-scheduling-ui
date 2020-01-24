@@ -23,10 +23,12 @@ const { Provider } = StateContext;
 
 export const useStateValue = (): ProviderValue => useContext(StateContext);
 
-export const StateProvider: FunctionComponent<StateProviderProps> = ({
+const StateProvider: FunctionComponent<StateProviderProps> = ({
   reducer,
   initialState,
   children,
 }: StateProviderProps) => (
   <Provider value={useReducer(reducer, initialState)}>{children}</Provider>
 );
+
+export default StateProvider;
