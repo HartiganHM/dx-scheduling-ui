@@ -16,14 +16,13 @@ import {
   defaultParentValues,
 } from 'shared/data';
 
-import {
-  AddressType,
-  IntakeFormType,
-  ParentType,
-  ServicesType,
-} from 'shared/types/types';
+import { IntakeFormType, ServicesType } from 'shared/types/types';
 
-import { InsuranceInputs, PrimaryCareProviderInputs } from './components';
+import {
+  InsuranceInputs,
+  ParentInputs,
+  PrimaryCareProviderInputs,
+} from './components';
 
 import './IntakeForm.scss';
 
@@ -87,79 +86,11 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
       },
     });
 
-  const handleUpdateParents = (newParents: ParentType[]): void =>
-    updateFormValues({
-      ...formValues,
-      parents: newParents,
-    });
-
-  const handleUpdateParentsByIndex = (
-    parents: ParentType[],
-    index: number,
-    property: string,
-    value: string | boolean | AddressType
-  ): ParentType[] =>
-    parents.map((parent, idx) => {
-      if (index === idx) {
-        return {
-          ...parent,
-          [property]: value,
-        };
-      }
-
-      return parent;
-    });
-
-  const handleUpdateParentInputValues = (
-    { target: { name, value } }: ChangeEvent<HTMLInputElement>,
-    index: number
-  ): void => {
-    const newParents = handleUpdateParentsByIndex(parents, index, name, value);
-
-    handleUpdateParents(newParents);
-  };
-
-  const handleToggleIsInSameHousehold = (
-    { target: { checked } }: ChangeEvent<HTMLInputElement>,
-    index: number
-  ): void => {
-    const newParents = handleUpdateParentsByIndex(
-      parents,
-      index,
-      'isInSameHousehold',
-      checked
-    );
-
-    handleUpdateParents(newParents);
-  };
-
-  const handleUpdateParentAddress = (
-    { target: { name, value } }: ChangeEvent<HTMLInputElement>,
-    index: number
-  ): void => {
-    const newAddress = { ...parents[index].address, [name]: value };
-
-    const newParents = handleUpdateParentsByIndex(
-      parents,
-      index,
-      'address',
-      newAddress
-    );
-
-    handleUpdateParents(newParents);
-  };
-
   const handleAddParent = (): void =>
     updateFormValues({
       ...formValues,
       parents: [...parents, defaultParentValues],
     });
-
-  const handleRemoveParent = (index: number): void => {
-    const newParents = parents.filter((parent, idx) => idx !== index);
-
-    handleUpdateParents(newParents);
-  };
 
   const handleSubmit = (): void => {
     console.log({ formValues, formChecklist });
@@ -258,141 +189,10 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
           </div>
         </ExpansionPanel>
 
-        {parents.map(
-          (
-            {
-              firstName,
-              lastName,
-              phoneNumber,
-              email,
-              address,
-              isInSameHousehold,
-            },
-            index
-          ) => (
-            <ExpansionPanel
-              key={`dfx-pg-${index}`}
-              title={`${
-                firstName || lastName
-                  ? `${firstName} ${lastName}`
-                  : `Parent/Guardian ${index + 1}`
-              }`}
-            >
-              <p className="intake-form__field-title">Contact</p>
+        <ParentInputs />
 
-              <div className="intake-form__field-container">
-                <Input
-                  name="firstName"
-                  label="First"
-                  value={firstName}
-                  onChange={(event): void =>
-                    handleUpdateParentInputValues(event, index)
-                  }
-                />
-
-                <Input
-                  name="lastName"
-                  label="Last"
-                  value={lastName}
-                  onChange={(event): void =>
-                    handleUpdateParentInputValues(event, index)
-                  }
-                />
-
-                <Input
-                  type="tel"
-                  name="phoneNumber"
-                  label="Phone Number"
-                  value={phoneNumber}
-                  onChange={(event): void =>
-                    handleUpdateParentInputValues(event, index)
-                  }
-                />
-
-                <Input
-                  type="email"
-                  name="email"
-                  label="Email"
-                  value={email}
-                  onChange={(event): void =>
-                    handleUpdateParentInputValues(event, index)
-                  }
-                />
-              </div>
-
-              <p className="intake-form__field-title">Address</p>
-
-              <>
-                {index !== 0 && (
-                  <div className="intake-form__field-container">
-                    <Checkbox
-                      onChange={(event): void =>
-                        handleToggleIsInSameHousehold(event, index)
-                      }
-                      options={[
-                        {
-                          label: 'In same household?',
-                          checked: isInSameHousehold,
-                        },
-                      ]}
-                    />
-                  </div>
-                )}
-              </>
-
-              <ExpansionPanel expanded={!isInSameHousehold}>
-                <div className="intake-form__field-container">
-                  <Input
-                    name="street"
-                    label="Street"
-                    value={address.street}
-                    onChange={(event): void =>
-                      handleUpdateParentAddress(event, index)
-                    }
-                  />
-
-                  <Input
-                    name="city"
-                    label="City"
-                    value={address.city}
-                    onChange={(event): void =>
-                      handleUpdateParentAddress(event, index)
-                    }
-                  />
-
-                  <Input
-                    name="state"
-                    label="State"
-                    value={address.state}
-                    onChange={(event): void =>
-                      handleUpdateParentAddress(event, index)
-                    }
-                  />
-
-                  <Input
-                    name="zip"
-                    label="Zip"
-                    value={address.zip}
-                    onChange={(event): void =>
-                      handleUpdateParentAddress(event, index)
-                    }
-                  />
-                </div>
-              </ExpansionPanel>
-
-              {parents.length > 1 && (
-                <Button
-                  className="intake-form__delete-button"
-                  type="default-destructive"
-                  onClick={(): void => handleRemoveParent(index)}
-                >
-                  Delete
-                </Button>
-              )}
-            </ExpansionPanel>
-          )
-        )}
         <PrimaryCareProviderInputs />
+
         <InsuranceInputs />
       </div>
 
