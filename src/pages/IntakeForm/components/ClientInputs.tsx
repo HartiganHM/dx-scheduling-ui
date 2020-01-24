@@ -60,6 +60,7 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
 
       <div className="intake-form__field-container">
         <Input
+          id="client-first-name"
           name="firstName"
           label="First"
           value={client.firstName}
@@ -67,6 +68,7 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
         />
 
         <Input
+          id="client-last-name"
           name="lastName"
           label="Last"
           value={client.lastName}
@@ -82,6 +84,7 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
         />
 
         <Input
+          id="client-school"
           name="school"
           label="School Name"
           value={client.school}
@@ -89,6 +92,7 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
         />
 
         <Input
+          id="client-grade"
           name="grade"
           label="Grade"
           value={client.grade}

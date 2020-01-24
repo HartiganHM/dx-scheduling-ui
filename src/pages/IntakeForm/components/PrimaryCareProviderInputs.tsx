@@ -26,6 +26,7 @@ const PrimaryCareProviderInputs: FunctionComponent = (): ReactElement => {
     <ExpansionPanel title="Primary Care Provider">
       <div className="intake-form__field-container">
         <Input
+          id="pcp-first-name"
           name="firstName"
           label="First"
           value={physician.firstName}
@@ -33,6 +34,7 @@ const PrimaryCareProviderInputs: FunctionComponent = (): ReactElement => {
         />
 
         <Input
+          id="pcp-last-name"
           name="lastName"
           label="Last"
           value={physician.lastName}
@@ -40,6 +42,7 @@ const PrimaryCareProviderInputs: FunctionComponent = (): ReactElement => {
         />
 
         <Input
+          id="pcp-phone-number"
           type="tel"
           name="phoneNumber"
           label="Phone Number"

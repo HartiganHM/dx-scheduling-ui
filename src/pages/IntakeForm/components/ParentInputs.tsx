@@ -54,6 +54,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
 
             <div className="intake-form__field-container">
               <Input
+                id={`parent-${index}-first-name`}
                 name="firstName"
                 label="First"
                 value={firstName}
@@ -65,6 +66,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
               />
 
               <Input
+                id={`parent-${index}-last-name`}
                 name="lastName"
                 label="Last"
                 value={lastName}
@@ -76,6 +78,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
               />
 
               <Input
+                id={`parent-${index}-phone-number`}
                 type="tel"
                 name="phoneNumber"
                 label="Phone Number"
@@ -88,6 +91,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
               />
 
               <Input
+                id={`parent-${index}-email`}
                 type="email"
                 name="email"
                 label="Email"
@@ -125,6 +129,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
             <ExpansionPanel expanded={!isInSameHousehold}>
               <div className="intake-form__field-container">
                 <Input
+                  id={`parent-${index}-street`}
                   name="street"
                   label="Street"
                   value={address.street}
@@ -136,6 +141,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                 />
 
                 <Input
+                  id={`parent-${index}-city`}
                   name="city"
                   label="City"
                   value={address.city}
@@ -147,6 +153,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                 />
 
                 <Input
+                  id={`parent-${index}-state`}
                   name="state"
                   label="State"
                   value={address.state}
@@ -158,6 +165,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                 />
 
                 <Input
+                  id={`parent-${index}-zip`}
                   name="zip"
                   label="Zip"
                   value={address.zip}
