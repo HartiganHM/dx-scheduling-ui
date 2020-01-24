@@ -370,6 +370,10 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
     handleUpdateInsurances(newInsurance);
   };
 
+  const handleSubmit = (): void => {
+    console.log({ formValues, formChecklist });
+  };
+
   const renderInsurance = (
     insurance: InsuranceType,
     index: number
@@ -725,6 +729,10 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
             add_circle_outline
           </i>
           Add Parent/Guardian
+        </Button>
+
+        <Button onClick={handleSubmit} type="brand">
+          Submit
         </Button>
       </div>
     </div>

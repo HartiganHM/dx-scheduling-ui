@@ -19,6 +19,7 @@
   }
   &__parent-controls-container {
     display: flex;
+    justify-content: space-between;
     padding: 1rem;
   }
   &__add-button-icon {
