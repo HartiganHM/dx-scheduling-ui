@@ -1,16 +1,12 @@
-import React, { useState, FunctionComponent, ChangeEvent } from 'react';
+import React, { FunctionComponent, ChangeEvent } from 'react';
 
 import classnames from 'classnames';
 
 import { Button, Checkbox, Input } from '@f-design/component-library';
 
-import {
-  defaultChecklistValues,
-  defaultFormValues,
-  defaultParentValues,
-} from 'shared/data';
-
-import { IntakeFormType, ServicesType } from 'shared/types/types';
+import { useStateValue } from 'components';
+import { defaultParentValues } from 'shared/data';
+import { ActionTypesEnum, ServicesType } from 'shared/types/types';
 
 import {
   ClientInputs,
@@ -22,19 +18,19 @@ import {
 import './IntakeForm.scss';
 
 const IntakeForm: FunctionComponent = () => {
-  const [formValues, updateFormValues] = useState<IntakeFormType>(
-    defaultFormValues
-  );
-  const [formChecklist, updateFormChecklist] = useState(defaultChecklistValues);
+  const [{ intakeFormValues }, dispatch] = useStateValue();
 
-  const { date, servicesRequested, parents } = formValues;
+  const { date, servicesRequested, parents } = intakeFormValues;
 
   const handleUpdateFormValue = ({
     target: { name, value },
   }: ChangeEvent<HTMLInputElement>): void =>
-    updateFormValues({
-      ...formValues,
-      [name]: value,
+    dispatch({
+      type: ActionTypesEnum.UpdateIntakeValues,
+      intakeFormValues: {
+        ...intakeFormValues,
+        [name]: value,
+      },
     });
 
   const handleSelectServices = ({
@@ -44,20 +40,26 @@ const IntakeForm: FunctionComponent = () => {
       ? [...servicesRequested, name]
       : servicesRequested.filter(service => service !== name);
 
-    updateFormValues({
-      ...formValues,
-      servicesRequested: newServices as ServicesType[],
+    dispatch({
+      type: ActionTypesEnum.UpdateIntakeValues,
+      intakeFormValues: {
+        ...intakeFormValues,
+        servicesRequested: newServices as ServicesType[],
+      },
     });
   };
 
   const handleAddParent = (): void =>
-    updateFormValues({
-      ...formValues,
-      parents: [...parents, defaultParentValues],
+    dispatch({
+      type: ActionTypesEnum.UpdateIntakeValues,
+      intakeFormValues: {
+        ...intakeFormValues,
+        parents: [...parents, defaultParentValues],
+      },
     });
 
   const handleSubmit = (): void => {
-    console.log({ formValues, formChecklist });
+    console.log({ intakeFormValues });
   };
 
   const services = [
