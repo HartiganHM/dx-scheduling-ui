@@ -17,6 +17,13 @@ import {
 } from '@f-design/component-library';
 
 import {
+  defaultChecklistValues,
+  defaultFormValues,
+  defaultInsuranceValues,
+  defaultParentValues,
+} from 'shared/data';
+
+import {
   AddressType,
   InsuranceType,
   IntakeFormType,
@@ -27,76 +34,6 @@ import {
 import './IntakeForm.scss';
 
 type IntakeFormProps = {};
-
-const defaultParentValues = {
-  firstName: '',
-  lastName: '',
-  gender: '',
-  phoneNumber: '',
-  email: '',
-  address: {
-    street: '',
-    city: '',
-    state: '',
-    zip: '',
-  },
-  isInSameHousehold: false,
-  dob: '',
-};
-
-const defaultInsuranceValues = {
-  id: '',
-  groupNumber: '',
-  provider: '',
-  insured: '',
-};
-
-const defaultFormValues = {
-  date: '',
-  servicesRequested: [],
-  client: {
-    firstName: '',
-    lastName: '',
-    dob: '',
-    gender: '',
-    school: '',
-    grade: '',
-  },
-  parents: [defaultParentValues],
-  sameHousehold: undefined,
-  physician: {
-    firstName: '',
-    lastName: '',
-    practice: '',
-    phoneNumber: '',
-  },
-  insurances: [],
-};
-
-const defaultChecklistValues = {
-  creditCardInfoSave: false,
-  ratesDiscussed: false,
-  preferredTimes: '',
-  needs: '',
-  referral: '',
-  referralConcernMatch: '',
-  diagnosis: {
-    name: '',
-    date: '',
-    provider: '',
-    comments: '',
-  },
-  concerns: {
-    areas: '',
-    communication: '',
-    motor: '',
-    sensory: '',
-    cognitive: '',
-  },
-  priorTherapy: '',
-  schoolSupport: '',
-  priorTreatments: '',
-};
 
 const IntakeForm: FunctionComponent<IntakeFormProps> = (
   props: IntakeFormProps
