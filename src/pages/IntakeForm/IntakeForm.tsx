@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  FunctionComponent,
-  ChangeEvent,
-  ReactElement,
-} from 'react';
+import React, { useState, FunctionComponent, ChangeEvent } from 'react';
 
 import classnames from 'classnames';
 
@@ -13,23 +8,22 @@ import {
   ExpansionPanel,
   Input,
   Radio,
-  Select,
 } from '@f-design/component-library';
 
 import {
   defaultChecklistValues,
   defaultFormValues,
-  defaultInsuranceValues,
   defaultParentValues,
 } from 'shared/data';
 
 import {
   AddressType,
-  InsuranceType,
   IntakeFormType,
   ParentType,
   ServicesType,
 } from 'shared/types/types';
+
+import { InsuranceInputs, PrimaryCareProviderInputs } from './components';
 
 import './IntakeForm.scss';
 
@@ -44,14 +38,7 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
   const [otherGenderValue, updateOtherGender] = useState('');
   const [formChecklist, updateFormChecklist] = useState(defaultChecklistValues);
 
-  const {
-    date,
-    servicesRequested,
-    client,
-    parents,
-    physician,
-    insurances,
-  } = formValues;
+  const { date, servicesRequested, client, parents } = formValues;
 
   const handleUpdateFormValue = ({
     target: { name, value },
@@ -174,154 +161,8 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
     handleUpdateParents(newParents);
   };
 
-  const handleUpdatePhysicianInputValues = ({
-    target: { name, value },
-  }: ChangeEvent<HTMLInputElement>): void =>
-    updateFormValues({
-      ...formValues,
-      physician: {
-        ...physician,
-        [name]: value,
-      },
-    });
-
-  const handleSelectInsurance = ({
-    target: { name, checked },
-  }: ChangeEvent<HTMLInputElement>): void => {
-    console.log({ name, checked });
-
-    const newInsurance = checked
-      ? [
-          ...insurances,
-          {
-            ...defaultInsuranceValues,
-            provider: name,
-          },
-        ]
-      : insurances.filter(({ provider }) => provider !== name);
-
-    updateFormValues({
-      ...formValues,
-      insurances: newInsurance,
-    });
-  };
-
-  const handleUpdateInsurances = (newInsurances: InsuranceType[]): void =>
-    updateFormValues({
-      ...formValues,
-      insurances: newInsurances,
-    });
-
-  const handleUpdateInsuranceByIndex = (
-    insurances: InsuranceType[],
-    index: number,
-    property: string,
-    value: string | boolean | ParentType
-  ): InsuranceType[] =>
-    insurances.map((parent, idx) => {
-      if (index === idx) {
-        return {
-          ...parent,
-          [property]: value,
-        };
-      }
-
-      return parent;
-    });
-
-  const handleUpdateInsuranceInputValues = (
-    { target: { name, value } }: ChangeEvent<HTMLInputElement>,
-    index: number
-  ): void => {
-    const newInsurance = handleUpdateInsuranceByIndex(
-      insurances,
-      index,
-      name,
-      value
-    );
-
-    handleUpdateInsurances(newInsurance);
-  };
-
-  const handleUpdateInsured = (value: string, index: number): void => {
-    const newInsurance = handleUpdateInsuranceByIndex(
-      insurances,
-      index,
-      'insured',
-      value
-    );
-
-    handleUpdateInsurances(newInsurance);
-  };
-
   const handleSubmit = (): void => {
     console.log({ formValues, formChecklist });
-  };
-
-  const renderInsurance = (
-    insurance: InsuranceType,
-    index: number
-  ): ReactElement => {
-    const { provider, id, groupNumber, insured } = insurance;
-    const parentOptions = parents
-      .filter(({ firstName }) => firstName)
-      .map(({ firstName, lastName }) => ({
-        value: firstName,
-        label: `${firstName} ${lastName}`,
-      }));
-    const parentNames = parentOptions.map(({ value }) => value);
-
-    const matchingParent = parents.find(
-      ({ firstName }) => firstName === insured
-    );
-    const selectedOption = matchingParent && {
-      value: insured,
-      label: `${matchingParent.firstName} ${matchingParent.lastName}`,
-    };
-
-    return (
-      <>
-        <p className="intake-form__field-title">{provider}</p>
-
-        <div className="intake-form__field-container">
-          <Input
-            name="id"
-            label="ID #"
-            value={id}
-            onChange={(event): void =>
-              handleUpdateInsuranceInputValues(event, index)
-            }
-          />
-
-          <Input
-            name="groupNumber"
-            label="Group #"
-            value={groupNumber}
-            onChange={(event): void =>
-              handleUpdateInsuranceInputValues(event, index)
-            }
-          />
-
-          <Select
-            label="Insured"
-            selected={selectedOption}
-            options={parentOptions}
-            onSelect={({ value }): void => handleUpdateInsured(value, index)}
-          />
-
-          <Input
-            type="date"
-            name="dob"
-            label="Insured DOB"
-            value={(matchingParent && matchingParent.dob) || ''}
-            disabled={!insured}
-            onChange={(event): void =>
-              handleUpdateParentInputValues(event, parentNames.indexOf(insured))
-            }
-          />
-        </div>
-      </>
-    );
   };
 
   const services = [
@@ -336,13 +177,6 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
   const serviceOptions = services.map(service => ({
     label: service,
     checked: servicesRequested.includes(service as ServicesType),
-  }));
-
-  const providers = ['Kaiser', 'Medicaid', 'United', 'Other'];
-
-  const insuranceOptions = providers.map(provider => ({
-    label: provider,
-    checked: !!insurances.find(insurance => insurance.provider === provider),
   }));
 
   return (
@@ -558,48 +392,8 @@ const IntakeForm: FunctionComponent<IntakeFormProps> = (
             </ExpansionPanel>
           )
         )}
-
-        <ExpansionPanel title="Primary Care Provider">
-          <div className="intake-form__field-container">
-            <Input
-              name="firstName"
-              label="First"
-              value={physician.firstName}
-              onChange={handleUpdatePhysicianInputValues}
-            />
-
-            <Input
-              name="lastName"
-              label="Last"
-              value={physician.lastName}
-              onChange={handleUpdatePhysicianInputValues}
-            />
-
-            <Input
-              type="tel"
-              name="phoneNumber"
-              label="Phone Number"
-              value={physician.phoneNumber}
-              onChange={handleUpdatePhysicianInputValues}
-            />
-          </div>
-        </ExpansionPanel>
-
-        <ExpansionPanel title="Insurance">
-          <div className="intake-form__field-container">
-            <Checkbox
-              label="Providers"
-              onChange={handleSelectInsurance}
-              options={insuranceOptions}
-            />
-          </div>
-
-          <>
-            {insurances.map((insurance, index) =>
-              renderInsurance(insurance, index)
-            )}
-          </>
-        </ExpansionPanel>
+        <PrimaryCareProviderInputs />
+        <InsuranceInputs />
       </div>
 
       <div className="intake-form__parent-controls-container">
