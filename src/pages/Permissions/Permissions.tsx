@@ -1,9 +1,20 @@
 import React, { FunctionComponent } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { Button, CircleLoader } from '@f-design/component-library';
+import { CircleLoader } from '@f-design/component-library';
 
-type PermissionsProps = {};
+type PermissionsProps = {
+  data: DataType;
+};
+
+type DataType = {
+  permissions: PermissionType[];
+};
+
+type PermissionType = {
+  id: string;
+  name: string;
+};
 
 const GET_PERMISSIONS = gql`
   query permissions {
@@ -29,9 +40,9 @@ const Permissions: FunctionComponent<PermissionsProps> = (
 
   return (
     <div className="permissions">
-      <Button type="brand" onClick={(): void => console.log('butt')}>
-        Hi!
-      </Button>
+      {data.permissions.map(({ id, name }: PermissionType) => (
+        <span key={id}>{name}</span>
+      ))}
     </div>
   );
 };
