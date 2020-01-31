@@ -88,10 +88,11 @@ export interface IntakeFormQuestionsType {
   ratesDiscussed: boolean;
   preferredTimes: string;
   needs: string;
-  referral?: string;
+  hasReferral: boolean;
+  referral: PersonalInformationType;
   referralConcernMatch?: string;
-  diagnosis?: DiagnosisType;
-  concerns?: ConcernType;
+  diagnosis: DiagnosisType;
+  concerns: ConcernType;
   priorTherapy?: string;
   schoolSupport?: string;
   priorTreatments?: string;
@@ -107,8 +108,8 @@ export interface ConcernType {
 
 export interface DiagnosisType {
   name: string;
-  date: string;
   provider: string;
+  date: string;
   comments: string;
 }
 
