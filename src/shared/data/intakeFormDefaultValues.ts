@@ -48,12 +48,16 @@ export const defaultIntakeQuestionValues = {
   ratesDiscussed: false,
   preferredTimes: '',
   needs: '',
-  referral: '',
+  hasReferral: false,
+  referral: {
+    firstName: '',
+    lastName: '',
+  },
   referralConcernMatch: '',
   diagnosis: {
     name: '',
-    date: '',
     provider: '',
+    date: '',
     comments: '',
   },
   concerns: {
