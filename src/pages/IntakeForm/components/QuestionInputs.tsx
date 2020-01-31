@@ -23,6 +23,7 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
     referral,
     referralConcernMatch,
     diagnosis,
+    concerns,
   } = intakeFormQuestions;
 
   const handleChangeCheckbox = (
@@ -82,24 +83,47 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
     });
   };
 
+  const handleChangeConcernsValues = ({
+    target: { name, value },
+  }: ChangeEvent<HTMLTextAreaElement>): void => {
+    const newConcerns = {
+      ...concerns,
+      [name]: value,
+    };
+
+    dispatch({
+      type: ActionTypesEnum.UpdateIntakeQuestions,
+      intakeFormQuestions: {
+        ...intakeFormQuestions,
+        concerns: newConcerns,
+      },
+    });
+  };
+
   const {
-    creditCardInfoSavedLabel,
-    diagnosisCommentsLabel,
-    diagnosisHeading,
-    generalQuestionsHeading,
-    hasReferralLabel,
-    needsLabel,
-    preferredTimesLabel,
-    ratesDiscussedLabel,
-    referralConcernMatchLabel,
-    referralHeading,
+    headingConcerns,
+    headingDiagnosis,
+    headingGeneralQuestions,
+    headingReferral,
+    labelAreasOfConcern,
+    labelCognitiveConcerns,
+    labelCommunicationConcerns,
+    labelCreditCardInfoSaved,
+    labelDiagnosisComments,
+    labelHasReferral,
+    labelMotorConcerns,
+    labelNeeds,
+    labelPreferredTimes,
+    labelRatesDiscussed,
+    labelReferralConcernMatch,
+    labelSensoryConcerns,
   } = copyContent.questionInputs;
 
   return (
     <ExpansionPanel title="Intake Questions">
       <div className="intake-form__field-container">
         <Checkbox
-          label={creditCardInfoSavedLabel}
+          label={labelCreditCardInfoSaved}
           options={[{ label: 'Yes', checked: creditCardInfoSaved }]}
           onChange={(event): void =>
             handleChangeCheckbox(event, 'creditCardInfoSaved')
@@ -107,7 +131,7 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
         />
 
         <Checkbox
-          label={ratesDiscussedLabel}
+          label={labelRatesDiscussed}
           options={[{ label: 'Yes', checked: ratesDiscussed }]}
           onChange={(event): void =>
             handleChangeCheckbox(event, 'ratesDiscussed')
@@ -115,14 +139,15 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
         />
 
         <Checkbox
-          label={hasReferralLabel}
+          label={labelHasReferral}
           options={[{ label: 'Yes', checked: hasReferral }]}
           onChange={(event): void => handleChangeCheckbox(event, 'hasReferral')}
         />
       </div>
 
       <ExpansionPanel expanded={!!hasReferral}>
-        <p className="intake-form__field-title">{referralHeading}</p>
+        <p className="intake-form__field-title">{headingReferral}</p>
+
         <div className="intake-form__field-container">
           <Input
             id="referral-first-name"
@@ -143,13 +168,14 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
           <TextArea
             name="referralConcernMatch"
             value={referralConcernMatch || ''}
-            label={referralConcernMatchLabel}
+            label={labelReferralConcernMatch}
             onChange={handleChangeTextArea}
           />
         </div>
       </ExpansionPanel>
 
-      <p className="intake-form__field-title">{generalQuestionsHeading}</p>
+      <p className="intake-form__field-title">{headingGeneralQuestions}</p>
+
       <div
         className={classnames({
           'intake-form__field-container': true,
@@ -159,19 +185,20 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
         <TextArea
           name="preferredTimes"
           value={preferredTimes}
-          label={preferredTimesLabel}
+          label={labelPreferredTimes}
           onChange={handleChangeTextArea}
         />
 
         <TextArea
           name="needs"
           value={needs}
-          label={needsLabel}
+          label={labelNeeds}
           onChange={handleChangeTextArea}
         />
       </div>
 
-      <p className="intake-form__field-title">{diagnosisHeading}</p>
+      <p className="intake-form__field-title">{headingDiagnosis}</p>
+
       <div className="intake-form__field-container">
         <Input
           id="diagnosis-name"
@@ -201,8 +228,47 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
         <TextArea
           name="comments"
           value={diagnosis.comments}
-          label={diagnosisCommentsLabel}
+          label={labelDiagnosisComments}
           onChange={handleChangeDiagnosisValues}
+        />
+      </div>
+
+      <p className="intake-form__field-title">{headingConcerns}</p>
+
+      <div className="intake-form__field-container">
+        <TextArea
+          name="areas"
+          value={concerns.areas || ''}
+          label={labelAreasOfConcern}
+          onChange={handleChangeConcernsValues}
+        />
+
+        <TextArea
+          name="communication"
+          value={concerns.communication || ''}
+          label={labelCommunicationConcerns}
+          onChange={handleChangeConcernsValues}
+        />
+
+        <TextArea
+          name="motor"
+          value={concerns.motor || ''}
+          label={labelMotorConcerns}
+          onChange={handleChangeConcernsValues}
+        />
+
+        <TextArea
+          name="sensory"
+          value={concerns.sensory || ''}
+          label={labelSensoryConcerns}
+          onChange={handleChangeConcernsValues}
+        />
+
+        <TextArea
+          name="cognitive"
+          value={concerns.cognitive || ''}
+          label={labelCognitiveConcerns}
+          onChange={handleChangeConcernsValues}
         />
       </div>
     </ExpansionPanel>
