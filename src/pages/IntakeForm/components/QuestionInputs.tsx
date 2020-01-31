@@ -15,28 +15,12 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
   const [{ intakeFormQuestions }, dispatch] = useStateValue();
 
   const {
-    creditCardInfoSaved,
-    ratesDiscussed,
-    preferredTimes,
-    needs,
     hasReferral,
     referral,
     referralConcernMatch,
     diagnosis,
     concerns,
   } = intakeFormQuestions;
-
-  const handleChangeCheckbox = (
-    { target: { checked } }: ChangeEvent<HTMLInputElement>,
-    name: string
-  ): void =>
-    dispatch({
-      type: ActionTypesEnum.UpdateIntakeQuestions,
-      intakeFormQuestions: {
-        ...intakeFormQuestions,
-        [name]: checked,
-      },
-    });
 
   const handleChangeTextArea = ({
     target: { name, value },
@@ -103,48 +87,18 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
   const {
     headingConcerns,
     headingDiagnosis,
-    headingGeneralQuestions,
     headingReferral,
     labelAreasOfConcern,
     labelCognitiveConcerns,
     labelCommunicationConcerns,
-    labelCreditCardInfoSaved,
     labelDiagnosisComments,
-    labelHasReferral,
     labelMotorConcerns,
-    labelNeeds,
-    labelPreferredTimes,
-    labelRatesDiscussed,
     labelReferralConcernMatch,
     labelSensoryConcerns,
   } = copyContent.questionInputs;
 
   return (
     <ExpansionPanel title="Intake Questions">
-      <div className="intake-form__field-container">
-        <Checkbox
-          label={labelCreditCardInfoSaved}
-          options={[{ label: 'Yes', checked: creditCardInfoSaved }]}
-          onChange={(event): void =>
-            handleChangeCheckbox(event, 'creditCardInfoSaved')
-          }
-        />
-
-        <Checkbox
-          label={labelRatesDiscussed}
-          options={[{ label: 'Yes', checked: ratesDiscussed }]}
-          onChange={(event): void =>
-            handleChangeCheckbox(event, 'ratesDiscussed')
-          }
-        />
-
-        <Checkbox
-          label={labelHasReferral}
-          options={[{ label: 'Yes', checked: hasReferral }]}
-          onChange={(event): void => handleChangeCheckbox(event, 'hasReferral')}
-        />
-      </div>
-
       <ExpansionPanel expanded={!!hasReferral}>
         <p className="intake-form__field-title">{headingReferral}</p>
 
@@ -173,29 +127,6 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
           />
         </div>
       </ExpansionPanel>
-
-      <p className="intake-form__field-title">{headingGeneralQuestions}</p>
-
-      <div
-        className={classnames({
-          'intake-form__field-container': true,
-          'intake-form__field-container-text-area': true,
-        })}
-      >
-        <TextArea
-          name="preferredTimes"
-          value={preferredTimes}
-          label={labelPreferredTimes}
-          onChange={handleChangeTextArea}
-        />
-
-        <TextArea
-          name="needs"
-          value={needs}
-          label={labelNeeds}
-          onChange={handleChangeTextArea}
-        />
-      </div>
 
       <p className="intake-form__field-title">{headingDiagnosis}</p>
 
@@ -235,42 +166,44 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
 
       <p className="intake-form__field-title">{headingConcerns}</p>
 
-      <div className="intake-form__field-container">
-        <TextArea
-          name="areas"
-          value={concerns.areas || ''}
-          label={labelAreasOfConcern}
-          onChange={handleChangeConcernsValues}
-        />
+      <ExpansionPanel title={headingConcerns}>
+        <div className="intake-form__field-container">
+          <TextArea
+            name="areas"
+            value={concerns.areas || ''}
+            label={labelAreasOfConcern}
+            onChange={handleChangeConcernsValues}
+          />
 
-        <TextArea
-          name="communication"
-          value={concerns.communication || ''}
-          label={labelCommunicationConcerns}
-          onChange={handleChangeConcernsValues}
-        />
+          <TextArea
+            name="communication"
+            value={concerns.communication || ''}
+            label={labelCommunicationConcerns}
+            onChange={handleChangeConcernsValues}
+          />
 
-        <TextArea
-          name="motor"
-          value={concerns.motor || ''}
-          label={labelMotorConcerns}
-          onChange={handleChangeConcernsValues}
-        />
+          <TextArea
+            name="motor"
+            value={concerns.motor || ''}
+            label={labelMotorConcerns}
+            onChange={handleChangeConcernsValues}
+          />
 
-        <TextArea
-          name="sensory"
-          value={concerns.sensory || ''}
-          label={labelSensoryConcerns}
-          onChange={handleChangeConcernsValues}
-        />
+          <TextArea
+            name="sensory"
+            value={concerns.sensory || ''}
+            label={labelSensoryConcerns}
+            onChange={handleChangeConcernsValues}
+          />
 
-        <TextArea
-          name="cognitive"
-          value={concerns.cognitive || ''}
-          label={labelCognitiveConcerns}
-          onChange={handleChangeConcernsValues}
-        />
-      </div>
+          <TextArea
+            name="cognitive"
+            value={concerns.cognitive || ''}
+            label={labelCognitiveConcerns}
+            onChange={handleChangeConcernsValues}
+          />
+        </div>
+      </ExpansionPanel>
     </ExpansionPanel>
   );
 };

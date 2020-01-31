@@ -10,6 +10,7 @@ import { ActionTypesEnum, ServicesType } from 'shared/types/types';
 
 import {
   ClientInputs,
+  GeneralQuestions,
   InsuranceInputs,
   ParentInputs,
   PrimaryCareProviderInputs,
@@ -100,6 +101,7 @@ const IntakeForm: FunctionComponent = () => {
         <ParentInputs />
         <PrimaryCareProviderInputs />
         <InsuranceInputs />
+        <GeneralQuestions />
         <QuestionInputs />
       </div>
 
