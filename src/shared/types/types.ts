@@ -100,7 +100,7 @@ export interface IntakeFormQuestionsType {
 
 export interface ConcernType {
   areas?: string;
-  communications?: string;
+  communication?: string;
   motor?: string;
   sensory?: string;
   cognitive?: string;
