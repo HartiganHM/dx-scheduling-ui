@@ -1,6 +1,6 @@
 import { InitialState } from 'shared/types/types';
 import {
-  defaultChecklistValues,
+  defaultIntakeQuestionValues,
   defaultFormValues,
 } from './intakeFormDefaultValues';
 
@@ -10,7 +10,7 @@ const initialState: InitialState = {
     title: 'Dashboard',
   },
   intakeFormValues: defaultFormValues,
-  intakeFormChecklist: defaultChecklistValues,
+  intakeFormQuestions: defaultIntakeQuestionValues,
 };
 
 export default initialState;

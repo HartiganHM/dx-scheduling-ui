@@ -43,7 +43,7 @@ export const defaultFormValues = {
   insurances: [],
 };
 
-export const defaultChecklistValues = {
+export const defaultIntakeQuestionValues = {
   creditCardInfoSaved: false,
   ratesDiscussed: false,
   preferredTimes: '',

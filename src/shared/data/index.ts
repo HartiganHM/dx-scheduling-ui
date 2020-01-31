@@ -1,7 +1,7 @@
 import globalReducer from './globalReducer';
 import initialState from './initialState';
 import {
-  defaultChecklistValues,
+  defaultIntakeQuestionValues,
   defaultFormValues,
   defaultInsuranceValues,
   defaultParentValues,
@@ -12,7 +12,7 @@ import {
 } from './navigationProperties';
 
 export {
-  defaultChecklistValues,
+  defaultIntakeQuestionValues,
   defaultFormValues,
   defaultInsuranceValues,
   defaultParentValues,

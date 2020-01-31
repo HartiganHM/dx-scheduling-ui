@@ -13,7 +13,7 @@ export enum ActionTypesEnum {
 export interface InitialState {
   currentlyViewing: CurrentlyViewing;
   intakeFormValues: IntakeFormValuesType;
-  intakeFormChecklist: IntakeFormCheckListType;
+  intakeFormQuestions: IntakeFormQuestionsType;
 }
 
 // Intake Form Values
@@ -81,7 +81,7 @@ export interface InsuranceType {
 type ProviderType = 'Kaiser' | 'Medicaid' | 'United' | string;
 
 // Intake Form Checklist
-export interface IntakeFormCheckListType {
+export interface IntakeFormQuestionsType {
   creditCardInfoSaved: boolean;
   ratesDiscussed: boolean;
   preferredTimes: string;
