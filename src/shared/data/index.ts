@@ -1,3 +1,4 @@
+import copyContent from './copyContent';
 import globalReducer from './globalReducer';
 import initialState from './initialState';
 import {
@@ -12,6 +13,7 @@ import {
 } from './navigationProperties';
 
 export {
+  copyContent,
   defaultIntakeQuestionValues,
   defaultFormValues,
   defaultInsuranceValues,
