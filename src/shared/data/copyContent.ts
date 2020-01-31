@@ -1,16 +1,23 @@
 export default {
   questionInputs: {
-    creditCardInfoSavedLabel: 'Payment information saved?',
-    diagnosisCommentsLabel: 'Comments',
-    diagnosisHeading: 'Diagnosis',
-    generalQuestionsHeading: 'GeneralQuestions',
-    hasReferralLabel: 'Were you referred to us?',
-    needsLabel:
+    headingConcerns: 'Concerns',
+    headingDiagnosis: 'Diagnosis',
+    headingGeneralQuestions: 'GeneralQuestions',
+    headingReferral: 'Referral',
+    labelAreasOfConcern:
+      "What do you think is the cause of your child's difficulties?",
+    labelCognitiveConcerns: 'Any cognitive concerns?',
+    labelCommunicationConcerns: 'Any communication concerns?',
+    labelCreditCardInfoSaved: 'Payment information saved?',
+    labelDiagnosisComments: 'Comments',
+    labelHasReferral: 'Were you referred to us?',
+    labelNeeds:
       'What will be helpful to your child or your family as a result of this evaluation and/or therapy?',
-    preferredTimesLabel: 'Preferred times for therapy or first available?',
-    ratesDiscussedLabel: 'Rates discussed?',
-    referralConcernMatchLabel:
+    labelMotorConcerns: 'Any motor concerns?',
+    labelPreferredTimes: 'Preferred times for therapy or first available?',
+    labelRatesDiscussed: 'Rates discussed?',
+    labelReferralConcernMatch:
       'Do your concerns match the concerns of the person who referred you?',
-    referralHeading: 'Referral',
+    labelSensoryConcerns: 'Any sensory concerns?',
   },
 };
