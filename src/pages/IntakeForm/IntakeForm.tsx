@@ -13,6 +13,7 @@ import {
   InsuranceInputs,
   ParentInputs,
   PrimaryCareProviderInputs,
+  QuestionInputs,
 } from './components';
 
 import './IntakeForm.scss';
@@ -96,12 +97,10 @@ const IntakeForm: FunctionComponent = () => {
 
       <div className="intake-form__contacts">
         <ClientInputs />
-
         <ParentInputs />
-
         <PrimaryCareProviderInputs />
-
         <InsuranceInputs />
+        <QuestionInputs />
       </div>
 
       <div className="intake-form__parent-controls-container">
