@@ -6,6 +6,7 @@ const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
   switch (action.type) {
     case ActionTypesEnum.UpdateCurrentlyViewing: {
       const { currentlyViewing } = action;
+
       if (currentlyViewing) {
         return {
           ...state,
@@ -15,10 +16,21 @@ const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
     }
     case ActionTypesEnum.UpdateIntakeValues: {
       const { intakeFormValues } = action;
+
       if (intakeFormValues) {
         return {
           ...state,
-          intakeFormValues: intakeFormValues,
+          intakeFormValues,
+        };
+      }
+    }
+    case ActionTypesEnum.UpdateIntakeQuestions: {
+      const { intakeFormQuestions } = action;
+
+      if (intakeFormQuestions) {
+        return {
+          ...state,
+          intakeFormQuestions,
         };
       }
     }

@@ -3,11 +3,13 @@ export type Actions = {
   type: ActionTypesEnum;
   currentlyViewing?: CurrentlyViewing;
   intakeFormValues?: IntakeFormValuesType;
+  intakeFormQuestions?: IntakeFormQuestionsType;
 };
 
 export enum ActionTypesEnum {
   UpdateCurrentlyViewing = 'UPDATE_CURRENTLY_VIEWING',
   UpdateIntakeValues = 'UPDATE_INTAKE_VALUES',
+  UpdateIntakeQuestions = 'UPDATE_INTAKE_QUESTIONS',
 }
 
 export interface InitialState {
