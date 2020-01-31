@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.2",
-    "@f-design/component-library": "^0.1.35",
+    "@f-design/component-library": "^0.1.36",
     "@types/classnames": "^2.2.9",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.12",
