@@ -27,20 +27,15 @@ const DiagnosisInputs: FunctionComponent = (): ReactElement => {
     });
   };
 
-  const {
-    headingDiagnosis,
-    labelDiagnosisComments,
-  } = copyContent.intakeQuestions;
+  const { heading, labels } = copyContent.diagnosisInputs;
 
   return (
-    <ExpansionPanel title={headingDiagnosis}>
-      <p className="intake-form__field-title">{headingDiagnosis}</p>
-
+    <ExpansionPanel title={heading}>
       <div className="intake-form__field-container">
         <Input
           id="diagnosis-name"
           name="name"
-          label="First"
+          label={labels.name}
           value={diagnosis.name}
           onChange={handleChangeDiagnosisValues}
         />
@@ -48,7 +43,7 @@ const DiagnosisInputs: FunctionComponent = (): ReactElement => {
         <Input
           id="diagnosis-provider"
           name="provider"
-          label="Provider"
+          label={labels.provider}
           value={diagnosis.provider}
           onChange={handleChangeDiagnosisValues}
         />
@@ -57,7 +52,7 @@ const DiagnosisInputs: FunctionComponent = (): ReactElement => {
           id="diagnosis-date"
           type="date"
           name="date"
-          label="Date"
+          label={labels.date}
           value={diagnosis.date}
           onChange={handleChangeDiagnosisValues}
         />
@@ -65,7 +60,7 @@ const DiagnosisInputs: FunctionComponent = (): ReactElement => {
         <TextArea
           name="comments"
           value={diagnosis.comments}
-          label={labelDiagnosisComments}
+          label={labels.comments}
           onChange={handleChangeDiagnosisValues}
         />
       </div>

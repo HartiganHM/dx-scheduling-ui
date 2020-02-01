@@ -45,18 +45,29 @@ export default {
       sensoryConcerns: 'Any sensory concerns?',
     },
   },
+  diagnosisInputs: {
+    heading: 'Diagnosis',
+    labels: {
+      comments: 'Comments',
+      date: 'Date',
+      name: 'Name',
+      provider: 'Provider',
+    },
+  },
+  generalQuestions: {
+    heading: 'GeneralQuestions',
+    labels: {
+      creditCardInfoSaved: 'Payment information saved?',
+      hasReferral: 'Were you referred to us?',
+      needs:
+        'What will be helpful to your child or your family as a result of this evaluation and/or therapy?',
+      preferredTimes: 'Preferred times for therapy or first available?',
+      ratesDiscussed: 'Rates discussed?',
+    },
+  },
   intakeQuestions: {
     headingConcerns: 'Concerns',
-    headingDiagnosis: 'Diagnosis',
-    headingGeneralQuestions: 'GeneralQuestions',
     headingReferral: 'Referral',
-    labelCreditCardInfoSaved: 'Payment information saved?',
-    labelDiagnosisComments: 'Comments',
-    labelHasReferral: 'Were you referred to us?',
-    labelNeeds:
-      'What will be helpful to your child or your family as a result of this evaluation and/or therapy?',
-    labelPreferredTimes: 'Preferred times for therapy or first available?',
-    labelRatesDiscussed: 'Rates discussed?',
     labelReferralConcernMatch:
       'Do your concerns match the concerns of the person who referred you?',
   },

@@ -21,15 +21,6 @@ const GeneralQuestions: FunctionComponent = (): ReactElement => {
     hasReferral,
   } = intakeFormQuestions;
 
-  const {
-    headingGeneralQuestions,
-    labelCreditCardInfoSaved,
-    labelHasReferral,
-    labelNeeds,
-    labelPreferredTimes,
-    labelRatesDiscussed,
-  } = copyContent.intakeQuestions;
-
   const handleChangeCheckbox = (
     { target: { checked } }: ChangeEvent<HTMLInputElement>,
     name: string
@@ -53,11 +44,13 @@ const GeneralQuestions: FunctionComponent = (): ReactElement => {
       },
     });
 
+  const { heading, labels } = copyContent.generalQuestions;
+
   return (
-    <ExpansionPanel title={headingGeneralQuestions}>
+    <ExpansionPanel title={heading}>
       <div className="intake-form__field-container">
         <Checkbox
-          label={labelCreditCardInfoSaved}
+          label={labels.creditCardInfoSaved}
           options={[{ label: 'Yes', checked: creditCardInfoSaved }]}
           onChange={(event): void =>
             handleChangeCheckbox(event, 'creditCardInfoSaved')
@@ -65,7 +58,7 @@ const GeneralQuestions: FunctionComponent = (): ReactElement => {
         />
 
         <Checkbox
-          label={labelRatesDiscussed}
+          label={labels.ratesDiscussed}
           options={[{ label: 'Yes', checked: ratesDiscussed }]}
           onChange={(event): void =>
             handleChangeCheckbox(event, 'ratesDiscussed')
@@ -73,7 +66,7 @@ const GeneralQuestions: FunctionComponent = (): ReactElement => {
         />
 
         <Checkbox
-          label={labelHasReferral}
+          label={labels.hasReferral}
           options={[{ label: 'Yes', checked: hasReferral }]}
           onChange={(event): void => handleChangeCheckbox(event, 'hasReferral')}
         />
@@ -88,14 +81,14 @@ const GeneralQuestions: FunctionComponent = (): ReactElement => {
         <TextArea
           name="preferredTimes"
           value={preferredTimes}
-          label={labelPreferredTimes}
+          label={labels.preferredTimes}
           onChange={handleChangeTextArea}
         />
 
         <TextArea
           name="needs"
           value={needs}
-          label={labelNeeds}
+          label={labels.needs}
           onChange={handleChangeTextArea}
         />
       </div>
