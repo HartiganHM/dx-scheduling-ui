@@ -1,5 +1,5 @@
 export default {
-  questionInputs: {
+  intakeQuestions: {
     headingConcerns: 'Concerns',
     headingDiagnosis: 'Diagnosis',
     headingGeneralQuestions: 'GeneralQuestions',
