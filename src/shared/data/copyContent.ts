@@ -93,6 +93,14 @@ export default {
       zip: 'Zip',
     },
   },
+  primaryCareProviderInputs: {
+    heading: 'Primary Care Provider',
+    labels: {
+      firstName: 'First',
+      lastName: 'Last',
+      phoneNumber: 'Phone Number',
+    },
+  },
   referralInputs: {
     heading: 'Referral',
     labels: {
