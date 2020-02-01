@@ -76,10 +76,13 @@ export default {
     },
     providers: ['Kaiser', 'Medicaid', 'United', 'Other'],
   },
-  intakeQuestions: {
-    headingConcerns: 'Concerns',
-    headingReferral: 'Referral',
-    labelReferralConcernMatch:
-      'Do your concerns match the concerns of the person who referred you?',
+  referralInputs: {
+    heading: 'Referral',
+    labels: {
+      firstName: 'First',
+      lastName: 'Last',
+      referralConcernMatch:
+        'Do your concerns match the concerns of the person who referred you?',
+    },
   },
 };

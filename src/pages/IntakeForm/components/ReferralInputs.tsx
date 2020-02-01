@@ -38,18 +38,15 @@ const ReferralInputs: FunctionComponent = (): ReactElement => {
       },
     });
 
-  const {
-    headingReferral,
-    labelReferralConcernMatch,
-  } = copyContent.intakeQuestions;
+  const { heading, labels } = copyContent.referralInputs;
 
   return (
-    <ExpansionPanel title={headingReferral}>
+    <ExpansionPanel title={heading}>
       <div className="intake-form__field-container">
         <Input
           id="referral-first-name"
           name="firstName"
-          label="First"
+          label={labels.firstName}
           value={referral.firstName}
           onChange={handleChangeReferralValue}
         />
@@ -57,7 +54,7 @@ const ReferralInputs: FunctionComponent = (): ReactElement => {
         <Input
           id="referral-last-name"
           name="lastName"
-          label="Last"
+          label={labels.lastName}
           value={referral.lastName}
           onChange={handleChangeReferralValue}
         />
@@ -65,7 +62,7 @@ const ReferralInputs: FunctionComponent = (): ReactElement => {
         <TextArea
           name="referralConcernMatch"
           value={referralConcernMatch || ''}
-          label={labelReferralConcernMatch}
+          label={labels.referralConcernMatch}
           onChange={handleChangeTextArea}
         />
       </div>
