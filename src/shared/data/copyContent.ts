@@ -76,6 +76,23 @@ export default {
     },
     providers: ['Kaiser', 'Medicaid', 'United', 'Other'],
   },
+  parentInputs: {
+    buttons: {
+      delete: 'Delete',
+    },
+    heading: (number: number): string => `Parent/Guardian ${number}`,
+    labels: {
+      city: 'City',
+      email: 'Email',
+      firstName: 'First',
+      lastName: 'Last',
+      phoneNumber: 'Phone Number',
+      sameHousehold: 'In same household?',
+      state: 'State',
+      street: 'Street',
+      zip: 'Zip',
+    },
+  },
   referralInputs: {
     heading: 'Referral',
     labels: {

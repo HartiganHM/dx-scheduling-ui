@@ -7,6 +7,7 @@ import {
 } from '@f-design/component-library';
 
 import { useStateValue } from 'components';
+import { copyContent } from 'shared/data';
 import { ActionTypesEnum, ParentType } from 'shared/types/types';
 import {
   handleRemoveParent,
@@ -28,6 +29,8 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
       },
     });
 
+  const { buttons, heading, labels } = copyContent.parentInputs;
+
   return (
     <>
       {parents.map(
@@ -47,7 +50,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
             title={`${
               firstName || lastName
                 ? `${firstName} ${lastName}`
-                : `Parent/Guardian ${index + 1}`
+                : heading(index + 1)
             }`}
           >
             <p className="intake-form__field-title">Contact</p>
@@ -56,7 +59,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
               <Input
                 id={`parent-${index}-first-name`}
                 name="firstName"
-                label="First"
+                label={labels.firstName}
                 value={firstName}
                 onChange={(event): void =>
                   handleUpdateParents(
@@ -68,7 +71,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
               <Input
                 id={`parent-${index}-last-name`}
                 name="lastName"
-                label="Last"
+                label={labels.lastName}
                 value={lastName}
                 onChange={(event): void =>
                   handleUpdateParents(
@@ -81,7 +84,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                 id={`parent-${index}-phone-number`}
                 type="tel"
                 name="phoneNumber"
-                label="Phone Number"
+                label={labels.phoneNumber}
                 value={phoneNumber}
                 onChange={(event): void =>
                   handleUpdateParents(
@@ -94,7 +97,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                 id={`parent-${index}-email`}
                 type="email"
                 name="email"
-                label="Email"
+                label={labels.email}
                 value={email}
                 onChange={(event): void =>
                   handleUpdateParents(
@@ -117,7 +120,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                     }
                     options={[
                       {
-                        label: 'In same household?',
+                        label: labels.sameHousehold,
                         checked: isInSameHousehold,
                       },
                     ]}
@@ -131,7 +134,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                 <Input
                   id={`parent-${index}-street`}
                   name="street"
-                  label="Street"
+                  label={labels.street}
                   value={address.street}
                   onChange={(event): void =>
                     handleUpdateParents(
@@ -143,7 +146,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                 <Input
                   id={`parent-${index}-city`}
                   name="city"
-                  label="City"
+                  label={labels.city}
                   value={address.city}
                   onChange={(event): void =>
                     handleUpdateParents(
@@ -155,7 +158,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                 <Input
                   id={`parent-${index}-state`}
                   name="state"
-                  label="State"
+                  label={labels.state}
                   value={address.state}
                   onChange={(event): void =>
                     handleUpdateParents(
@@ -167,7 +170,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                 <Input
                   id={`parent-${index}-zip`}
                   name="zip"
-                  label="Zip"
+                  label={labels.zip}
                   value={address.zip}
                   onChange={(event): void =>
                     handleUpdateParents(
@@ -186,7 +189,7 @@ const ParentInputs: FunctionComponent = (): ReactElement => {
                   handleUpdateParents(handleRemoveParent(index, parents))
                 }
               >
-                Delete
+                {buttons.delete}
               </Button>
             )}
           </ExpansionPanel>
