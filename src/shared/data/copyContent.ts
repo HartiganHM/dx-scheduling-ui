@@ -65,6 +65,17 @@ export default {
       ratesDiscussed: 'Rates discussed?',
     },
   },
+  insuranceInputs: {
+    heading: 'Insurance',
+    labels: {
+      dob: 'Insured DOB',
+      groupNumber: 'Group #',
+      id: 'ID #',
+      insured: 'Insured',
+      providers: 'Providers',
+    },
+    providers: ['Kaiser', 'Medicaid', 'United', 'Other'],
+  },
   intakeQuestions: {
     headingConcerns: 'Concerns',
     headingReferral: 'Referral',
