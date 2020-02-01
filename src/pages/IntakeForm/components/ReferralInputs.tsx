@@ -41,7 +41,7 @@ const ReferralInputs: FunctionComponent = (): ReactElement => {
   const {
     headingReferral,
     labelReferralConcernMatch,
-  } = copyContent.questionInputs;
+  } = copyContent.intakeQuestions;
 
   return (
     <ExpansionPanel title={headingReferral}>

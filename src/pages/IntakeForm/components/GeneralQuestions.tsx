@@ -28,7 +28,7 @@ const GeneralQuestions: FunctionComponent = (): ReactElement => {
     labelNeeds,
     labelPreferredTimes,
     labelRatesDiscussed,
-  } = copyContent.questionInputs;
+  } = copyContent.intakeQuestions;
 
   const handleChangeCheckbox = (
     { target: { checked } }: ChangeEvent<HTMLInputElement>,
