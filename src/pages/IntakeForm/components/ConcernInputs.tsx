@@ -27,50 +27,43 @@ const ConcernInputs: FunctionComponent = (): ReactElement => {
     });
   };
 
-  const {
-    headingConcerns,
-    labelAreasOfConcern,
-    labelCognitiveConcerns,
-    labelCommunicationConcerns,
-    labelMotorConcerns,
-    labelSensoryConcerns,
-  } = copyContent.intakeQuestions;
+  const { heading, labels } = copyContent.concernInputs;
 
   return (
-    <ExpansionPanel title={headingConcerns}>
+    <ExpansionPanel title={heading}>
       <div className="intake-form__field-container">
         <TextArea
           name="areas"
           value={concerns.areas || ''}
-          label={labelAreasOfConcern}
+          label={labels.areasOfConcern}
           onChange={handleChangeConcernsValues}
         />
 
         <TextArea
           name="communication"
           value={concerns.communication || ''}
-          label={labelCommunicationConcerns}
+          label={labels.communicationConcerns}
           onChange={handleChangeConcernsValues}
         />
 
         <TextArea
           name="motor"
           value={concerns.motor || ''}
-          label={labelMotorConcerns}
+          label={labels.motorConcerns}
           onChange={handleChangeConcernsValues}
         />
 
         <TextArea
           name="sensory"
           value={concerns.sensory || ''}
-          label={labelSensoryConcerns}
+          label={labels.sensoryConcerns}
           onChange={handleChangeConcernsValues}
         />
 
         <TextArea
           name="cognitive"
           value={concerns.cognitive || ''}
-          label={labelCognitiveConcerns}
+          label={labels.cognitiveConcerns}
           onChange={handleChangeConcernsValues}
         />
       </div>

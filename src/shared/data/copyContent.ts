@@ -34,25 +34,30 @@ export default {
       'ST Treatment',
     ],
   },
+  concernInputs: {
+    heading: 'Concerns',
+    labels: {
+      areasOfConcern:
+        "What do you think is the cause of your child's difficulties?",
+      cognitiveConcerns: 'Any cognitive concerns?',
+      communicationConcerns: 'Any communication concerns?',
+      motorConcerns: 'Any motor concerns?',
+      sensoryConcerns: 'Any sensory concerns?',
+    },
+  },
   intakeQuestions: {
     headingConcerns: 'Concerns',
     headingDiagnosis: 'Diagnosis',
     headingGeneralQuestions: 'GeneralQuestions',
     headingReferral: 'Referral',
-    labelAreasOfConcern:
-      "What do you think is the cause of your child's difficulties?",
-    labelCognitiveConcerns: 'Any cognitive concerns?',
-    labelCommunicationConcerns: 'Any communication concerns?',
     labelCreditCardInfoSaved: 'Payment information saved?',
     labelDiagnosisComments: 'Comments',
     labelHasReferral: 'Were you referred to us?',
     labelNeeds:
       'What will be helpful to your child or your family as a result of this evaluation and/or therapy?',
-    labelMotorConcerns: 'Any motor concerns?',
     labelPreferredTimes: 'Preferred times for therapy or first available?',
     labelRatesDiscussed: 'Rates discussed?',
     labelReferralConcernMatch:
       'Do your concerns match the concerns of the person who referred you?',
-    labelSensoryConcerns: 'Any sensory concerns?',
   },
 };
