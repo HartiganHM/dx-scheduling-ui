@@ -4,6 +4,7 @@ import InsuranceInputs from './InsuranceInputs';
 import ParentInputs from './ParentInputs';
 import PrimaryCareProviderInputs from './PrimaryCareProviderInputs';
 import QuestionInputs from './QuestionInputs';
+import ReferralInputs from './ReferralInputs';
 
 export {
   ClientInputs,
@@ -12,4 +13,5 @@ export {
   ParentInputs,
   PrimaryCareProviderInputs,
   QuestionInputs,
+  ReferralInputs,
 };

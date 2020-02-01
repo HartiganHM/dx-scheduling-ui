@@ -1,11 +1,5 @@
 import React, { ReactElement, FunctionComponent, ChangeEvent } from 'react';
-import classnames from 'classnames';
-import {
-  Checkbox,
-  ExpansionPanel,
-  Input,
-  TextArea,
-} from '@f-design/component-library';
+import { ExpansionPanel, Input, TextArea } from '@f-design/component-library';
 
 import { useStateValue } from 'components';
 import { copyContent } from 'shared/data';
@@ -32,23 +26,6 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
         [name]: value,
       },
     });
-
-  const handleChangeReferralValue = ({
-    target: { name, value },
-  }: ChangeEvent<HTMLInputElement>): void => {
-    const newReferral = {
-      ...referral,
-      [name]: value,
-    };
-
-    dispatch({
-      type: ActionTypesEnum.UpdateIntakeQuestions,
-      intakeFormQuestions: {
-        ...intakeFormQuestions,
-        referral: newReferral,
-      },
-    });
-  };
 
   const handleChangeDiagnosisValues = ({
     target: { name, value },
@@ -99,35 +76,6 @@ const QuestionInputs: FunctionComponent = (): ReactElement => {
 
   return (
     <ExpansionPanel title="Intake Questions">
-      <ExpansionPanel expanded={!!hasReferral}>
-        <p className="intake-form__field-title">{headingReferral}</p>
-
-        <div className="intake-form__field-container">
-          <Input
-            id="referral-first-name"
-            name="firstName"
-            label="First"
-            value={referral.firstName}
-            onChange={handleChangeReferralValue}
-          />
-
-          <Input
-            id="referral-last-name"
-            name="lastName"
-            label="Last"
-            value={referral.lastName}
-            onChange={handleChangeReferralValue}
-          />
-
-          <TextArea
-            name="referralConcernMatch"
-            value={referralConcernMatch || ''}
-            label={labelReferralConcernMatch}
-            onChange={handleChangeTextArea}
-          />
-        </div>
-      </ExpansionPanel>
-
       <p className="intake-form__field-title">{headingDiagnosis}</p>
 
       <div className="intake-form__field-container">

@@ -1,9 +1,6 @@
 import React, { FunctionComponent, ChangeEvent } from 'react';
-
 import classnames from 'classnames';
-
 import { Button, Checkbox, Input } from '@f-design/component-library';
-
 import { useStateValue } from 'components';
 import { defaultParentValues } from 'shared/data';
 import { ActionTypesEnum, ServicesType } from 'shared/types/types';
@@ -15,14 +12,16 @@ import {
   ParentInputs,
   PrimaryCareProviderInputs,
   QuestionInputs,
+  ReferralInputs,
 } from './components';
 
 import './IntakeForm.scss';
 
 const IntakeForm: FunctionComponent = () => {
-  const [{ intakeFormValues }, dispatch] = useStateValue();
+  const [{ intakeFormValues, intakeFormQuestions }, dispatch] = useStateValue();
 
   const { date, servicesRequested, parents } = intakeFormValues;
+  const { hasReferral } = intakeFormQuestions;
 
   const handleUpdateFormValue = ({
     target: { name, value },
@@ -102,6 +101,7 @@ const IntakeForm: FunctionComponent = () => {
         <PrimaryCareProviderInputs />
         <InsuranceInputs />
         <GeneralQuestions />
+        {hasReferral && <ReferralInputs />}
         <QuestionInputs />
       </div>
 
