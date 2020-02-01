@@ -2,6 +2,7 @@ import React, { FunctionComponent, ReactElement, ChangeEvent } from 'react';
 import { ExpansionPanel, Input, Radio } from '@f-design/component-library';
 
 import { useStateValue } from 'components';
+import { copyContent } from 'shared/data';
 import { ActionTypesEnum } from 'shared/types/types';
 
 const ClientInputs: FunctionComponent = (): ReactElement => {
@@ -34,12 +35,14 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
     target: { name },
   }: ChangeEvent<HTMLInputElement>): void => handleUpdateClient('gender', name);
 
+  const { genderOptions, headings, labels } = copyContent.clientInputs;
+
   return (
     <ExpansionPanel
       title={
         client.firstName || client.lastName
           ? `${client.firstName} ${client.lastName}`
-          : 'Client'
+          : headings.client
       }
       expanded
     >
@@ -49,7 +52,7 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
         <Input
           id="client-first-name"
           name="firstName"
-          label="First"
+          label={labels.firstName}
           value={client.firstName}
           onChange={handleUpdateClientInputValues}
         />
@@ -57,7 +60,7 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
         <Input
           id="client-last-name"
           name="lastName"
-          label="Last"
+          label={labels.lastName}
           value={client.lastName}
           onChange={handleUpdateClientInputValues}
         />
@@ -65,7 +68,7 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
         <Input
           type="date"
           name="dob"
-          label="DOB"
+          label={labels.dob}
           value={client.dob}
           onChange={handleUpdateClientInputValues}
         />
@@ -73,7 +76,7 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
         <Input
           id="client-school"
           name="school"
-          label="School Name"
+          label={labels.school}
           value={client.school}
           onChange={handleUpdateClientInputValues}
         />
@@ -81,15 +84,15 @@ const ClientInputs: FunctionComponent = (): ReactElement => {
         <Input
           id="client-grade"
           name="grade"
-          label="Grade"
+          label={labels.grade}
           value={client.grade}
           onChange={handleUpdateClientInputValues}
         />
 
         <Radio
-          label="Gender"
+          label={labels.gender}
           selected={client.gender}
-          options={['Female', 'Male', 'Prefer not to say', 'Other']}
+          options={genderOptions}
           onChange={handleUpdateClientGender}
           other={{
             value: client.otherGender || '',

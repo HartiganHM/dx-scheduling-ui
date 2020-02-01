@@ -1,4 +1,18 @@
 export default {
+  clientInputs: {
+    genderOptions: ['Female', 'Male', 'Prefer not to say', 'Other'],
+    headings: {
+      client: 'Client',
+    },
+    labels: {
+      dob: 'DOB',
+      firstName: 'First',
+      gender: 'Gender',
+      grade: 'Grade',
+      lastName: 'Last',
+      school: 'School Name',
+    },
+  },
   intakeForm: {
     buttons: {
       addParent: 'Add Parent/Guardian',
