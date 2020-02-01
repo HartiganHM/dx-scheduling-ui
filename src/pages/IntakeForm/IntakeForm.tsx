@@ -2,7 +2,7 @@ import React, { FunctionComponent, ChangeEvent } from 'react';
 import classnames from 'classnames';
 import { Button, Checkbox, Input } from '@f-design/component-library';
 import { useStateValue } from 'components';
-import { defaultParentValues } from 'shared/data';
+import { copyContent, defaultParentValues } from 'shared/data';
 import { ActionTypesEnum, ServicesType } from 'shared/types/types';
 
 import {
@@ -64,14 +64,7 @@ const IntakeForm: FunctionComponent = () => {
     console.log({ intakeFormValues });
   };
 
-  const services = [
-    'Psych Evaluation',
-    'Psych Therapy',
-    'OT Evaluation',
-    'OT Treatment',
-    'ST Evaluation',
-    'ST Treatment',
-  ];
+  const { buttons, icons, labels, services } = copyContent.intakeForm;
 
   const serviceOptions = services.map(service => ({
     label: service,
@@ -84,13 +77,13 @@ const IntakeForm: FunctionComponent = () => {
         <Input
           type="date"
           name="date"
-          label="Date"
+          label={labels.date}
           value={date}
           onChange={handleUpdateFormValue}
         />
 
         <Checkbox
-          label="Services Requested"
+          label={labels.servicesRequested}
           onChange={handleSelectServices}
           options={serviceOptions}
         />
@@ -115,13 +108,13 @@ const IntakeForm: FunctionComponent = () => {
               'intake-form__add-button-icon': true,
             })}
           >
-            add_circle_outline
+            {icons.addParent}
           </i>
-          Add Parent/Guardian
+          {buttons.addParent}
         </Button>
 
         <Button onClick={handleSubmit} type="brand">
-          Submit
+          {buttons.submit}
         </Button>
       </div>
     </div>

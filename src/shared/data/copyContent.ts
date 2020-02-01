@@ -1,4 +1,25 @@
 export default {
+  intakeForm: {
+    buttons: {
+      addParent: 'Add Parent/Guardian',
+      submit: 'Submit',
+    },
+    icons: {
+      addParent: 'add_circle_outline',
+    },
+    labels: {
+      date: 'Date',
+      servicesRequested: 'Services Requested',
+    },
+    services: [
+      'Psych Evaluation',
+      'Psych Therapy',
+      'OT Evaluation',
+      'OT Treatment',
+      'ST Evaluation',
+      'ST Treatment',
+    ],
+  },
   intakeQuestions: {
     headingConcerns: 'Concerns',
     headingDiagnosis: 'Diagnosis',
