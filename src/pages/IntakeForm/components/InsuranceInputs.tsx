@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, FunctionComponent } from 'react';
+import React, { Fragment, ReactElement, FC } from 'react';
 
 import {
   Checkbox,
@@ -17,7 +17,7 @@ import {
   handleUpdateParentInputValues,
 } from '../utilities';
 
-const InsuranceInputs: FunctionComponent = (): ReactElement => {
+const InsuranceInputs: FC = (): ReactElement => {
   const [{ intakeFormValues }, dispatch] = useStateValue();
 
   const { insurances, parents } = intakeFormValues;

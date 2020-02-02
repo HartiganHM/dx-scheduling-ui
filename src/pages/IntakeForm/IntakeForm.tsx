@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ChangeEvent } from 'react';
+import React, { FC, ChangeEvent } from 'react';
 import classnames from 'classnames';
 import { Button, Checkbox, Input } from '@f-design/component-library';
 import { useStateValue } from 'components';
@@ -18,7 +18,7 @@ import {
 
 import './IntakeForm.scss';
 
-const IntakeForm: FunctionComponent = () => {
+const IntakeForm: FC = () => {
   const [{ intakeFormValues, intakeFormQuestions }, dispatch] = useStateValue();
 
   const { date, servicesRequested, parents } = intakeFormValues;

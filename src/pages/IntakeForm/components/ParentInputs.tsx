@@ -1,4 +1,4 @@
-import React, { ReactElement, FunctionComponent } from 'react';
+import React, { ReactElement, FC } from 'react';
 import {
   Button,
   Checkbox,
@@ -16,7 +16,7 @@ import {
   handleUpdateParentInputValues,
 } from '../utilities';
 
-const ParentInputs: FunctionComponent = (): ReactElement => {
+const ParentInputs: FC = (): ReactElement => {
   const [{ intakeFormValues }, dispatch] = useStateValue();
   const { parents } = intakeFormValues;
 

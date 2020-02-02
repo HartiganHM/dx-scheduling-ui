@@ -1,4 +1,4 @@
-import React, { ReactChild, FunctionComponent, useEffect } from 'react';
+import React, { ReactChild, FC, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { HeaderMenu, SideNavigation } from '@f-design/component-library';
 
@@ -12,7 +12,7 @@ type NavigationContainerProps = {
   children: ReactChild | ReactChild[];
 };
 
-const NavigationContainer: FunctionComponent<NavigationContainerProps> = ({
+const NavigationContainer: FC<NavigationContainerProps> = ({
   children,
 }: NavigationContainerProps) => {
   const history = useHistory();

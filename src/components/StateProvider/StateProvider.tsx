@@ -3,7 +3,7 @@ import React, {
   useContext,
   useReducer,
   ReactChild,
-  FunctionComponent,
+  FC,
   Dispatch,
   Reducer,
 } from 'react';
@@ -23,7 +23,7 @@ const { Provider } = StateContext;
 
 export const useStateValue = (): ProviderValue => useContext(StateContext);
 
-const StateProvider: FunctionComponent<StateProviderProps> = ({
+const StateProvider: FC<StateProviderProps> = ({
   reducer,
   initialState,
   children,

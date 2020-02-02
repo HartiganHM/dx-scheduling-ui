@@ -1,4 +1,4 @@
-import React, { ReactElement, FunctionComponent, ChangeEvent } from 'react';
+import React, { ReactElement, FC, ChangeEvent } from 'react';
 import classnames from 'classnames';
 import {
   Checkbox,
@@ -10,7 +10,7 @@ import { useStateValue } from 'components';
 import { copyContent } from 'shared/data';
 import { ActionTypesEnum } from 'shared/types/types';
 
-const GeneralQuestions: FunctionComponent = (): ReactElement => {
+const GeneralQuestions: FC = (): ReactElement => {
   const [{ intakeFormQuestions }, dispatch] = useStateValue();
 
   const {

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { CircleLoader } from '@f-design/component-library';
@@ -25,7 +25,7 @@ const GET_PERMISSIONS = gql`
   }
 `;
 
-const Permissions: FunctionComponent<PermissionsProps> = (
+const Permissions: FC<PermissionsProps> = (
   props: PermissionsProps
 ) => {
   const { loading, error, data } = useQuery(GET_PERMISSIONS, {

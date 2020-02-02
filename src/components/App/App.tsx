@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import Routes from '../Routes/Routes';
 import './App.scss';
 
-const App: React.FC = () => (
+const App: FC = () => (
   <div className="dx-app">
     <Routes />
   </div>

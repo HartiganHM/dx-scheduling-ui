@@ -1,11 +1,11 @@
-import React, { ReactElement, FunctionComponent, ChangeEvent } from 'react';
+import React, { ReactElement, FC, ChangeEvent } from 'react';
 import { ExpansionPanel, Input, TextArea } from '@f-design/component-library';
 
 import { useStateValue } from 'components';
 import { copyContent } from 'shared/data';
 import { ActionTypesEnum } from 'shared/types/types';
 
-const DiagnosisInputs: FunctionComponent = (): ReactElement => {
+const DiagnosisInputs: FC = (): ReactElement => {
   const [{ intakeFormQuestions }, dispatch] = useStateValue();
 
   const { diagnosis } = intakeFormQuestions;

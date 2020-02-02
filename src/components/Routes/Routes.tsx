@@ -1,10 +1,10 @@
-import React, { ReactElement, FunctionComponent } from 'react';
+import React, { ReactElement, FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { IntakeForm, Permissions } from 'pages';
 import NavigationContainer from '../NavigationContainer/NavigationContainer';
 
-const Routes: FunctionComponent = () => (
+const Routes: FC = () => (
   <Router>
     <Route
       path="/"
