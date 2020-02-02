@@ -25,9 +25,7 @@ const GET_PERMISSIONS = gql`
   }
 `;
 
-const Permissions: FC<PermissionsProps> = (
-  props: PermissionsProps
-) => {
+const Permissions: FC<PermissionsProps> = (props: PermissionsProps) => {
   const { loading, error, data } = useQuery(GET_PERMISSIONS, {
     displayName: 'permissionsData',
   });
