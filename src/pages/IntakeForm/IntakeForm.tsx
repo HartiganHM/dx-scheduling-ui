@@ -61,7 +61,7 @@ const IntakeForm: FC = () => {
     });
 
   const handleSubmit = (): void => {
-    console.log({ intakeFormValues });
+    console.log({ intakeFormValues, intakeFormQuestions });
   };
 
   const { buttons, icons, labels, services } = copyContent.intakeForm;
