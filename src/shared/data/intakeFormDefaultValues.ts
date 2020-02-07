@@ -1,73 +1,213 @@
 export const defaultParentValues = {
-  firstName: '',
-  lastName: '',
-  gender: '',
-  phoneNumber: '',
-  email: '',
-  address: {
-    street: '',
-    city: '',
-    state: '',
-    zip: '',
+  firstName: {
+    value: '',
+    required: true,
   },
-  isInSameHousehold: false,
-  dob: '',
+  lastName: {
+    value: '',
+    required: true,
+  },
+  gender: {
+    value: '',
+    required: true,
+  },
+  phoneNumber: {
+    value: '',
+    required: true,
+  },
+  email: {
+    value: '',
+    required: true,
+  },
+  address: {
+    street: {
+      value: '',
+      required: true,
+    },
+    city: {
+      value: '',
+      required: true,
+    },
+    state: {
+      value: '',
+      required: true,
+    },
+    zip: {
+      value: '',
+      required: true,
+    },
+  },
+  isInSameHousehold: {
+    value: false,
+    required: true,
+  },
+  dob: {
+    value: '',
+    required: true,
+  },
 };
 
 export const defaultInsuranceValues = {
-  id: '',
-  groupNumber: '',
-  provider: '',
-  insured: '',
+  idNumber: {
+    value: '',
+    required: true,
+  },
+  groupNumber: {
+    value: '',
+    required: true,
+  },
+  provider: {
+    value: '',
+    required: true,
+  },
+  insured: {
+    value: '',
+    required: true,
+  },
 };
 
 export const defaultFormValues = {
-  date: '',
-  servicesRequested: [],
+  date: {
+    value: '',
+    required: true,
+  },
+  servicesRequested: {
+    value: [],
+    required: true,
+  },
   client: {
-    firstName: '',
-    lastName: '',
-    dob: '',
-    gender: '',
-    school: '',
-    grade: '',
+    firstName: {
+      value: '',
+      required: true,
+    },
+    lastName: {
+      value: '',
+      required: true,
+    },
+    dob: {
+      value: '',
+      required: true,
+    },
+    gender: {
+      value: '',
+      required: true,
+    },
+    school: {
+      value: '',
+      required: true,
+    },
+    grade: {
+      value: '',
+      required: true,
+    },
   },
   parents: [defaultParentValues],
-  sameHousehold: undefined,
   physician: {
-    firstName: '',
-    lastName: '',
-    practice: '',
-    phoneNumber: '',
+    firstName: {
+      value: '',
+      required: true,
+    },
+    lastName: {
+      value: '',
+      required: true,
+    },
+    practice: {
+      value: '',
+      required: true,
+    },
+    phoneNumber: {
+      value: '',
+      required: true,
+    },
   },
   insurances: [],
 };
 
 export const defaultIntakeQuestionValues = {
-  creditCardInfoSaved: false,
-  ratesDiscussed: false,
-  preferredTimes: '',
-  needs: '',
-  hasReferral: false,
-  referral: {
-    firstName: '',
-    lastName: '',
+  creditCardInfoSaved: {
+    value: false,
+    required: true,
   },
-  referralConcernMatch: '',
+  ratesDiscussed: {
+    value: false,
+    required: true,
+  },
+  preferredTimes: {
+    value: '',
+    required: true,
+  },
+  needs: {
+    value: '',
+    required: true,
+  },
+  hasReferral: {
+    value: false,
+    required: true,
+  },
+  referral: {
+    firstName: {
+      value: '',
+      required: true,
+    },
+    lastName: {
+      value: '',
+      required: true,
+    },
+  },
+  referralConcernMatch: {
+    value: '',
+    required: true,
+  },
   diagnosis: {
-    name: '',
-    provider: '',
-    date: '',
-    comments: '',
+    name: {
+      value: '',
+      required: true,
+    },
+    provider: {
+      value: '',
+      required: true,
+    },
+    date: {
+      value: '',
+      required: true,
+    },
+    comments: {
+      value: '',
+      required: true,
+    },
   },
   concerns: {
-    areas: '',
-    communication: '',
-    motor: '',
-    sensory: '',
-    cognitive: '',
+    areas: {
+      value: '',
+      required: true,
+    },
+    communication: {
+      value: '',
+      required: true,
+    },
+    motor: {
+      value: '',
+      required: true,
+    },
+    sensory: {
+      value: '',
+      required: true,
+    },
+    cognitive: {
+      value: '',
+      required: true,
+    },
   },
-  priorTherapy: '',
-  schoolSupport: '',
-  priorTreatments: '',
+  priorTherapy: {
+    value: '',
+    required: true,
+  },
+  schoolSupport: {
+    value: '',
+    required: true,
+  },
+  priorTreatments: {
+    value: '',
+    required: true,
+  },
 };
