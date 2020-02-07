@@ -40,7 +40,8 @@ const InsuranceInputs: FC = (): ReactElement => {
     insurance: InsuranceType,
     index: number
   ): ReactElement => {
-    const { provider, id, groupNumber, insured } = insurance;
+    const { provider, idNumber, groupNumber, insured } = insurance;
+
     const parentOptions = parents
       .filter(({ firstName }) => firstName)
       .map(({ firstName, lastName }) => ({
@@ -64,8 +65,8 @@ const InsuranceInputs: FC = (): ReactElement => {
         <div className="intake-form__field-container">
           <Input
             name="id"
-            label={labels.id}
-            value={id}
+            label={labels.idNumber}
+            value={idNumber}
             onChange={(event): void =>
               handleUpdateFormValues(
                 'insurances',

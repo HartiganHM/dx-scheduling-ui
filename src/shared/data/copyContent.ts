@@ -70,7 +70,7 @@ export default {
     labels: {
       dob: 'Insured DOB',
       groupNumber: 'Group #',
-      id: 'ID #',
+      idNumber: 'ID #',
       insured: 'Insured',
       providers: 'Providers',
     },
