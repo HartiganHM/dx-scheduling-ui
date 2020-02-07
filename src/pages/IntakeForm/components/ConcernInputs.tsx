@@ -34,35 +34,35 @@ const ConcernInputs: FC = (): ReactElement => {
       <div className="intake-form__field-container">
         <TextArea
           name="areas"
-          value={concerns.areas || ''}
+          value={concerns.areas.value}
           label={labels.areasOfConcern}
           onChange={handleChangeConcernsValues}
         />
 
         <TextArea
           name="communication"
-          value={concerns.communication || ''}
+          value={concerns.communication.value}
           label={labels.communicationConcerns}
           onChange={handleChangeConcernsValues}
         />
 
         <TextArea
           name="motor"
-          value={concerns.motor || ''}
+          value={concerns.motor.value}
           label={labels.motorConcerns}
           onChange={handleChangeConcernsValues}
         />
 
         <TextArea
           name="sensory"
-          value={concerns.sensory || ''}
+          value={concerns.sensory.value}
           label={labels.sensoryConcerns}
           onChange={handleChangeConcernsValues}
         />
 
         <TextArea
           name="cognitive"
-          value={concerns.cognitive || ''}
+          value={concerns.cognitive.value}
           label={labels.cognitiveConcerns}
           onChange={handleChangeConcernsValues}
         />
