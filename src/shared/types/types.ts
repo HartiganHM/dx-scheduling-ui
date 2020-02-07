@@ -18,13 +18,41 @@ export interface InitialState {
   intakeFormQuestions: IntakeFormQuestionsType;
 }
 
+// Errors
+export interface Errors {
+  intakeFormValues: string;
+  intakeFormQuestions: string;
+}
+
 // Intake Form Values
+interface FieldBaseValues {
+  required: boolean;
+}
+export interface FieldStringType extends FieldBaseValues {
+  value: string;
+}
+
+export interface FieldBooleanType extends FieldBaseValues {
+  value: boolean;
+}
+
+export interface FieldServicesType extends FieldBaseValues {
+  value: ServicesType[];
+}
+
+export interface FieldGenderType extends FieldBaseValues {
+  value: GenderType;
+}
+
+export interface FieldProviderType extends FieldBaseValues {
+  value: ProviderType;
+}
+
 export interface IntakeFormValuesType {
-  date: string;
-  servicesRequested: ServicesType[];
+  date: FieldStringType;
+  servicesRequested: FieldServicesType;
   client: ClientType;
   parents: ParentType[];
-  sameHousehold: boolean | undefined;
   physician: PhysicianType;
   insurances: InsuranceType[];
 }
@@ -38,79 +66,79 @@ export type ServicesType =
   | 'ST Treatment';
 
 export interface PersonalInformationType {
-  firstName: string;
-  lastName: string;
+  firstName: FieldStringType;
+  lastName: FieldStringType;
 }
 
 export interface ClientType extends PersonalInformationType {
-  dob: string;
-  gender: GenderType;
-  school: string;
-  grade: string;
+  dob: FieldStringType;
+  gender: FieldGenderType;
+  school: FieldStringType;
+  grade: FieldStringType;
   otherGender?: string;
 }
 
 export type GenderType = 'Female' | 'Male' | 'Prefer not to say' | string;
 
 export interface ParentType extends PersonalInformationType {
-  gender: string;
-  phoneNumber: string;
-  email: string;
+  gender: FieldStringType;
+  phoneNumber: FieldStringType;
+  email: FieldStringType;
   address: AddressType;
-  isInSameHousehold: boolean;
-  dob: string;
+  isInSameHousehold: FieldBooleanType;
+  dob: FieldStringType;
 }
 
 export interface AddressType {
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
+  street: FieldStringType;
+  city: FieldStringType;
+  state: FieldStringType;
+  zip: FieldStringType;
 }
 
 export interface PhysicianType extends PersonalInformationType {
-  practice: string;
-  phoneNumber: string;
+  practice: FieldStringType;
+  phoneNumber: FieldStringType;
 }
 
 export interface InsuranceType {
-  id: string;
-  groupNumber: string;
-  insured: string;
-  provider: ProviderType;
+  idNumber: FieldStringType;
+  groupNumber: FieldStringType;
+  insured: FieldStringType;
+  provider: FieldProviderType;
 }
 
 type ProviderType = 'Kaiser' | 'Medicaid' | 'United' | string;
 
 // Intake Form Checklist
 export interface IntakeFormQuestionsType {
-  creditCardInfoSaved: boolean;
-  ratesDiscussed: boolean;
-  preferredTimes: string;
-  needs: string;
-  hasReferral: boolean;
+  creditCardInfoSaved: FieldBooleanType;
+  ratesDiscussed: FieldBooleanType;
+  preferredTimes: FieldStringType;
+  needs: FieldStringType;
+  hasReferral: FieldBooleanType;
   referral: PersonalInformationType;
-  referralConcernMatch?: string;
+  referralConcernMatch?: FieldStringType;
   diagnosis: DiagnosisType;
   concerns: ConcernType;
-  priorTherapy?: string;
-  schoolSupport?: string;
-  priorTreatments?: string;
+  priorTherapy: FieldStringType;
+  schoolSupport: FieldStringType;
+  priorTreatments: FieldStringType;
 }
 
 export interface ConcernType {
-  areas?: string;
-  communication?: string;
-  motor?: string;
-  sensory?: string;
-  cognitive?: string;
+  areas: FieldStringType;
+  communication: FieldStringType;
+  motor: FieldStringType;
+  sensory: FieldStringType;
+  cognitive: FieldStringType;
 }
 
 export interface DiagnosisType {
-  name: string;
-  provider: string;
-  date: string;
-  comments: string;
+  name: FieldStringType;
+  provider: FieldStringType;
+  date: FieldStringType;
+  comments: FieldStringType;
 }
 
 // Navigation
