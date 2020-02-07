@@ -53,7 +53,7 @@ const ClientInputs: FC = (): ReactElement => {
           id="client-first-name"
           name="firstName"
           label={labels.firstName}
-          value={client.firstName}
+          value={client.firstName.value}
           onChange={handleUpdateClientInputValues}
         />
 
@@ -61,7 +61,7 @@ const ClientInputs: FC = (): ReactElement => {
           id="client-last-name"
           name="lastName"
           label={labels.lastName}
-          value={client.lastName}
+          value={client.lastName.value}
           onChange={handleUpdateClientInputValues}
         />
 
@@ -69,7 +69,7 @@ const ClientInputs: FC = (): ReactElement => {
           type="date"
           name="dob"
           label={labels.dob}
-          value={client.dob}
+          value={client.dob.value}
           onChange={handleUpdateClientInputValues}
         />
 
@@ -77,7 +77,7 @@ const ClientInputs: FC = (): ReactElement => {
           id="client-school"
           name="school"
           label={labels.school}
-          value={client.school}
+          value={client.school.value}
           onChange={handleUpdateClientInputValues}
         />
 
@@ -85,13 +85,13 @@ const ClientInputs: FC = (): ReactElement => {
           id="client-grade"
           name="grade"
           label={labels.grade}
-          value={client.grade}
+          value={client.grade.value}
           onChange={handleUpdateClientInputValues}
         />
 
         <Radio
           label={labels.gender}
-          selected={client.gender}
+          selected={client.gender.value}
           options={genderOptions}
           onChange={handleUpdateClientGender}
           other={{
