@@ -60,7 +60,7 @@ const ParentInputs: FC = (): ReactElement => {
                 id={`parent-${index}-first-name`}
                 name="firstName"
                 label={labels.firstName}
-                value={firstName}
+                value={firstName.value}
                 onChange={(event): void =>
                   handleUpdateParents(
                     handleUpdateParentInputValues(event, index, parents)
@@ -72,7 +72,7 @@ const ParentInputs: FC = (): ReactElement => {
                 id={`parent-${index}-last-name`}
                 name="lastName"
                 label={labels.lastName}
-                value={lastName}
+                value={lastName.value}
                 onChange={(event): void =>
                   handleUpdateParents(
                     handleUpdateParentInputValues(event, index, parents)
@@ -85,7 +85,7 @@ const ParentInputs: FC = (): ReactElement => {
                 type="tel"
                 name="phoneNumber"
                 label={labels.phoneNumber}
-                value={phoneNumber}
+                value={phoneNumber.value}
                 onChange={(event): void =>
                   handleUpdateParents(
                     handleUpdateParentInputValues(event, index, parents)
@@ -98,7 +98,7 @@ const ParentInputs: FC = (): ReactElement => {
                 type="email"
                 name="email"
                 label={labels.email}
-                value={email}
+                value={email.value}
                 onChange={(event): void =>
                   handleUpdateParents(
                     handleUpdateParentInputValues(event, index, parents)
@@ -121,7 +121,7 @@ const ParentInputs: FC = (): ReactElement => {
                     options={[
                       {
                         label: labels.sameHousehold,
-                        checked: isInSameHousehold,
+                        checked: isInSameHousehold.value,
                       },
                     ]}
                   />
@@ -135,7 +135,7 @@ const ParentInputs: FC = (): ReactElement => {
                   id={`parent-${index}-street`}
                   name="street"
                   label={labels.street}
-                  value={address.street}
+                  value={address.street.value}
                   onChange={(event): void =>
                     handleUpdateParents(
                       handleUpdateParentAddress(event, index, parents)
@@ -147,7 +147,7 @@ const ParentInputs: FC = (): ReactElement => {
                   id={`parent-${index}-city`}
                   name="city"
                   label={labels.city}
-                  value={address.city}
+                  value={address.city.value}
                   onChange={(event): void =>
                     handleUpdateParents(
                       handleUpdateParentAddress(event, index, parents)
@@ -159,7 +159,7 @@ const ParentInputs: FC = (): ReactElement => {
                   id={`parent-${index}-state`}
                   name="state"
                   label={labels.state}
-                  value={address.state}
+                  value={address.state.value}
                   onChange={(event): void =>
                     handleUpdateParents(
                       handleUpdateParentAddress(event, index, parents)
@@ -171,7 +171,7 @@ const ParentInputs: FC = (): ReactElement => {
                   id={`parent-${index}-zip`}
                   name="zip"
                   label={labels.zip}
-                  value={address.zip}
+                  value={address.zip.value}
                   onChange={(event): void =>
                     handleUpdateParents(
                       handleUpdateParentAddress(event, index, parents)
