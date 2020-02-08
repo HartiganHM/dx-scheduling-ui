@@ -29,7 +29,7 @@ const ParentInputs: FC = (): ReactElement => {
       },
     });
 
-  const { buttons, heading, labels } = copyContent.parentInputs;
+  const { buttons, headings, labels } = copyContent.parentInputs;
 
   return (
     <>
@@ -48,12 +48,12 @@ const ParentInputs: FC = (): ReactElement => {
           <ExpansionPanel
             key={`dfx-pg-${index}`}
             title={`${
-              firstName || lastName
-                ? `${firstName} ${lastName}`
-                : heading(index + 1)
+              firstName.value || lastName.value
+                ? `${firstName.value} ${lastName.value}`
+                : headings.name(index + 1)
             }`}
           >
-            <p className="intake-form__field-title">Contact</p>
+            <p className="intake-form__field-title">{headings.contact}</p>
 
             <div className="intake-form__field-container">
               <Input

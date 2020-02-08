@@ -81,7 +81,10 @@ export default {
     buttons: {
       delete: 'Delete',
     },
-    heading: (number: number): string => `Parent/Guardian ${number}`,
+    headings: {
+      contact: 'Contact',
+      name: (number: number): string => `Parent/Guardian ${number}`,
+    },
     labels: {
       city: 'City',
       email: 'Email',
