@@ -36,7 +36,7 @@ const DiagnosisInputs: FC = (): ReactElement => {
           id="diagnosis-name"
           name="name"
           label={labels.name}
-          value={diagnosis.name}
+          value={diagnosis.name.value}
           onChange={handleChangeDiagnosisValues}
         />
 
@@ -44,7 +44,7 @@ const DiagnosisInputs: FC = (): ReactElement => {
           id="diagnosis-provider"
           name="provider"
           label={labels.provider}
-          value={diagnosis.provider}
+          value={diagnosis.provider.value}
           onChange={handleChangeDiagnosisValues}
         />
 
@@ -53,13 +53,13 @@ const DiagnosisInputs: FC = (): ReactElement => {
           type="date"
           name="date"
           label={labels.date}
-          value={diagnosis.date}
+          value={diagnosis.date.value}
           onChange={handleChangeDiagnosisValues}
         />
 
         <TextArea
           name="comments"
-          value={diagnosis.comments}
+          value={diagnosis.comments.value}
           label={labels.comments}
           onChange={handleChangeDiagnosisValues}
         />
