@@ -43,27 +43,28 @@ const InsuranceInputs: FC = (): ReactElement => {
     const { provider, idNumber, groupNumber, insured } = insurance;
 
     const parentOptions = parents
-      .filter(({ firstName }) => firstName)
+      .filter(({ firstName }) => firstName.value)
       .map(({ firstName, lastName }) => ({
-        value: firstName,
-        label: `${firstName} ${lastName}`,
+        value: firstName.value,
+        label: `${firstName.value} ${lastName.value}`,
       }));
     const parentNames = parentOptions.map(({ value }) => value);
 
     const matchingParent = parents.find(
-      ({ firstName }) => firstName === insured
+      ({ firstName }) => firstName.value === insured.value
     );
     const selectedOption = matchingParent && {
       value: insured.value,
-      label: `${matchingParent.firstName} ${matchingParent.lastName}`,
+      label: `${matchingParent.firstName.value} ${matchingParent.lastName.value}`,
     };
 
     return (
       <Fragment key={provider.value}>
-        <p className="intake-form__field-title">{provider}</p>
+        <p className="intake-form__field-title">{provider.value}</p>
 
         <div className="intake-form__field-container">
           <Input
+            id={`provider-${provider.value}`}
             name="id"
             label={labels.idNumber}
             value={idNumber.value}
@@ -104,13 +105,13 @@ const InsuranceInputs: FC = (): ReactElement => {
             name="dob"
             label={labels.dob}
             value={(matchingParent && matchingParent.dob.value) || ''}
-            disabled={!insured}
+            disabled={!insured.value}
             onChange={(event): void =>
               handleUpdateFormValues(
                 'parents',
                 handleUpdateParentInputValues(
                   event,
-                  parentNames.indexOf(insured),
+                  parentNames.indexOf(insured.value),
                   parents
                 )
               )
