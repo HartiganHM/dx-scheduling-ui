@@ -66,6 +66,7 @@ export type ServicesType =
   | 'ST Treatment';
 
 export interface PersonalInformationType {
+  [key: string]: FieldStringType | FieldBooleanType | AddressType;
   firstName: FieldStringType;
   lastName: FieldStringType;
 }
@@ -82,7 +83,6 @@ export interface ClientType extends PersonalInformationType {
 export type GenderType = 'Female' | 'Male' | 'Prefer not to say' | string;
 
 export interface ParentType extends PersonalInformationType {
-  [key: string]: FieldStringType | FieldBooleanType | AddressType;
   gender: FieldStringType;
   phoneNumber: FieldStringType;
   email: FieldStringType;
@@ -100,7 +100,6 @@ export interface AddressType {
 }
 
 export interface PhysicianType extends PersonalInformationType {
-  [key: string]: FieldStringType;
   practice: FieldStringType;
   phoneNumber: FieldStringType;
 }

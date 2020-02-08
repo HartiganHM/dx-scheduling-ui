@@ -3,7 +3,11 @@ import { ExpansionPanel, Input, TextArea } from '@f-design/component-library';
 
 import { useStateValue } from 'components';
 import { copyContent } from 'shared/data';
-import { ActionTypesEnum } from 'shared/types/types';
+import {
+  ActionTypesEnum,
+  FieldStringType,
+  PersonalInformationType,
+} from 'shared/types/types';
 
 const ReferralInputs: FC = (): ReactElement => {
   const [{ intakeFormQuestions }, dispatch] = useStateValue();
@@ -15,14 +19,17 @@ const ReferralInputs: FC = (): ReactElement => {
   }: ChangeEvent<HTMLInputElement>): void => {
     const newReferral = {
       ...referral,
-      [name]: value,
+      [name]: {
+        ...referral[name],
+        value,
+      },
     };
 
     dispatch({
       type: ActionTypesEnum.UpdateIntakeQuestions,
       intakeFormQuestions: {
         ...intakeFormQuestions,
-        referral: newReferral,
+        referral: newReferral as PersonalInformationType,
       },
     });
   };
@@ -34,7 +41,10 @@ const ReferralInputs: FC = (): ReactElement => {
       type: ActionTypesEnum.UpdateIntakeQuestions,
       intakeFormQuestions: {
         ...intakeFormQuestions,
-        [name]: value,
+        [name]: {
+          ...intakeFormQuestions[name],
+          value,
+        } as FieldStringType,
       },
     });
 
