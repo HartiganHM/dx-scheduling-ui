@@ -101,7 +101,7 @@ const IntakeForm: FC = () => {
         <PrimaryCareProviderInputs />
         <InsuranceInputs />
         <GeneralQuestions />
-        {hasReferral && <ReferralInputs />}
+        {hasReferral.value && <ReferralInputs />}
         <DiagnosisInputs />
         <ConcernInputs />
       </div>
