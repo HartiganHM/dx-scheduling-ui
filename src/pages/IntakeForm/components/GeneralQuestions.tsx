@@ -8,7 +8,11 @@ import {
 
 import { useStateValue } from 'components';
 import { copyContent } from 'shared/data';
-import { ActionTypesEnum } from 'shared/types/types';
+import {
+  FieldBooleanType,
+  FieldStringType,
+  ActionTypesEnum,
+} from 'shared/types/types';
 
 const GeneralQuestions: FC = (): ReactElement => {
   const [{ intakeFormQuestions }, dispatch] = useStateValue();
@@ -32,7 +36,7 @@ const GeneralQuestions: FC = (): ReactElement => {
         [name]: {
           ...intakeFormQuestions[name],
           value: checked,
-        },
+        } as FieldBooleanType,
       },
     });
 
@@ -46,7 +50,7 @@ const GeneralQuestions: FC = (): ReactElement => {
         [name]: {
           ...intakeFormQuestions[name],
           value,
-        },
+        } as FieldStringType,
       },
     });
 
