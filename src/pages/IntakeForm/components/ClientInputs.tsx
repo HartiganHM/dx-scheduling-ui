@@ -17,7 +17,10 @@ const ClientInputs: FC = (): ReactElement => {
         ...intakeFormValues,
         client: {
           ...client,
-          [field]: value,
+          [field]: {
+            ...client[field],
+            value,
+          },
         },
       },
     });
@@ -40,13 +43,13 @@ const ClientInputs: FC = (): ReactElement => {
   return (
     <ExpansionPanel
       title={
-        client.firstName || client.lastName
-          ? `${client.firstName} ${client.lastName}`
+        client.firstName.value || client.lastName.value
+          ? `${client.firstName.value} ${client.lastName.value}`
           : headings.client
       }
       expanded
     >
-      <p className="intake-form__field-title">General Information</p>
+      <p className="intake-form__field-title">{headings.general}</p>
 
       <div className="intake-form__field-container">
         <Input
@@ -95,7 +98,7 @@ const ClientInputs: FC = (): ReactElement => {
           options={genderOptions}
           onChange={handleUpdateClientGender}
           other={{
-            value: client.otherGender || '',
+            value: client.otherGender.value || '',
             onChange: handleChangeOtherGender,
           }}
         />
