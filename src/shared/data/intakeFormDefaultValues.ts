@@ -92,6 +92,10 @@ export const defaultFormValues = {
       value: '',
       required: true,
     },
+    otherGender: {
+      value: '',
+      required: false,
+    },
     school: {
       value: '',
       required: true,

@@ -71,11 +71,12 @@ export interface PersonalInformationType {
 }
 
 export interface ClientType extends PersonalInformationType {
+  [key: string]: FieldStringType;
   dob: FieldStringType;
   gender: FieldGenderType;
   school: FieldStringType;
   grade: FieldStringType;
-  otherGender?: string;
+  otherGender: FieldStringType;
 }
 
 export type GenderType = 'Female' | 'Male' | 'Prefer not to say' | string;
