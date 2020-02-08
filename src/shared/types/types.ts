@@ -106,6 +106,7 @@ export interface PhysicianType extends PersonalInformationType {
 }
 
 export interface InsuranceType {
+  [key: string]: FieldStringType;
   idNumber: FieldStringType;
   groupNumber: FieldStringType;
   insured: FieldStringType;

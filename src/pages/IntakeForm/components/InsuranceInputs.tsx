@@ -65,7 +65,7 @@ const InsuranceInputs: FC = (): ReactElement => {
         <div className="intake-form__field-container">
           <Input
             id={`provider-${provider.value}`}
-            name="id"
+            name="idNumber"
             label={labels.idNumber}
             value={idNumber.value}
             onChange={(event): void =>

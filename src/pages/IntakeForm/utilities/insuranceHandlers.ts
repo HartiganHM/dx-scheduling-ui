@@ -1,7 +1,12 @@
 import { ChangeEvent } from 'react';
 
 import { defaultInsuranceValues } from 'shared/data';
-import { InsuranceType, ParentType } from 'shared/types/types';
+import {
+  FieldStringType,
+  FieldBooleanType,
+  InsuranceType,
+  ParentType,
+} from 'shared/types/types';
 
 const handleSelectInsurance = (
   { target: { name, checked } }: ChangeEvent<HTMLInputElement>,
@@ -27,7 +32,7 @@ const handleUpdateInsuranceByIndex = (
   insurances: InsuranceType[],
   index: number,
   property: string,
-  value: string | boolean | ParentType
+  value: FieldStringType
 ): InsuranceType[] =>
   insurances.map((parent, idx) => {
     if (index === idx) {
@@ -45,11 +50,12 @@ const handleUpdateInsuranceInputValues = (
   index: number,
   insurances: InsuranceType[]
 ): InsuranceType[] => {
+  const newValue = { ...insurances[index][name], value };
   const newInsurances = handleUpdateInsuranceByIndex(
     insurances,
     index,
     name,
-    value
+    newValue
   );
 
   return newInsurances;
@@ -60,11 +66,12 @@ const handleUpdateInsured = (
   index: number,
   insurances: InsuranceType[]
 ): InsuranceType[] => {
+  const newValue = { ...insurances[index].insured, value };
   const newInsurances = handleUpdateInsuranceByIndex(
     insurances,
     index,
     'insured',
-    value
+    newValue
   );
 
   return newInsurances;
