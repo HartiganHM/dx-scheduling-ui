@@ -51,7 +51,7 @@ const GeneralQuestions: FC = (): ReactElement => {
       <div className="intake-form__field-container">
         <Checkbox
           label={labels.creditCardInfoSaved}
-          options={[{ label: 'Yes', checked: creditCardInfoSaved }]}
+          options={[{ label: 'Yes', checked: creditCardInfoSaved.value }]}
           onChange={(event): void =>
             handleChangeCheckbox(event, 'creditCardInfoSaved')
           }
@@ -59,7 +59,7 @@ const GeneralQuestions: FC = (): ReactElement => {
 
         <Checkbox
           label={labels.ratesDiscussed}
-          options={[{ label: 'Yes', checked: ratesDiscussed }]}
+          options={[{ label: 'Yes', checked: ratesDiscussed.value }]}
           onChange={(event): void =>
             handleChangeCheckbox(event, 'ratesDiscussed')
           }
@@ -67,7 +67,7 @@ const GeneralQuestions: FC = (): ReactElement => {
 
         <Checkbox
           label={labels.hasReferral}
-          options={[{ label: 'Yes', checked: hasReferral }]}
+          options={[{ label: 'Yes', checked: hasReferral.value }]}
           onChange={(event): void => handleChangeCheckbox(event, 'hasReferral')}
         />
       </div>
@@ -80,14 +80,14 @@ const GeneralQuestions: FC = (): ReactElement => {
       >
         <TextArea
           name="preferredTimes"
-          value={preferredTimes}
+          value={preferredTimes.value}
           label={labels.preferredTimes}
           onChange={handleChangeTextArea}
         />
 
         <TextArea
           name="needs"
-          value={needs}
+          value={needs.value}
           label={labels.needs}
           onChange={handleChangeTextArea}
         />
