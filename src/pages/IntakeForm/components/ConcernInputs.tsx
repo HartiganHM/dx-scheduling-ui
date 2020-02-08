@@ -1,4 +1,5 @@
 import React, { ReactElement, FC, ChangeEvent } from 'react';
+import classnames from 'classnames';
 import { ExpansionPanel, TextArea } from '@f-design/component-library';
 
 import { useStateValue } from 'components';
@@ -34,7 +35,12 @@ const ConcernInputs: FC = (): ReactElement => {
 
   return (
     <ExpansionPanel title={heading}>
-      <div className="intake-form__field-container">
+      <div
+        className={classnames({
+          'intake-form__field-container': true,
+          'intake-form__field-container-text-area': true,
+        })}
+      >
         <TextArea
           name="areas"
           value={concerns.areas.value}
