@@ -15,7 +15,10 @@ const ConcernInputs: FC = (): ReactElement => {
   }: ChangeEvent<HTMLTextAreaElement>): void => {
     const newConcerns = {
       ...concerns,
-      [name]: value,
+      [name]: {
+        ...concerns[name],
+        value,
+      },
     };
 
     dispatch({

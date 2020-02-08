@@ -117,7 +117,12 @@ type ProviderType = 'Kaiser' | 'Medicaid' | 'United' | string;
 
 // Intake Form Checklist
 export interface IntakeFormQuestionsType {
-  [key: string]: FieldBooleanType | FieldStringType;
+  [key: string]:
+    | FieldBooleanType
+    | FieldStringType
+    | PersonalInformationType
+    | DiagnosisType
+    | ConcernType;
   creditCardInfoSaved: FieldBooleanType;
   ratesDiscussed: FieldBooleanType;
   preferredTimes: FieldStringType;
@@ -133,6 +138,7 @@ export interface IntakeFormQuestionsType {
 }
 
 export interface ConcernType {
+  [key: string]: FieldStringType;
   areas: FieldStringType;
   communication: FieldStringType;
   motor: FieldStringType;
