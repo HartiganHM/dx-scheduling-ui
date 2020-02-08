@@ -12,10 +12,13 @@ const handleSelectInsurance = (
         ...insurances,
         {
           ...defaultInsuranceValues,
-          provider: name,
+          provider: {
+            ...defaultInsuranceValues.provider,
+            value: name,
+          },
         },
       ]
-    : insurances.filter(({ provider }) => provider !== name);
+    : insurances.filter(({ provider }) => provider.value !== name);
 
   return newInsurances;
 };

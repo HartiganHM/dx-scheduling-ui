@@ -24,14 +24,17 @@ const IntakeForm: FC = () => {
   const { date, servicesRequested, parents } = intakeFormValues;
   const { hasReferral } = intakeFormQuestions;
 
-  const handleUpdateFormValue = ({
-    target: { name, value },
+  const handleUpdateDate = ({
+    target: { value },
   }: ChangeEvent<HTMLInputElement>): void =>
     dispatch({
       type: ActionTypesEnum.UpdateIntakeValues,
       intakeFormValues: {
         ...intakeFormValues,
-        [name]: value,
+        date: {
+          ...intakeFormValues.date,
+          value,
+        },
       },
     });
 
@@ -82,7 +85,7 @@ const IntakeForm: FC = () => {
           name="date"
           label={labels.date}
           value={date.value}
-          onChange={handleUpdateFormValue}
+          onChange={handleUpdateDate}
         />
 
         <Checkbox
