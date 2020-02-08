@@ -3,7 +3,7 @@ import { ExpansionPanel, Input } from '@f-design/component-library';
 
 import { useStateValue } from 'components';
 import { copyContent } from 'shared/data';
-import { ActionTypesEnum } from 'shared/types/types';
+import { ActionTypesEnum, FieldStringType } from 'shared/types/types';
 
 const PrimaryCareProviderInputs: FC = (): ReactElement => {
   const [{ intakeFormValues }, dispatch] = useStateValue();
@@ -21,7 +21,7 @@ const PrimaryCareProviderInputs: FC = (): ReactElement => {
           [name]: {
             ...physician[name],
             value,
-          },
+          } as FieldStringType,
         },
       },
     });

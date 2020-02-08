@@ -1,12 +1,7 @@
 import { ChangeEvent } from 'react';
 
 import { defaultInsuranceValues } from 'shared/data';
-import {
-  FieldStringType,
-  FieldBooleanType,
-  InsuranceType,
-  ParentType,
-} from 'shared/types/types';
+import { FieldStringType, InsuranceType } from 'shared/types/types';
 
 const handleSelectInsurance = (
   { target: { name, checked } }: ChangeEvent<HTMLInputElement>,
