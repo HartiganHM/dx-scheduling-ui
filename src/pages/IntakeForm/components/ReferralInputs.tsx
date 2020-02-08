@@ -47,7 +47,7 @@ const ReferralInputs: FC = (): ReactElement => {
           id="referral-first-name"
           name="firstName"
           label={labels.firstName}
-          value={referral.firstName}
+          value={referral.firstName.value}
           onChange={handleChangeReferralValue}
         />
 
@@ -55,13 +55,13 @@ const ReferralInputs: FC = (): ReactElement => {
           id="referral-last-name"
           name="lastName"
           label={labels.lastName}
-          value={referral.lastName}
+          value={referral.lastName.value}
           onChange={handleChangeReferralValue}
         />
 
         <TextArea
           name="referralConcernMatch"
-          value={referralConcernMatch || ''}
+          value={referralConcernMatch.value || ''}
           label={labels.referralConcernMatch}
           onChange={handleChangeTextArea}
         />

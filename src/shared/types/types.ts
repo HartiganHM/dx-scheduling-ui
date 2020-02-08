@@ -118,7 +118,7 @@ export interface IntakeFormQuestionsType {
   needs: FieldStringType;
   hasReferral: FieldBooleanType;
   referral: PersonalInformationType;
-  referralConcernMatch?: FieldStringType;
+  referralConcernMatch: FieldStringType;
   diagnosis: DiagnosisType;
   concerns: ConcernType;
   priorTherapy: FieldStringType;
