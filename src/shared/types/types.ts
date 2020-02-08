@@ -100,6 +100,7 @@ export interface AddressType {
 }
 
 export interface PhysicianType extends PersonalInformationType {
+  [key: string]: FieldStringType;
   practice: FieldStringType;
   phoneNumber: FieldStringType;
 }

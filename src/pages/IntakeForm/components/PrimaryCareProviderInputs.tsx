@@ -18,7 +18,10 @@ const PrimaryCareProviderInputs: FC = (): ReactElement => {
         ...intakeFormValues,
         physician: {
           ...physician,
-          [name]: value,
+          [name]: {
+            ...physician[name],
+            value,
+          },
         },
       },
     });
