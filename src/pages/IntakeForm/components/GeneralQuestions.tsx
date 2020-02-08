@@ -29,7 +29,10 @@ const GeneralQuestions: FC = (): ReactElement => {
       type: ActionTypesEnum.UpdateIntakeQuestions,
       intakeFormQuestions: {
         ...intakeFormQuestions,
-        [name]: checked,
+        [name]: {
+          ...intakeFormQuestions[name],
+          value: checked,
+        },
       },
     });
 
@@ -40,7 +43,10 @@ const GeneralQuestions: FC = (): ReactElement => {
       type: ActionTypesEnum.UpdateIntakeQuestions,
       intakeFormQuestions: {
         ...intakeFormQuestions,
-        [name]: value,
+        [name]: {
+          ...intakeFormQuestions[name],
+          value,
+        },
       },
     });
 

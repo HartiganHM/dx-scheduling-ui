@@ -117,6 +117,7 @@ type ProviderType = 'Kaiser' | 'Medicaid' | 'United' | string;
 
 // Intake Form Checklist
 export interface IntakeFormQuestionsType {
+  [key: string]: FieldBooleanType | FieldStringType;
   creditCardInfoSaved: FieldBooleanType;
   ratesDiscussed: FieldBooleanType;
   preferredTimes: FieldStringType;
