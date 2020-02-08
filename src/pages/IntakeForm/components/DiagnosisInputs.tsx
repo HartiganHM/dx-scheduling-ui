@@ -15,7 +15,10 @@ const DiagnosisInputs: FC = (): ReactElement => {
   }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const newDiagnosis = {
       ...diagnosis,
-      [name]: value,
+      [name]: {
+        ...diagnosis[name],
+        value,
+      },
     };
 
     dispatch({

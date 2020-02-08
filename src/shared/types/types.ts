@@ -146,6 +146,7 @@ export interface ConcernType {
 }
 
 export interface DiagnosisType {
+  [key: string]: FieldStringType;
   name: FieldStringType;
   provider: FieldStringType;
   date: FieldStringType;
