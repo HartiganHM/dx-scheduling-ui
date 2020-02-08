@@ -82,6 +82,7 @@ export interface ClientType extends PersonalInformationType {
 export type GenderType = 'Female' | 'Male' | 'Prefer not to say' | string;
 
 export interface ParentType extends PersonalInformationType {
+  [key: string]: FieldStringType | FieldBooleanType | AddressType;
   gender: FieldStringType;
   phoneNumber: FieldStringType;
   email: FieldStringType;
@@ -91,6 +92,7 @@ export interface ParentType extends PersonalInformationType {
 }
 
 export interface AddressType {
+  [key: string]: FieldStringType;
   street: FieldStringType;
   city: FieldStringType;
   state: FieldStringType;

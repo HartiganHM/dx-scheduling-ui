@@ -82,6 +82,7 @@ export default {
       delete: 'Delete',
     },
     headings: {
+      address: 'Address',
       contact: 'Contact',
       name: (number: number): string => `Parent/Guardian ${number}`,
     },

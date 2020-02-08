@@ -107,7 +107,7 @@ const ParentInputs: FC = (): ReactElement => {
               />
             </div>
 
-            <p className="intake-form__field-title">Address</p>
+            <p className="intake-form__field-title">{headings.address}</p>
 
             <>
               {index !== 0 && (
@@ -129,7 +129,7 @@ const ParentInputs: FC = (): ReactElement => {
               )}
             </>
 
-            <ExpansionPanel expanded={!isInSameHousehold}>
+            <ExpansionPanel expanded={!isInSameHousehold.value}>
               <div className="intake-form__field-container">
                 <Input
                   id={`parent-${index}-street`}

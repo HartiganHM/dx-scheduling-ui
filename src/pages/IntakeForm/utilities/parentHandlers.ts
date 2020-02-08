@@ -1,30 +1,39 @@
 import { ChangeEvent } from 'react';
 
-import { AddressType, ParentType } from 'shared/types/types';
+import {
+  FieldStringType,
+  FieldBooleanType,
+  AddressType,
+  ParentType,
+} from 'shared/types/types';
 
 const handleUpdateParentsByIndex = (
   parents: ParentType[],
   index: number,
   property: string,
-  value: string | boolean | AddressType
+  value: FieldStringType | FieldBooleanType | AddressType
 ): ParentType[] =>
-  parents.map((parent, idx) => {
-    if (index === idx) {
-      return {
-        ...parent,
-        [property]: value,
-      };
-    }
-
-    return parent;
-  });
+  parents.map((parent, idx) =>
+    index === idx
+      ? {
+          ...parent,
+          [property]: value,
+        }
+      : parent
+  );
 
 const handleUpdateParentInputValues = (
   { target: { name, value } }: ChangeEvent<HTMLInputElement>,
   index: number,
   parents: ParentType[]
 ): ParentType[] => {
-  const newParents = handleUpdateParentsByIndex(parents, index, name, value);
+  const newValue = { ...parents[index][name], value };
+  const newParents = handleUpdateParentsByIndex(
+    parents,
+    index,
+    name,
+    newValue as FieldStringType
+  );
 
   return newParents;
 };
@@ -34,11 +43,12 @@ const handleToggleIsInSameHousehold = (
   index: number,
   parents: ParentType[]
 ): ParentType[] => {
+  const newValue = { ...parents[index].isInSameHousehold, value: checked };
   const newParents = handleUpdateParentsByIndex(
     parents,
     index,
     'isInSameHousehold',
-    checked
+    newValue
   );
 
   return newParents;
@@ -49,7 +59,10 @@ const handleUpdateParentAddress = (
   index: number,
   parents: ParentType[]
 ): ParentType[] => {
-  const newAddress = { ...parents[index].address, [name]: value };
+  const newAddress = {
+    ...parents[index].address,
+    [name]: { ...parents[index].address[name], value },
+  };
 
   const newParents = handleUpdateParentsByIndex(
     parents,
