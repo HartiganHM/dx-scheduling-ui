@@ -3,6 +3,7 @@ export default {
     genderOptions: ['Female', 'Male', 'Prefer not to say', 'Other'],
     headings: {
       client: 'Client',
+      general: 'General Information',
     },
     labels: {
       dob: 'DOB',
