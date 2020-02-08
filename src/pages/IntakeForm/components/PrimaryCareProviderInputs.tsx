@@ -32,7 +32,7 @@ const PrimaryCareProviderInputs: FC = (): ReactElement => {
           id="pcp-first-name"
           name="firstName"
           label={labels.firstName}
-          value={physician.firstName}
+          value={physician.firstName.value}
           onChange={handleUpdatePhysicianInputValues}
         />
 
@@ -40,7 +40,7 @@ const PrimaryCareProviderInputs: FC = (): ReactElement => {
           id="pcp-last-name"
           name="lastName"
           label={labels.lastName}
-          value={physician.lastName}
+          value={physician.lastName.value}
           onChange={handleUpdatePhysicianInputValues}
         />
 
@@ -49,7 +49,7 @@ const PrimaryCareProviderInputs: FC = (): ReactElement => {
           type="tel"
           name="phoneNumber"
           label={labels.phoneNumber}
-          value={physician.phoneNumber}
+          value={physician.phoneNumber.value}
           onChange={handleUpdatePhysicianInputValues}
         />
       </div>
