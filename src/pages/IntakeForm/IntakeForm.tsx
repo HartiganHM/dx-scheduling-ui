@@ -39,14 +39,17 @@ const IntakeForm: FC = () => {
     target: { name, checked },
   }: ChangeEvent<HTMLInputElement>): void => {
     const newServices = checked
-      ? [...servicesRequested, name]
-      : servicesRequested.filter(service => service !== name);
+      ? [...servicesRequested.value, name]
+      : servicesRequested.value.filter(service => service !== name);
 
     dispatch({
       type: ActionTypesEnum.UpdateIntakeValues,
       intakeFormValues: {
         ...intakeFormValues,
-        servicesRequested: newServices as ServicesType[],
+        servicesRequested: {
+          ...intakeFormValues.servicesRequested,
+          value: newServices as ServicesType[],
+        },
       },
     });
   };
@@ -68,7 +71,7 @@ const IntakeForm: FC = () => {
 
   const serviceOptions = services.map(service => ({
     label: service,
-    checked: servicesRequested.includes(service as ServicesType),
+    checked: servicesRequested.value.includes(service as ServicesType),
   }));
 
   return (
@@ -78,7 +81,7 @@ const IntakeForm: FC = () => {
           type="date"
           name="date"
           label={labels.date}
-          value={date}
+          value={date.value}
           onChange={handleUpdateFormValue}
         />
 
