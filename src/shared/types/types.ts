@@ -68,6 +68,8 @@ export interface FieldInsurancesType extends FieldBaseValues {
   value: InsuranceType[];
 }
 
+export type FieldArrayTypes = InsuranceType[] | ParentType[];
+
 export interface IntakeFormValuesType {
   [key: string]:
     | FieldStringType

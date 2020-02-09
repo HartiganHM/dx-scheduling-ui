@@ -71,7 +71,10 @@ const IntakeForm: FC = () => {
     });
 
   const handleSubmit = (): void => {
-    const isValid = validateIntakeForm(intakeFormValues, intakeFormQuestions, dispatch);
+    const isValid = validateIntakeForm(
+      { intakeFormValues, intakeFormQuestions },
+      dispatch
+    );
   };
 
   const { buttons, icons, labels, services } = copyContent.intakeForm;
