@@ -9,6 +9,15 @@ const ClientInputs: FC = (): ReactElement => {
   const [{ intakeFormValues }, dispatch] = useStateValue();
 
   const { client } = intakeFormValues;
+  const {
+    firstName,
+    lastName,
+    dob,
+    school,
+    grade,
+    gender,
+    otherGender,
+  } = client;
 
   const handleUpdateClient = (field: string, value: string): void =>
     dispatch({
@@ -43,8 +52,8 @@ const ClientInputs: FC = (): ReactElement => {
   return (
     <ExpansionPanel
       title={
-        client.firstName.value || client.lastName.value
-          ? `${client.firstName.value} ${client.lastName.value}`
+        firstName.value || lastName.value
+          ? `${firstName.value} ${lastName.value}`
           : headings.client
       }
       expanded
@@ -56,51 +65,57 @@ const ClientInputs: FC = (): ReactElement => {
           id="client-first-name"
           name="firstName"
           label={labels.firstName}
-          value={client.firstName.value}
+          value={firstName.value}
           onChange={handleUpdateClientInputValues}
+          errorMessage={firstName.error}
         />
 
         <Input
           id="client-last-name"
           name="lastName"
           label={labels.lastName}
-          value={client.lastName.value}
+          value={lastName.value}
           onChange={handleUpdateClientInputValues}
+          errorMessage={lastName.error}
         />
 
         <Input
           type="date"
           name="dob"
           label={labels.dob}
-          value={client.dob.value}
+          value={dob.value}
           onChange={handleUpdateClientInputValues}
+          errorMessage={dob.error}
         />
 
         <Input
           id="client-school"
           name="school"
           label={labels.school}
-          value={client.school.value}
+          value={school.value}
           onChange={handleUpdateClientInputValues}
+          errorMessage={school.error}
         />
 
         <Input
           id="client-grade"
           name="grade"
           label={labels.grade}
-          value={client.grade.value}
+          value={grade.value}
           onChange={handleUpdateClientInputValues}
+          errorMessage={grade.error}
         />
 
         <Radio
           label={labels.gender}
-          selected={client.gender.value}
+          selected={gender.value}
           options={genderOptions}
           onChange={handleUpdateClientGender}
           other={{
-            value: client.otherGender.value || '',
+            value: otherGender.value || '',
             onChange: handleChangeOtherGender,
           }}
+          errorMessage={gender.error}
         />
       </div>
     </ExpansionPanel>
