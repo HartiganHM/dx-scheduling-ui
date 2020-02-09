@@ -9,6 +9,7 @@ const DiagnosisInputs: FC = (): ReactElement => {
   const [{ intakeFormQuestions }, dispatch] = useStateValue();
 
   const { diagnosis } = intakeFormQuestions;
+  const { name, provider, date, comments } = diagnosis;
 
   const handleChangeDiagnosisValues = ({
     target: { name, value },
@@ -39,16 +40,18 @@ const DiagnosisInputs: FC = (): ReactElement => {
           id="diagnosis-name"
           name="name"
           label={labels.name}
-          value={diagnosis.name.value}
+          value={name.value}
           onChange={handleChangeDiagnosisValues}
+          errorMessage={name.error}
         />
 
         <Input
           id="diagnosis-provider"
           name="provider"
           label={labels.provider}
-          value={diagnosis.provider.value}
+          value={provider.value}
           onChange={handleChangeDiagnosisValues}
+          errorMessage={provider.error}
         />
 
         <Input
@@ -56,15 +59,17 @@ const DiagnosisInputs: FC = (): ReactElement => {
           type="date"
           name="date"
           label={labels.date}
-          value={diagnosis.date.value}
+          value={date.value}
           onChange={handleChangeDiagnosisValues}
+          errorMessage={date.error}
         />
 
         <TextArea
           name="comments"
-          value={diagnosis.comments.value}
+          value={comments.value}
           label={labels.comments}
           onChange={handleChangeDiagnosisValues}
+          errorMessage={comments.error}
         />
       </div>
     </ExpansionPanel>
