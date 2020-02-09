@@ -4,6 +4,7 @@ import { Button, Checkbox, Input } from '@f-design/component-library';
 import { useStateValue } from 'components';
 import { copyContent, defaultParentValues } from 'shared/data';
 import { ActionTypesEnum, ServicesType } from 'shared/types/types';
+import { validateIntakeForm } from './utilities';
 
 import {
   ClientInputs,
@@ -62,12 +63,15 @@ const IntakeForm: FC = () => {
       type: ActionTypesEnum.UpdateIntakeValues,
       intakeFormValues: {
         ...intakeFormValues,
-        parents: [...parents, defaultParentValues],
+        parents: {
+          ...intakeFormValues.parents,
+          value: [...parents.value, defaultParentValues],
+        },
       },
     });
 
   const handleSubmit = (): void => {
-    console.log({ intakeFormValues, intakeFormQuestions });
+    const isValid = validateIntakeForm(intakeFormValues, intakeFormQuestions);
   };
 
   const { buttons, icons, labels, services } = copyContent.intakeForm;

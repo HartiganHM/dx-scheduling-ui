@@ -11,6 +11,7 @@ import {
   handleUpdateParentInputValues,
   handleUpdateParentsByIndex,
 } from './parentHandlers';
+import validateIntakeForm from './validateIntakeForm';
 
 export {
   handleRemoveParent,
@@ -22,4 +23,5 @@ export {
   handleUpdateParentAddress,
   handleUpdateParentInputValues,
   handleUpdateParentsByIndex,
+  validateIntakeForm,
 };
