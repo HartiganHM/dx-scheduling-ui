@@ -10,6 +10,7 @@ const ConcernInputs: FC = (): ReactElement => {
   const [{ intakeFormQuestions }, dispatch] = useStateValue();
 
   const { concerns } = intakeFormQuestions;
+  const { areas, communication, motor, sensory, cognitive } = concerns;
 
   const handleChangeConcernsValues = ({
     target: { name, value },
@@ -43,37 +44,42 @@ const ConcernInputs: FC = (): ReactElement => {
       >
         <TextArea
           name="areas"
-          value={concerns.areas.value}
+          value={areas.value}
           label={labels.areasOfConcern}
           onChange={handleChangeConcernsValues}
+          errorMessage={areas.error}
         />
 
         <TextArea
           name="communication"
-          value={concerns.communication.value}
+          value={communication.value}
           label={labels.communicationConcerns}
           onChange={handleChangeConcernsValues}
+          errorMessage={communication.error}
         />
 
         <TextArea
           name="motor"
-          value={concerns.motor.value}
+          value={motor.value}
           label={labels.motorConcerns}
           onChange={handleChangeConcernsValues}
+          errorMessage={motor.error}
         />
 
         <TextArea
           name="sensory"
-          value={concerns.sensory.value}
+          value={sensory.value}
           label={labels.sensoryConcerns}
           onChange={handleChangeConcernsValues}
+          errorMessage={sensory.error}
         />
 
         <TextArea
           name="cognitive"
-          value={concerns.cognitive.value}
+          value={cognitive.value}
           label={labels.cognitiveConcerns}
           onChange={handleChangeConcernsValues}
+          errorMessage={cognitive.error}
         />
       </div>
     </ExpansionPanel>
