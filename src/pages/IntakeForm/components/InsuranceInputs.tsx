@@ -14,7 +14,6 @@ import {
   FieldInsurancesType,
   FieldParentsType,
   InsuranceType,
-  ParentType,
 } from 'shared/types/types';
 import {
   handleSelectInsurance,

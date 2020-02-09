@@ -8,7 +8,7 @@ import {
 
 import { useStateValue } from 'components';
 import { copyContent } from 'shared/data';
-import { ActionTypesEnum, ParentType } from 'shared/types/types';
+import { ActionTypesEnum, FieldParentsType } from 'shared/types/types';
 import {
   handleRemoveParent,
   handleToggleIsInSameHousehold,
@@ -20,7 +20,7 @@ const ParentInputs: FC = (): ReactElement => {
   const [{ intakeFormValues }, dispatch] = useStateValue();
   const { parents } = intakeFormValues;
 
-  const handleUpdateParents = (newParents: ParentType[]): void =>
+  const handleUpdateParents = (newParents: FieldParentsType): void =>
     dispatch({
       type: ActionTypesEnum.UpdateIntakeValues,
       intakeFormValues: {
@@ -33,7 +33,7 @@ const ParentInputs: FC = (): ReactElement => {
 
   return (
     <>
-      {parents.map(
+      {parents.value.map(
         (
           {
             firstName,
@@ -181,7 +181,7 @@ const ParentInputs: FC = (): ReactElement => {
               </div>
             </ExpansionPanel>
 
-            {parents.length > 1 && (
+            {parents.value.length > 1 && (
               <Button
                 className="intake-form__delete-button"
                 type="default-destructive"
