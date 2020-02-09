@@ -4,7 +4,7 @@ export type Actions = {
   currentlyViewing?: CurrentlyViewing;
   intakeFormValues?: IntakeFormValuesType;
   intakeFormQuestions?: IntakeFormQuestionsType;
-  mergeState?: InitialState;
+  mergeState?: MergeState;
 };
 
 export enum ActionTypesEnum {
@@ -68,7 +68,7 @@ export interface FieldInsurancesType extends FieldBaseValues {
   value: InsuranceType[];
 }
 
-export type FieldArrayTypes = InsuranceType[] | ParentType[];
+export type FieldArrayTypes = InsuranceType | ParentType;
 
 export interface IntakeFormValuesType {
   [key: string]:

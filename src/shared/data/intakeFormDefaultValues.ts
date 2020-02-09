@@ -192,18 +192,18 @@ export const defaultIntakeQuestionValues = {
   referral: {
     firstName: {
       value: '',
-      required: true,
+      required: false,
       error: '',
     },
     lastName: {
       value: '',
-      required: true,
+      required: false,
       error: '',
     },
   },
   referralConcernMatch: {
     value: '',
-    required: true,
+    required: false,
     error: '',
   },
   diagnosis: {
