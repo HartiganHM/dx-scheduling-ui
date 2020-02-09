@@ -14,16 +14,6 @@ const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
         };
       }
     }
-    case ActionTypesEnum.UpdateErrors: {
-      const { errors } = action;
-
-      if (errors) {
-        return {
-          ...state,
-          errors,
-        };
-      }
-    }
     case ActionTypesEnum.UpdateIntakeQuestions: {
       const { intakeFormQuestions } = action;
 
