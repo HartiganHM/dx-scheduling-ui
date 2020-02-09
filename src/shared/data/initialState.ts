@@ -11,6 +11,7 @@ const initialState: InitialState = {
   },
   intakeFormValues: defaultFormValues,
   intakeFormQuestions: defaultIntakeQuestionValues,
+  errors: {},
 };
 
 export default initialState;

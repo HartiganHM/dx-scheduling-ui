@@ -14,13 +14,13 @@ const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
         };
       }
     }
-    case ActionTypesEnum.UpdateIntakeValues: {
-      const { intakeFormValues } = action;
+    case ActionTypesEnum.UpdateErrors: {
+      const { errors } = action;
 
-      if (intakeFormValues) {
+      if (errors) {
         return {
           ...state,
-          intakeFormValues,
+          errors,
         };
       }
     }
@@ -31,6 +31,16 @@ const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
         return {
           ...state,
           intakeFormQuestions,
+        };
+      }
+    }
+    case ActionTypesEnum.UpdateIntakeValues: {
+      const { intakeFormValues } = action;
+
+      if (intakeFormValues) {
+        return {
+          ...state,
+          intakeFormValues,
         };
       }
     }

@@ -4,10 +4,12 @@ export type Actions = {
   currentlyViewing?: CurrentlyViewing;
   intakeFormValues?: IntakeFormValuesType;
   intakeFormQuestions?: IntakeFormQuestionsType;
+  errors?: Errors;
 };
 
 export enum ActionTypesEnum {
   UpdateCurrentlyViewing = 'UPDATE_CURRENTLY_VIEWING',
+  UpdateErrors = 'UPDATE_ERRORS',
   UpdateIntakeValues = 'UPDATE_INTAKE_VALUES',
   UpdateIntakeQuestions = 'UPDATE_INTAKE_QUESTIONS',
 }
@@ -16,12 +18,12 @@ export interface InitialState {
   currentlyViewing: CurrentlyViewing;
   intakeFormValues: IntakeFormValuesType;
   intakeFormQuestions: IntakeFormQuestionsType;
+  errors: Errors;
 }
 
 // Errors
 export interface Errors {
-  intakeFormValues: string;
-  intakeFormQuestions: string;
+  [key: string]: string;
 }
 
 // Intake Form Values
