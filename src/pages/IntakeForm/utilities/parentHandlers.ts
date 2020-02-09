@@ -3,31 +3,33 @@ import { ChangeEvent } from 'react';
 import {
   FieldStringType,
   FieldBooleanType,
+  FieldParentsType,
   AddressType,
-  ParentType,
 } from 'shared/types/types';
 
 const handleUpdateParentsByIndex = (
-  parents: ParentType[],
+  parents: FieldParentsType,
   index: number,
   property: string,
   value: FieldStringType | FieldBooleanType | AddressType
-): ParentType[] =>
-  parents.map((parent, idx) =>
+): FieldParentsType => ({
+  ...parents,
+  value: parents.value.map((parent, idx) =>
     index === idx
       ? {
           ...parent,
           [property]: value,
         }
       : parent
-  );
+  ),
+});
 
 const handleUpdateParentInputValues = (
   { target: { name, value } }: ChangeEvent<HTMLInputElement>,
   index: number,
-  parents: ParentType[]
-): ParentType[] => {
-  const newValue = { ...parents[index][name], value };
+  parents: FieldParentsType
+): FieldParentsType => {
+  const newValue = { ...parents.value[index][name], value };
   const newParents = handleUpdateParentsByIndex(
     parents,
     index,
@@ -41,9 +43,12 @@ const handleUpdateParentInputValues = (
 const handleToggleIsInSameHousehold = (
   { target: { checked } }: ChangeEvent<HTMLInputElement>,
   index: number,
-  parents: ParentType[]
-): ParentType[] => {
-  const newValue = { ...parents[index].isInSameHousehold, value: checked };
+  parents: FieldParentsType
+): FieldParentsType => {
+  const newValue = {
+    ...parents.value[index].isInSameHousehold,
+    value: checked,
+  };
   const newParents = handleUpdateParentsByIndex(
     parents,
     index,
@@ -57,11 +62,11 @@ const handleToggleIsInSameHousehold = (
 const handleUpdateParentAddress = (
   { target: { name, value } }: ChangeEvent<HTMLInputElement>,
   index: number,
-  parents: ParentType[]
-): ParentType[] => {
+  parents: FieldParentsType
+): FieldParentsType => {
   const newAddress = {
-    ...parents[index].address,
-    [name]: { ...parents[index].address[name], value },
+    ...parents.value[index].address,
+    [name]: { ...parents.value[index].address[name], value },
   };
 
   const newParents = handleUpdateParentsByIndex(
@@ -76,9 +81,12 @@ const handleUpdateParentAddress = (
 
 const handleRemoveParent = (
   index: number,
-  parents: ParentType[]
-): ParentType[] => {
-  const newParents = parents.filter((parent, idx) => idx !== index);
+  parents: FieldParentsType
+): FieldParentsType => {
+  const newParents = {
+    ...parents,
+    value: parents.value.filter((parent, idx) => idx !== index),
+  };
 
   return newParents;
 };
