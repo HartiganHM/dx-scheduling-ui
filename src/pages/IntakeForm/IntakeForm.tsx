@@ -93,12 +93,14 @@ const IntakeForm: FC = () => {
           label={labels.date}
           value={date.value}
           onChange={handleUpdateDate}
+          errorMessage={date.error}
         />
 
         <Checkbox
           label={labels.servicesRequested}
           onChange={handleSelectServices}
           options={serviceOptions}
+          errorMessage={servicesRequested.error}
         />
       </div>
 
