@@ -105,7 +105,10 @@ export const defaultFormValues = {
       required: true,
     },
   },
-  parents: [defaultParentValues],
+  parents: {
+    value: [defaultParentValues],
+    required: true,
+  },
   physician: {
     firstName: {
       value: '',
@@ -124,7 +127,10 @@ export const defaultFormValues = {
       required: true,
     },
   },
-  insurances: [],
+  insurances: {
+    value: [],
+    required: true,
+  },
 };
 
 export const defaultIntakeQuestionValues = {

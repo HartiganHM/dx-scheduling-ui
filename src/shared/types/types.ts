@@ -50,13 +50,21 @@ export interface FieldProviderType extends FieldBaseValues {
   value: ProviderType;
 }
 
+export interface FieldParentsType extends FieldBaseValues {
+  value: ParentType[];
+}
+
+export interface FieldInsurancesType extends FieldBaseValues {
+  value: InsuranceType[];
+}
+
 export interface IntakeFormValuesType {
   date: FieldStringType;
   servicesRequested: FieldServicesType;
   client: ClientType;
-  parents: ParentType[];
+  parents: FieldParentsType;
   physician: PhysicianType;
-  insurances: InsuranceType[];
+  insurances: FieldInsurancesType;
 }
 
 export type ServicesType =
