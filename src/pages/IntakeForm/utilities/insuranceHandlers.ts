@@ -1,51 +1,56 @@
 import { ChangeEvent } from 'react';
 
 import { defaultInsuranceValues } from 'shared/data';
-import { FieldStringType, InsuranceType } from 'shared/types/types';
+import { FieldStringType, FieldInsurancesType } from 'shared/types/types';
 
 const handleSelectInsurance = (
   { target: { name, checked } }: ChangeEvent<HTMLInputElement>,
-  insurances: InsuranceType[]
-): InsuranceType[] => {
-  const newInsurances = checked
-    ? [
-        ...insurances,
-        {
-          ...defaultInsuranceValues,
-          provider: {
-            ...defaultInsuranceValues.provider,
-            value: name,
+  insurances: FieldInsurancesType
+): FieldInsurancesType => {
+  const newInsurances = {
+    ...insurances,
+    value: checked
+      ? [
+          ...insurances.value,
+          {
+            ...defaultInsuranceValues,
+            provider: {
+              ...defaultInsuranceValues.provider,
+              value: name,
+            },
           },
-        },
-      ]
-    : insurances.filter(({ provider }) => provider.value !== name);
+        ]
+      : insurances.value.filter(({ provider }) => provider.value !== name),
+  };
 
   return newInsurances;
 };
 
 const handleUpdateInsuranceByIndex = (
-  insurances: InsuranceType[],
+  insurances: FieldInsurancesType,
   index: number,
   property: string,
   value: FieldStringType
-): InsuranceType[] =>
-  insurances.map((parent, idx) => {
+): FieldInsurancesType => ({
+  ...insurances,
+  value: insurances.value.map((insurance, idx) => {
     if (index === idx) {
       return {
-        ...parent,
+        ...insurance,
         [property]: value,
       };
     }
 
-    return parent;
-  });
+    return insurance;
+  }),
+});
 
 const handleUpdateInsuranceInputValues = (
   { target: { name, value } }: ChangeEvent<HTMLInputElement>,
   index: number,
-  insurances: InsuranceType[]
-): InsuranceType[] => {
-  const newValue = { ...insurances[index][name], value };
+  insurances: FieldInsurancesType
+): FieldInsurancesType => {
+  const newValue = { ...insurances.value[index][name], value };
   const newInsurances = handleUpdateInsuranceByIndex(
     insurances,
     index,
@@ -59,9 +64,9 @@ const handleUpdateInsuranceInputValues = (
 const handleUpdateInsured = (
   value: string,
   index: number,
-  insurances: InsuranceType[]
-): InsuranceType[] => {
-  const newValue = { ...insurances[index].insured, value };
+  insurances: FieldInsurancesType
+): FieldInsurancesType => {
+  const newValue = { ...insurances.value[index].insured, value };
   const newInsurances = handleUpdateInsuranceByIndex(
     insurances,
     index,
