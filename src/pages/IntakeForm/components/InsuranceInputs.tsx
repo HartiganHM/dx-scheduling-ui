@@ -9,7 +9,13 @@ import {
 
 import { useStateValue } from 'components';
 import { copyContent } from 'shared/data';
-import { ActionTypesEnum, InsuranceType, ParentType } from 'shared/types/types';
+import {
+  ActionTypesEnum,
+  FieldInsurancesType,
+  FieldParentsType,
+  InsuranceType,
+  ParentType,
+} from 'shared/types/types';
 import {
   handleSelectInsurance,
   handleUpdateInsuranceInputValues,
@@ -24,7 +30,7 @@ const InsuranceInputs: FC = (): ReactElement => {
 
   const handleUpdateFormValues = (
     key: string,
-    newInsurances: InsuranceType[] | ParentType[]
+    newInsurances: FieldInsurancesType | FieldParentsType
   ): void =>
     dispatch({
       type: ActionTypesEnum.UpdateIntakeValues,
@@ -42,7 +48,7 @@ const InsuranceInputs: FC = (): ReactElement => {
   ): ReactElement => {
     const { provider, idNumber, groupNumber, insured } = insurance;
 
-    const parentOptions = parents
+    const parentOptions = parents.value
       .filter(({ firstName }) => firstName.value)
       .map(({ firstName, lastName }) => ({
         value: firstName.value,
@@ -50,7 +56,7 @@ const InsuranceInputs: FC = (): ReactElement => {
       }));
     const parentNames = parentOptions.map(({ value }) => value);
 
-    const matchingParent = parents.find(
+    const matchingParent = parents.value.find(
       ({ firstName }) => firstName.value === insured.value
     );
     const selectedOption = matchingParent && {
@@ -124,7 +130,7 @@ const InsuranceInputs: FC = (): ReactElement => {
 
   const insuranceOptions = providers.map(provider => ({
     label: provider,
-    checked: !!insurances.find(
+    checked: !!insurances.value.find(
       insurance => insurance.provider.value === provider
     ),
   }));
@@ -145,7 +151,7 @@ const InsuranceInputs: FC = (): ReactElement => {
       </div>
 
       <>
-        {insurances.map((insurance, index) =>
+        {insurances.value.map((insurance, index) =>
           renderInsurance(insurance, index)
         )}
       </>
