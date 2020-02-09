@@ -4,6 +4,16 @@ import { Actions, ActionTypesEnum, InitialState } from 'shared/types/types';
 
 const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
   switch (action.type) {
+    case ActionTypesEnum.MergeState: {
+      const { mergeState } = action;
+
+      if (mergeState) {
+        return {
+          ...state,
+          ...mergeState,
+        };
+      }
+    }
     case ActionTypesEnum.UpdateCurrentlyViewing: {
       const { currentlyViewing } = action;
 

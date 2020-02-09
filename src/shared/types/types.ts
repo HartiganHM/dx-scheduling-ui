@@ -4,9 +4,11 @@ export type Actions = {
   currentlyViewing?: CurrentlyViewing;
   intakeFormValues?: IntakeFormValuesType;
   intakeFormQuestions?: IntakeFormQuestionsType;
+  mergeState?: InitialState;
 };
 
 export enum ActionTypesEnum {
+  MergeState = 'MERGE_STATE',
   UpdateCurrentlyViewing = 'UPDATE_CURRENTLY_VIEWING',
   UpdateIntakeValues = 'UPDATE_INTAKE_VALUES',
   UpdateIntakeQuestions = 'UPDATE_INTAKE_QUESTIONS',
@@ -18,13 +20,23 @@ export interface InitialState {
   intakeFormQuestions: IntakeFormQuestionsType;
 }
 
+export interface MergeState {
+  [key: string]: IntakeFormQuestionsType | IntakeFormValuesType;
+}
+
 // Errors
 export interface Errors {
   [key: string]: string;
 }
 
 // Intake Form Values
-interface FieldBaseValues {
+export interface FieldBaseValues {
+  [key: string]:
+    | boolean
+    | string
+    | ServicesType[]
+    | ParentType[]
+    | InsuranceType[];
   required: boolean;
   error: string;
 }
@@ -57,6 +69,13 @@ export interface FieldInsurancesType extends FieldBaseValues {
 }
 
 export interface IntakeFormValuesType {
+  [key: string]:
+    | FieldStringType
+    | FieldServicesType
+    | ClientType
+    | FieldParentsType
+    | PhysicianType
+    | FieldInsurancesType;
   date: FieldStringType;
   servicesRequested: FieldServicesType;
   client: ClientType;
