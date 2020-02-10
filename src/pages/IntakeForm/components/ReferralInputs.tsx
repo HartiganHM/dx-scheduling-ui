@@ -59,6 +59,7 @@ const ReferralInputs: FC = (): ReactElement => {
           label={labels.firstName}
           value={referral.firstName.value}
           onChange={handleChangeReferralValue}
+          errorMessage={referral.firstName.error}
         />
 
         <Input
@@ -67,6 +68,7 @@ const ReferralInputs: FC = (): ReactElement => {
           label={labels.lastName}
           value={referral.lastName.value}
           onChange={handleChangeReferralValue}
+          errorMessage={referral.lastName.error}
         />
 
         <TextArea
@@ -74,6 +76,7 @@ const ReferralInputs: FC = (): ReactElement => {
           value={referralConcernMatch.value || ''}
           label={labels.referralConcernMatch}
           onChange={handleChangeTextArea}
+          errorMessage={referralConcernMatch.error}
         />
       </div>
     </ExpansionPanel>
