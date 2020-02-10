@@ -186,7 +186,7 @@ export const defaultIntakeQuestionValues = {
   },
   hasReferral: {
     value: false,
-    required: true,
+    required: false,
     error: '',
   },
   referral: {
