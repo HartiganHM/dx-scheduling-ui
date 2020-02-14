@@ -65,6 +65,7 @@ const GeneralQuestions: FC = (): ReactElement => {
           onChange={(event): void =>
             handleChangeCheckbox(event, 'creditCardInfoSaved')
           }
+          errorMessage={creditCardInfoSaved.error}
         />
 
         <Checkbox
@@ -73,12 +74,14 @@ const GeneralQuestions: FC = (): ReactElement => {
           onChange={(event): void =>
             handleChangeCheckbox(event, 'ratesDiscussed')
           }
+          errorMessage={ratesDiscussed.error}
         />
 
         <Checkbox
           label={labels.hasReferral}
           options={[{ label: 'Yes', checked: hasReferral.value }]}
           onChange={(event): void => handleChangeCheckbox(event, 'hasReferral')}
+          errorMessage={hasReferral.error}
         />
       </div>
 
@@ -93,6 +96,7 @@ const GeneralQuestions: FC = (): ReactElement => {
           value={preferredTimes.value}
           label={labels.preferredTimes}
           onChange={handleChangeTextArea}
+          errorMessage={preferredTimes.error}
         />
 
         <TextArea
@@ -100,6 +104,7 @@ const GeneralQuestions: FC = (): ReactElement => {
           value={needs.value}
           label={labels.needs}
           onChange={handleChangeTextArea}
+          errorMessage={needs.error}
         />
       </div>
     </ExpansionPanel>
