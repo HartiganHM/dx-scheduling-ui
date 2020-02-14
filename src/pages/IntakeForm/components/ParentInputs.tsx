@@ -61,6 +61,7 @@ const ParentInputs: FC = (): ReactElement => {
                 name="firstName"
                 label={labels.firstName}
                 value={firstName.value}
+                errorMessage={firstName.error}
                 onChange={(event): void =>
                   handleUpdateParents(
                     handleUpdateParentInputValues(event, index, parents)
@@ -73,6 +74,7 @@ const ParentInputs: FC = (): ReactElement => {
                 name="lastName"
                 label={labels.lastName}
                 value={lastName.value}
+                errorMessage={lastName.error}
                 onChange={(event): void =>
                   handleUpdateParents(
                     handleUpdateParentInputValues(event, index, parents)
@@ -86,6 +88,7 @@ const ParentInputs: FC = (): ReactElement => {
                 name="phoneNumber"
                 label={labels.phoneNumber}
                 value={phoneNumber.value}
+                errorMessage={phoneNumber.error}
                 onChange={(event): void =>
                   handleUpdateParents(
                     handleUpdateParentInputValues(event, index, parents)
@@ -99,6 +102,7 @@ const ParentInputs: FC = (): ReactElement => {
                 name="email"
                 label={labels.email}
                 value={email.value}
+                errorMessage={email.error}
                 onChange={(event): void =>
                   handleUpdateParents(
                     handleUpdateParentInputValues(event, index, parents)
@@ -113,6 +117,7 @@ const ParentInputs: FC = (): ReactElement => {
               {index !== 0 && (
                 <div className="intake-form__field-container">
                   <Checkbox
+                    errorMessage={isInSameHousehold.error}
                     onChange={(event): void =>
                       handleUpdateParents(
                         handleToggleIsInSameHousehold(event, index, parents)
@@ -136,6 +141,7 @@ const ParentInputs: FC = (): ReactElement => {
                   name="street"
                   label={labels.street}
                   value={address.street.value}
+                  errorMessage={address.street.error}
                   onChange={(event): void =>
                     handleUpdateParents(
                       handleUpdateParentAddress(event, index, parents)
@@ -148,6 +154,7 @@ const ParentInputs: FC = (): ReactElement => {
                   name="city"
                   label={labels.city}
                   value={address.city.value}
+                  errorMessage={address.city.error}
                   onChange={(event): void =>
                     handleUpdateParents(
                       handleUpdateParentAddress(event, index, parents)
@@ -160,6 +167,7 @@ const ParentInputs: FC = (): ReactElement => {
                   name="state"
                   label={labels.state}
                   value={address.state.value}
+                  errorMessage={address.state.error}
                   onChange={(event): void =>
                     handleUpdateParents(
                       handleUpdateParentAddress(event, index, parents)
@@ -172,6 +180,7 @@ const ParentInputs: FC = (): ReactElement => {
                   name="zip"
                   label={labels.zip}
                   value={address.zip.value}
+                  errorMessage={address.zip.error}
                   onChange={(event): void =>
                     handleUpdateParents(
                       handleUpdateParentAddress(event, index, parents)
