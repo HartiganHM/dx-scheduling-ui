@@ -63,7 +63,12 @@ export default {
       needs:
         'What will be helpful to your child or your family as a result of this evaluation and/or therapy?',
       preferredTimes: 'Preferred times for therapy or first available?',
+      priorTherapy: 'Other Therapy Received? Private or in School?',
+      priorTreatments:
+        'What other treatments now or in the past have you tried?',
       ratesDiscussed: 'Rates discussed?',
+      schoolSupport:
+        'Are you happy with the support your child gets from school?',
     },
   },
   insuranceInputs: {

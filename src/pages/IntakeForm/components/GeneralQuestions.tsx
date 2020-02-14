@@ -23,6 +23,9 @@ const GeneralQuestions: FC = (): ReactElement => {
     preferredTimes,
     needs,
     hasReferral,
+    priorTherapy,
+    schoolSupport,
+    priorTreatments,
   } = intakeFormQuestions;
 
   const handleChangeCheckbox = (
@@ -104,6 +107,30 @@ const GeneralQuestions: FC = (): ReactElement => {
           value={needs.value}
           label={labels.needs}
           errorMessage={needs.error}
+          onChange={handleChangeTextArea}
+        />
+
+        <TextArea
+          name="needs"
+          value={priorTherapy.value}
+          label={labels.priorTherapy}
+          errorMessage={priorTherapy.error}
+          onChange={handleChangeTextArea}
+        />
+
+        <TextArea
+          name="needs"
+          value={schoolSupport.value}
+          label={labels.schoolSupport}
+          errorMessage={schoolSupport.error}
+          onChange={handleChangeTextArea}
+        />
+
+        <TextArea
+          name="needs"
+          value={priorTreatments.value}
+          label={labels.priorTreatments}
+          errorMessage={priorTreatments.error}
           onChange={handleChangeTextArea}
         />
       </div>
