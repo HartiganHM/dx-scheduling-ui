@@ -62,26 +62,26 @@ const GeneralQuestions: FC = (): ReactElement => {
         <Checkbox
           label={labels.creditCardInfoSaved}
           options={[{ label: 'Yes', checked: creditCardInfoSaved.value }]}
+          errorMessage={creditCardInfoSaved.error}
           onChange={(event): void =>
             handleChangeCheckbox(event, 'creditCardInfoSaved')
           }
-          errorMessage={creditCardInfoSaved.error}
         />
 
         <Checkbox
           label={labels.ratesDiscussed}
           options={[{ label: 'Yes', checked: ratesDiscussed.value }]}
+          errorMessage={ratesDiscussed.error}
           onChange={(event): void =>
             handleChangeCheckbox(event, 'ratesDiscussed')
           }
-          errorMessage={ratesDiscussed.error}
         />
 
         <Checkbox
           label={labels.hasReferral}
           options={[{ label: 'Yes', checked: hasReferral.value }]}
-          onChange={(event): void => handleChangeCheckbox(event, 'hasReferral')}
           errorMessage={hasReferral.error}
+          onChange={(event): void => handleChangeCheckbox(event, 'hasReferral')}
         />
       </div>
 
@@ -95,16 +95,16 @@ const GeneralQuestions: FC = (): ReactElement => {
           name="preferredTimes"
           value={preferredTimes.value}
           label={labels.preferredTimes}
-          onChange={handleChangeTextArea}
           errorMessage={preferredTimes.error}
+          onChange={handleChangeTextArea}
         />
 
         <TextArea
           name="needs"
           value={needs.value}
           label={labels.needs}
-          onChange={handleChangeTextArea}
           errorMessage={needs.error}
+          onChange={handleChangeTextArea}
         />
       </div>
     </ExpansionPanel>
