@@ -36,6 +36,7 @@ const PrimaryCareProviderInputs: FC = (): ReactElement => {
           name="firstName"
           label={labels.firstName}
           value={physician.firstName.value}
+          errorMessage={physician.firstName.error}
           onChange={handleUpdatePhysicianInputValues}
         />
 
@@ -44,6 +45,7 @@ const PrimaryCareProviderInputs: FC = (): ReactElement => {
           name="lastName"
           label={labels.lastName}
           value={physician.lastName.value}
+          errorMessage={physician.lastName.error}
           onChange={handleUpdatePhysicianInputValues}
         />
 
@@ -53,6 +55,7 @@ const PrimaryCareProviderInputs: FC = (): ReactElement => {
           name="phoneNumber"
           label={labels.phoneNumber}
           value={physician.phoneNumber.value}
+          errorMessage={physician.phoneNumber.error}
           onChange={handleUpdatePhysicianInputValues}
         />
       </div>
