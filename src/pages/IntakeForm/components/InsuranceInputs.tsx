@@ -73,6 +73,7 @@ const InsuranceInputs: FC = (): ReactElement => {
             name="idNumber"
             label={labels.idNumber}
             value={idNumber.value}
+            errorMessage={idNumber.error}
             onChange={(event): void =>
               handleUpdateFormValues(
                 'insurances',
@@ -85,6 +86,7 @@ const InsuranceInputs: FC = (): ReactElement => {
             name="groupNumber"
             label={labels.groupNumber}
             value={groupNumber.value}
+            errorMessage={groupNumber.error}
             onChange={(event): void =>
               handleUpdateFormValues(
                 'insurances',
@@ -97,6 +99,7 @@ const InsuranceInputs: FC = (): ReactElement => {
             label={labels.insured}
             selected={selectedOption}
             options={parentOptions}
+            errorMessage={insured.error}
             onSelect={({ value }): void =>
               handleUpdateFormValues(
                 'insurances',
@@ -111,6 +114,7 @@ const InsuranceInputs: FC = (): ReactElement => {
             label={labels.dob}
             value={(matchingParent && matchingParent.dob.value) || ''}
             disabled={!insured.value}
+            errorMessage={matchingParent && matchingParent.dob.error}
             onChange={(event): void =>
               handleUpdateFormValues(
                 'parents',
