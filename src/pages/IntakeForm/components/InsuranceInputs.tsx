@@ -143,13 +143,14 @@ const InsuranceInputs: FC = (): ReactElement => {
       <div className="intake-form__field-container">
         <Checkbox
           label={labels.providers}
+          options={insuranceOptions}
+          errorMessage={insurances.error}
           onChange={(event): void =>
             handleUpdateFormValues(
               'insurances',
               handleSelectInsurance(event, insurances)
             )
           }
-          options={insuranceOptions}
         />
       </div>
 
