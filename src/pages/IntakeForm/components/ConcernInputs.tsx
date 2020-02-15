@@ -20,6 +20,7 @@ const ConcernInputs: FC = (): ReactElement => {
       [name]: {
         ...concerns[name],
         value,
+        error: '',
       },
     };
 

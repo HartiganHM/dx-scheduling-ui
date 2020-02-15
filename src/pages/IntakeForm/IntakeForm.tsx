@@ -33,8 +33,9 @@ const IntakeForm: FC = () => {
       intakeFormValues: {
         ...intakeFormValues,
         date: {
-          ...intakeFormValues.date,
+          ...date,
           value,
+          error: '',
         },
       },
     });
@@ -53,6 +54,7 @@ const IntakeForm: FC = () => {
         servicesRequested: {
           ...intakeFormValues.servicesRequested,
           value: newServices as ServicesType[],
+          error: '',
         },
       },
     });

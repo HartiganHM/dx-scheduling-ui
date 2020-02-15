@@ -29,7 +29,7 @@ const handleUpdateParentInputValues = (
   index: number,
   parents: FieldParentsType
 ): FieldParentsType => {
-  const newValue = { ...parents.value[index][name], value };
+  const newValue = { ...parents.value[index][name], value, error: '' };
   const newParents = handleUpdateParentsByIndex(
     parents,
     index,
@@ -48,6 +48,7 @@ const handleToggleIsInSameHousehold = (
   const newValue = {
     ...parents.value[index].isInSameHousehold,
     value: checked,
+    error: '',
   };
   const newParents = handleUpdateParentsByIndex(
     parents,
@@ -66,7 +67,7 @@ const handleUpdateParentAddress = (
 ): FieldParentsType => {
   const newAddress = {
     ...parents.value[index].address,
-    [name]: { ...parents.value[index].address[name], value },
+    [name]: { ...parents.value[index].address[name], value, error: '' },
   };
 
   const newParents = handleUpdateParentsByIndex(

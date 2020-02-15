@@ -29,6 +29,7 @@ const ClientInputs: FC = (): ReactElement => {
           [field]: {
             ...client[field],
             value,
+            error: '',
           },
         },
       },

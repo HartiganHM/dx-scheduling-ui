@@ -19,6 +19,7 @@ const DiagnosisInputs: FC = (): ReactElement => {
       [name]: {
         ...diagnosis[name],
         value,
+        error: '',
       },
     };
 

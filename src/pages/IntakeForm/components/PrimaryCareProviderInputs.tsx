@@ -21,6 +21,7 @@ const PrimaryCareProviderInputs: FC = (): ReactElement => {
           [name]: {
             ...physician[name],
             value,
+            error: '',
           } as FieldStringType,
         },
       },

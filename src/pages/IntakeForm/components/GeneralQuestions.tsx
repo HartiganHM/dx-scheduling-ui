@@ -39,6 +39,7 @@ const GeneralQuestions: FC = (): ReactElement => {
         [name]: {
           ...intakeFormQuestions[name],
           value: checked,
+          error: '',
         } as FieldBooleanType,
       },
     });
@@ -53,6 +54,7 @@ const GeneralQuestions: FC = (): ReactElement => {
         [name]: {
           ...intakeFormQuestions[name],
           value,
+          error: '',
         } as FieldStringType,
       },
     });

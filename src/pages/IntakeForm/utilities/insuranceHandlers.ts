@@ -21,6 +21,7 @@ const handleSelectInsurance = (
           },
         ]
       : insurances.value.filter(({ provider }) => provider.value !== name),
+    error: '',
   };
 
   return newInsurances;
@@ -50,7 +51,7 @@ const handleUpdateInsuranceInputValues = (
   index: number,
   insurances: FieldInsurancesType
 ): FieldInsurancesType => {
-  const newValue = { ...insurances.value[index][name], value };
+  const newValue = { ...insurances.value[index][name], value, error: '' };
   const newInsurances = handleUpdateInsuranceByIndex(
     insurances,
     index,
@@ -66,7 +67,7 @@ const handleUpdateInsured = (
   index: number,
   insurances: FieldInsurancesType
 ): FieldInsurancesType => {
-  const newValue = { ...insurances.value[index].insured, value };
+  const newValue = { ...insurances.value[index].insured, value, error: '' };
   const newInsurances = handleUpdateInsuranceByIndex(
     insurances,
     index,

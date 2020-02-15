@@ -22,6 +22,7 @@ const ReferralInputs: FC = (): ReactElement => {
       [name]: {
         ...referral[name],
         value,
+        error: '',
       },
     };
 
@@ -44,6 +45,7 @@ const ReferralInputs: FC = (): ReactElement => {
         [name]: {
           ...intakeFormQuestions[name],
           value,
+          error: '',
         } as FieldStringType,
       },
     });
