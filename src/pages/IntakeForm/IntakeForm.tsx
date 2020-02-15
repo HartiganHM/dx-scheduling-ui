@@ -9,7 +9,7 @@ import { validateIntakeForm } from './utilities';
 import {
   ClientInputs,
   DiagnosisInputs,
-  GeneralQuestions,
+  GeneralQuestionsInputs,
   InsuranceInputs,
   ParentInputs,
   PrimaryCareProviderInputs,
@@ -111,7 +111,7 @@ const IntakeForm: FC = () => {
         <ParentInputs />
         <PrimaryCareProviderInputs />
         <InsuranceInputs />
-        <GeneralQuestions />
+        <GeneralQuestionsInputs />
         {hasReferral.value && <ReferralInputs />}
         <DiagnosisInputs />
         <ConcernInputs />

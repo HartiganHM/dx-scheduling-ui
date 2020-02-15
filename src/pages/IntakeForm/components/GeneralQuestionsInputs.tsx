@@ -14,7 +14,7 @@ import {
   ActionTypesEnum,
 } from 'shared/types/types';
 
-const GeneralQuestions: FC = (): ReactElement => {
+const GeneralQuestionsInputs: FC = (): ReactElement => {
   const [{ intakeFormQuestions }, dispatch] = useStateValue();
 
   const {
@@ -140,4 +140,4 @@ const GeneralQuestions: FC = (): ReactElement => {
   );
 };
 
-export default GeneralQuestions;
+export default GeneralQuestionsInputs;

@@ -1,6 +1,6 @@
 import ClientInputs from './ClientInputs';
 import DiagnosisInputs from './DiagnosisInputs';
-import GeneralQuestions from './GeneralQuestions';
+import GeneralQuestionsInputs from './GeneralQuestionsInputs';
 import InsuranceInputs from './InsuranceInputs';
 import ParentInputs from './ParentInputs';
 import PrimaryCareProviderInputs from './PrimaryCareProviderInputs';
@@ -10,7 +10,7 @@ import ReferralInputs from './ReferralInputs';
 export {
   ClientInputs,
   DiagnosisInputs,
-  GeneralQuestions,
+  GeneralQuestionsInputs,
   InsuranceInputs,
   ParentInputs,
   PrimaryCareProviderInputs,
