@@ -4,50 +4,162 @@ import {
   Actions,
   ActionTypesEnum,
   MergeState,
-  FieldBooleanType,
-  FieldStringType,
   FieldArrayTypes,
-  ParentType,
-  InsuranceType,
+  FieldStringType,
+  FieldBooleanType,
 } from 'shared/types/types';
 
 const validateIntakeForm = (
   stateToValidate: MergeState,
   dispatch: Dispatch<Actions>
 ): boolean => {
-  console.log({ stateToValidate });
+  let hasErrors = false;
   const mergeState = Object.keys(stateToValidate).reduce(
     (accumulator, stateProp) => {
       const stateValue = stateToValidate[stateProp];
 
-      Object.keys(stateValue).forEach(fieldProp => {
-        const fieldValue = stateValue[fieldProp];
+      return {
+        ...accumulator,
+        [stateProp]: Object.keys(stateValue).reduce(
+          (stateAccumulator, fieldProp) => {
+            const fieldValue = stateValue[fieldProp];
 
-        if (
-          fieldValue.required &&
-          (!fieldValue.value || !(fieldValue.value as FieldArrayTypes).length)
-        ) {
-          accumulator[stateProp][fieldProp].error = 'Error';
-        } else if (
-          typeof fieldValue.value === 'object' &&
-          fieldValue.value.length
-        ) {
-          console.log(fieldProp, fieldValue);
-          accumulator[stateProp][fieldProp].value = (accumulator[stateProp][
-            fieldProp
-          ].value as FieldArrayTypes).map(thing => {
-            console.log({ thing });
-            return thing;
-          });
-        }
-      });
+            if (!fieldValue.hasOwnProperty('value')) {
+              return {
+                ...stateAccumulator,
+                [fieldProp]: Object.keys(fieldValue).reduce(
+                  (fieldAccumulator, groupedProp) => {
+                    const groupedValue = fieldValue[groupedProp] as
+                      | FieldStringType
+                      | FieldBooleanType;
 
-      return accumulator;
+                    if (groupedValue.required && !groupedValue.value) {
+                      hasErrors = true;
+                      return {
+                        ...fieldAccumulator,
+                        [groupedProp]: {
+                          ...groupedValue,
+                          error: 'Object error',
+                        },
+                      };
+                    }
+
+                    return {
+                      ...fieldAccumulator,
+                      [groupedProp]: groupedValue,
+                    };
+                  },
+                  {}
+                ),
+              };
+            } else if (typeof fieldValue.value === 'object') {
+              if (fieldValue.required && !fieldValue.value.length) {
+                hasErrors = true;
+                return {
+                  ...stateAccumulator,
+                  [fieldProp]: {
+                    ...fieldValue,
+                    error: 'Array error',
+                  },
+                };
+              } else if (
+                fieldProp === 'parents' ||
+                fieldProp === 'insurances'
+              ) {
+                return {
+                  ...stateAccumulator,
+                  [fieldProp]: {
+                    ...fieldValue,
+                    value: (fieldValue.value as FieldArrayTypes[]).map(item => {
+                      return Object.keys(item).reduce(
+                        (fieldAccumulator, groupedProp) => {
+                          const groupedValue = item[groupedProp];
+
+                          if (groupedValue.required && !groupedValue.value) {
+                            return {
+                              ...fieldAccumulator,
+                              [groupedProp]: {
+                                ...groupedValue,
+                                error: 'Array object error',
+                              },
+                            };
+                          } else if (groupedProp === 'address') {
+                            return {
+                              ...fieldAccumulator,
+                              [groupedProp]: Object.keys(groupedValue).reduce(
+                                (addressAccumulator, addressProp) => {
+                                  const addressValue = groupedValue[
+                                    addressProp
+                                  ] as FieldStringType;
+                                  console.log(addressProp, addressValue);
+
+                                  if (
+                                    addressValue.required &&
+                                    !addressValue.value
+                                  ) {
+                                    return {
+                                      ...addressAccumulator,
+                                      [addressProp]: {
+                                        ...addressValue,
+                                        error: 'Address error',
+                                      },
+                                    };
+                                  }
+
+                                  return {
+                                    ...addressAccumulator,
+                                    [addressProp]: addressValue,
+                                  };
+                                },
+                                {}
+                              ),
+                            };
+                          }
+
+                          return {
+                            ...fieldAccumulator,
+                            [groupedProp]: groupedValue,
+                          };
+                        },
+                        {}
+                      );
+                    }),
+                  },
+                };
+              }
+            } else {
+              if (fieldValue.required && !fieldValue.value) {
+                hasErrors = true;
+                return {
+                  ...stateAccumulator,
+                  [fieldProp]: {
+                    ...fieldValue,
+                    error: 'Field Error',
+                  },
+                };
+              }
+            }
+
+            return { ...stateAccumulator, [fieldProp]: fieldValue };
+          },
+          {}
+        ),
+      };
     },
-    stateToValidate
+    {}
   );
 
   console.log({ mergeState });
+
+  if (hasErrors) {
+    dispatch({
+      type: ActionTypesEnum.MergeState,
+      mergeState,
+    });
+
+    return false;
+  }
+
   return true;
 };
 
