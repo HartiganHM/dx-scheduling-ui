@@ -189,15 +189,30 @@ export const defaultIntakeQuestionValues = {
     required: false,
     error: '',
   },
+  priorTherapy: {
+    value: '',
+    required: true,
+    error: '',
+  },
+  schoolSupport: {
+    value: '',
+    required: true,
+    error: '',
+  },
+  priorTreatments: {
+    value: '',
+    required: true,
+    error: '',
+  },
   referral: {
     firstName: {
       value: '',
-      required: false,
+      required: true,
       error: '',
     },
     lastName: {
       value: '',
-      required: false,
+      required: true,
       error: '',
     },
   },
@@ -254,20 +269,5 @@ export const defaultIntakeQuestionValues = {
       required: true,
       error: '',
     },
-  },
-  priorTherapy: {
-    value: '',
-    required: true,
-    error: '',
-  },
-  schoolSupport: {
-    value: '',
-    required: true,
-    error: '',
-  },
-  priorTreatments: {
-    value: '',
-    required: true,
-    error: '',
   },
 };
