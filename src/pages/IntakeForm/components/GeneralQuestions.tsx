@@ -113,7 +113,7 @@ const GeneralQuestions: FC = (): ReactElement => {
         />
 
         <TextArea
-          name="needs"
+          name="priorTherapy"
           value={priorTherapy.value}
           label={labels.priorTherapy}
           errorMessage={priorTherapy.error}
@@ -121,7 +121,7 @@ const GeneralQuestions: FC = (): ReactElement => {
         />
 
         <TextArea
-          name="needs"
+          name="schoolSupport"
           value={schoolSupport.value}
           label={labels.schoolSupport}
           errorMessage={schoolSupport.error}
@@ -129,7 +129,7 @@ const GeneralQuestions: FC = (): ReactElement => {
         />
 
         <TextArea
-          name="needs"
+          name="priorTreatments"
           value={priorTreatments.value}
           label={labels.priorTreatments}
           errorMessage={priorTreatments.error}
