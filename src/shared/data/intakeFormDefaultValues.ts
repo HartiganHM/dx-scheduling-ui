@@ -9,11 +9,6 @@ export const defaultParentValues = {
     required: true,
     error: '',
   },
-  gender: {
-    value: '',
-    required: true,
-    error: '',
-  },
   phoneNumber: {
     value: '',
     required: true,
