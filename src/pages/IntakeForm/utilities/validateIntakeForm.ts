@@ -76,6 +76,7 @@ const validateIntakeForm = (
                           const groupedValue = item[groupedProp];
 
                           if (groupedValue.required && !groupedValue.value) {
+                            hasErrors = true;
                             return {
                               ...fieldAccumulator,
                               [groupedProp]: {
@@ -91,12 +92,12 @@ const validateIntakeForm = (
                                   const addressValue = groupedValue[
                                     addressProp
                                   ] as FieldStringType;
-                                  console.log(addressProp, addressValue);
 
                                   if (
                                     addressValue.required &&
                                     !addressValue.value
                                   ) {
+                                    hasErrors = true;
                                     return {
                                       ...addressAccumulator,
                                       [addressProp]: {
