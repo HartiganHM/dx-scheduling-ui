@@ -204,9 +204,12 @@ export interface IntakeFormValuesPayload {
   insurances: InsurancePayloadType[];
 }
 
-export interface ClientPayloadType {
+export interface PersonalInformationPayloadType {
   firstName: string;
   lastName: string;
+}
+
+export interface ClientPayloadType extends PersonalInformationPayloadType {
   dob: string;
   gender: string;
   otherGender: string;
@@ -214,9 +217,7 @@ export interface ClientPayloadType {
   grade: string;
 }
 
-export interface ParentPayloadType {
-  firstName: string;
-  lastName: string;
+export interface ParentPayloadType extends PersonalInformationPayloadType {
   phoneNumber: string;
   email: string;
   address: AddressPayloadType;
@@ -231,9 +232,7 @@ export interface AddressPayloadType {
   zip: string;
 }
 
-export interface PhysicianPayloadType {
-  firstName: string;
-  lastName: string;
+export interface PhysicianPayloadType extends PersonalInformationPayloadType {
   practice: string;
   phoneNumber: string;
 }
@@ -254,15 +253,10 @@ export interface IntakeFormQuestionsPayload {
   priorTherapy: string;
   schoolSupport: string;
   priorTreatments: string;
-  referral: ReferralPayloadType;
+  referral: PersonalInformationPayloadType;
   referralConcernMatch: string;
   diagnosis: DiagnosisPayloadType;
   concerns: ConcernPayloadType;
-}
-
-export interface ReferralPayloadType {
-  firstName: string;
-  lastName: string;
 }
 
 export interface DiagnosisPayloadType {
