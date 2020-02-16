@@ -4,7 +4,7 @@ import { Button, Checkbox, Input } from '@f-design/component-library';
 import { useStateValue } from 'components';
 import { copyContent, defaultParentValues } from 'shared/data';
 import { ActionTypesEnum, ServicesType } from 'shared/types/types';
-import { validateIntakeForm } from './utilities';
+import { validateIntakeForm, formatIntakePayload } from './utilities';
 
 import {
   ClientInputs,
@@ -77,6 +77,13 @@ const IntakeForm: FC = () => {
       { intakeFormValues, intakeFormQuestions },
       dispatch
     );
+
+    if (isValid) {
+      const payload = formatIntakePayload({
+        intakeFormValues,
+        intakeFormQuestions,
+      });
+    }
   };
 
   const { buttons, icons, labels, services } = copyContent.intakeForm;
