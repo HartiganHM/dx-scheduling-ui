@@ -1,3 +1,4 @@
+import formatIntakePayload from './formatIntakePayload';
 import {
   handleSelectInsurance,
   handleUpdateInsuranceByIndex,
@@ -14,6 +15,7 @@ import {
 import validateIntakeForm from './validateIntakeForm';
 
 export {
+  formatIntakePayload,
   handleRemoveParent,
   handleSelectInsurance,
   handleToggleIsInSameHousehold,
