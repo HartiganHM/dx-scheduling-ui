@@ -112,7 +112,6 @@ export interface ClientType extends PersonalInformationType {
 export type GenderType = 'Female' | 'Male' | 'Prefer not to say' | string;
 
 export interface ParentType extends PersonalInformationType {
-  gender: FieldStringType;
   phoneNumber: FieldStringType;
   email: FieldStringType;
   address: AddressType;
@@ -188,4 +187,95 @@ export interface CurrentlyViewing {
   title: string;
   subTitle?: string;
   backPath?: string;
+}
+
+// GQL Input Types
+export interface IntakeFormPayload {
+  intakeFormValues: IntakeFormValuesPayload;
+  intakeFormQuestions: IntakeFormQuestionsPayload;
+}
+
+export interface IntakeFormValuesPayload {
+  date: string;
+  servicesRequested: ServicesType[];
+  client: ClientPayloadType;
+  parents: ParentPayloadType[];
+  physician: PhysicianPayloadType;
+  insurances: InsurancePayloadType[];
+}
+
+export interface ClientPayloadType {
+  firstName: string;
+  lastName: string;
+  dob: string;
+  gender: string;
+  otherGender: string;
+  school: string;
+  grade: string;
+}
+
+export interface ParentPayloadType {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  address: AddressPayloadType;
+  isInSameHousehold: boolean;
+  dob: string;
+}
+
+export interface AddressPayloadType {
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+}
+
+export interface PhysicianPayloadType {
+  firstName: string;
+  lastName: string;
+  practice: string;
+  phoneNumber: string;
+}
+
+export interface InsurancePayloadType {
+  idNumber: string;
+  groupNumber: string;
+  provider: string;
+  insured: string;
+}
+
+export interface IntakeFormQuestionsPayload {
+  creditCardInfoSaved: boolean;
+  ratesDiscussed: boolean;
+  preferredTimes: boolean;
+  needs: string;
+  hasReferral: boolean;
+  priorTherapy: string;
+  schoolSupport: string;
+  priorTreatments: string;
+  referral: ReferralPayloadType;
+  referralConcernMatch: string;
+  diagnosis: DiagnosisPayloadType;
+  concerns: ConcernPayloadType;
+}
+
+export interface ReferralPayloadType {
+  firstName: string;
+  lastName: string;
+}
+
+export interface DiagnosisPayloadType {
+  name: string;
+  provider: string;
+  date: string;
+  comments: string;
+}
+
+export interface ConcernPayloadType {
+  areas: string;
+  communication: string;
+  motor: string;
+  sensory: string;
+  cognitive: string;
 }
