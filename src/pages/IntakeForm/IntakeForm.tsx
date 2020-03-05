@@ -1,8 +1,11 @@
 import React, { FC, ChangeEvent } from 'react';
 import classnames from 'classnames';
+import { useMutation } from '@apollo/react-hooks';
 import { Button, Checkbox, Input } from '@f-design/component-library';
+
 import { useStateValue } from 'components';
 import { copyContent, defaultParentValues } from 'shared/data';
+import CREATE_INTAKE_FORM from 'shared/mutations/createIntakeForm';
 import { ActionTypesEnum, ServicesType } from 'shared/types/types';
 import { validateIntakeForm, formatIntakePayload } from './utilities';
 
@@ -20,6 +23,7 @@ import {
 import './IntakeForm.scss';
 
 const IntakeForm: FC = () => {
+  const [submitIntakForm, { data }] = useMutation(CREATE_INTAKE_FORM);
   const [{ intakeFormValues, intakeFormQuestions }, dispatch] = useStateValue();
 
   const { date, servicesRequested, parents } = intakeFormValues;
@@ -78,12 +82,12 @@ const IntakeForm: FC = () => {
       dispatch
     );
 
-    if (isValid) {
-      const payload = formatIntakePayload({
-        intakeFormValues,
-        intakeFormQuestions,
-      });
-    }
+    // if (isValid) {
+    const payload = formatIntakePayload({
+      intakeFormValues,
+      intakeFormQuestions,
+    });
+    // }
   };
 
   const { buttons, icons, labels, services } = copyContent.intakeForm;
