@@ -197,16 +197,17 @@ export interface IntakeFormPayload {
 
 export interface IntakeFormValuesPayload {
   date: string;
-  servicesRequested: ServicesType[];
-  client: ClientPayloadType;
-  parents: ParentPayloadType[];
-  physician: PhysicianPayloadType;
-  insurances: InsurancePayloadType[];
+  servicesRequested: ServicesCreateInputType;
+  client: ClientCreateInputType;
 }
 
 export interface PersonalInformationPayloadType {
   firstName: string;
   lastName: string;
+}
+
+export interface ClientCreateInputType {
+  create: ClientPayloadType;
 }
 
 export interface ClientPayloadType extends PersonalInformationPayloadType {
@@ -215,14 +216,25 @@ export interface ClientPayloadType extends PersonalInformationPayloadType {
   otherGender: string;
   school: string;
   grade: string;
+  parents: ParentCreateInputType;
+  insurances: InsuranceCreatePayloadType;
+  physician: PhysicianCreateInputType;
+}
+
+export interface ParentCreateInputType {
+  create: [ParentPayloadType];
 }
 
 export interface ParentPayloadType extends PersonalInformationPayloadType {
   phoneNumber: string;
   email: string;
-  address: AddressPayloadType;
+  address: AddressCreateInputType;
   isInSameHousehold: boolean;
   dob: string;
+}
+
+export interface AddressCreateInputType {
+  create: AddressPayloadType;
 }
 
 export interface AddressPayloadType {
@@ -232,9 +244,17 @@ export interface AddressPayloadType {
   zip: string;
 }
 
+export interface PhysicianCreateInputType {
+  create: PhysicianPayloadType;
+}
+
 export interface PhysicianPayloadType extends PersonalInformationPayloadType {
   practice: string;
   phoneNumber: string;
+}
+
+export interface InsuranceCreatePayloadType {
+  create: InsurancePayloadType;
 }
 
 export interface InsurancePayloadType {
@@ -242,6 +262,10 @@ export interface InsurancePayloadType {
   groupNumber: string;
   provider: string;
   insured: string;
+}
+
+export interface ServicesCreateInputType {
+  set: ServicesType[];
 }
 
 export interface IntakeFormQuestionsPayload {
