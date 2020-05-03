@@ -95,6 +95,7 @@ import gql from 'graphql-tag';
     }
   }
 }
+*/
 
 const CREATE_INTAKE_FORM = gql`
   mutation createIntakeFormValues($input: IntakeFormValuesCreateInput!) {
