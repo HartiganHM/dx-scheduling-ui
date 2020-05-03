@@ -39,8 +39,8 @@ const formatIntakePayload = (stateToFormat: MergeState) => {
             if (fieldProp === 'parents' || fieldProp === 'insurances') {
               return {
                 ...stateAccumulator,
-                [fieldProp]: (fieldValue.value as FieldArrayTypes[]).map(
-                  item => {
+                [fieldProp]: {
+                  create: (fieldValue.value as FieldArrayTypes[]).map(item => {
                     return Object.keys(item).reduce(
                       (fieldAccumulator, groupedProp) => {
                         const groupedValue = item[groupedProp];
@@ -71,8 +71,8 @@ const formatIntakePayload = (stateToFormat: MergeState) => {
                       },
                       {}
                     );
-                  }
-                ),
+                  }),
+                },
               };
             }
 
@@ -85,14 +85,14 @@ const formatIntakePayload = (stateToFormat: MergeState) => {
     {} as IntakeFormPayload
   );
 
-  const updatedParents = formattedPayload.intakeFormValues.parents.map(
+  const updatedParents = formattedPayload.intakeFormValues.parents.create.map(
     (parent, index) => {
       const { isInSameHousehold } = parent;
 
       if (index > 0 && isInSameHousehold) {
         return {
           ...parent,
-          address: formattedPayload.intakeFormValues.parents[0].address,
+          address: formattedPayload.intakeFormValues.parents.create[0].address,
         };
       }
 
