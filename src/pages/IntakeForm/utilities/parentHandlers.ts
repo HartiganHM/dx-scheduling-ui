@@ -50,12 +50,34 @@ const handleToggleIsInSameHousehold = (
     value: checked,
     error: '',
   };
-  const newParents = handleUpdateParentsByIndex(
+  const sameHouseholdParents = handleUpdateParentsByIndex(
     parents,
     index,
     'isInSameHousehold',
     newValue
   );
+
+  const newAddressWithoutRequired = Object.keys(
+    sameHouseholdParents.value[index].address
+  ).reduce(
+    (accumulator, value) => ({
+      ...accumulator,
+      [value]: {
+        ...sameHouseholdParents.value[index].address[value],
+        required: false,
+      },
+    }),
+    {}
+  );
+
+  const newParents = handleUpdateParentsByIndex(
+    sameHouseholdParents,
+    index,
+    'address',
+    newAddressWithoutRequired as AddressType
+  );
+
+  console.log({ newAddressWithoutRequired, newParents });
 
   return newParents;
 };
