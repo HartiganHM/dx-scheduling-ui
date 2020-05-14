@@ -13,6 +13,7 @@ const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
           ...mergeState,
         };
       }
+      return state;
     }
     case ActionTypesEnum.UpdateCurrentlyViewing: {
       const { currentlyViewing } = action;
@@ -23,6 +24,7 @@ const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
           currentlyViewing,
         };
       }
+      return state;
     }
     case ActionTypesEnum.UpdateIntakeQuestions: {
       const { intakeFormQuestions } = action;
@@ -33,6 +35,7 @@ const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
           intakeFormQuestions,
         };
       }
+      return state;
     }
     case ActionTypesEnum.UpdateIntakeValues: {
       const { intakeFormValues } = action;
@@ -43,6 +46,7 @@ const globalReducer: Reducer<InitialState, Actions> = (state, action) => {
           intakeFormValues,
         };
       }
+      return state;
     }
     default: {
       return state;
