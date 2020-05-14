@@ -50,7 +50,7 @@ const InsuranceInputs: FC = (): ReactElement => {
     const parentOptions = parents.value
       .filter(({ firstName }) => firstName.value)
       .map(({ firstName, lastName }) => ({
-        value: firstName.value,
+        value: `${firstName.value} ${lastName.value}`,
         label: `${firstName.value} ${lastName.value}`,
       }));
     const parentNames = parentOptions.map(({ value }) => value);
