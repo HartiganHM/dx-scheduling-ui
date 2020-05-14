@@ -1,98 +1,155 @@
 import {
-  MergeState,
+  DiagnosisType,
   FieldStringType,
   FieldBooleanType,
   FieldArrayTypes,
   IntakeFormPayload,
+  MergeState,
+  PersonalInformationType,
+  PhysicianType,
+  ConcernType,
+  FieldServicesType,
+  IntakeFormValuesType,
+  IntakeFormQuestionsType,
+  IntakeFormQuestionsCreateInputType,
+  IntakeFormValuesCreateInputType,
+  ParentPayloadType,
 } from 'shared/types/types';
 
-const formatIntakePayload = (stateToFormat: MergeState) => {
-  const formattedPayload = Object.keys(stateToFormat).reduce(
-    (accumulator, stateProp) => {
-      const stateValue = stateToFormat[stateProp];
+type CreateTypes =
+  | DiagnosisType
+  | PersonalInformationType
+  | PhysicianType
+  | DiagnosisType
+  | FieldStringType
+  | FieldBooleanType
+  | ConcernType
+  | FieldServicesType;
+
+const formatSimpleValues = (value: CreateTypes) =>
+  Object.keys(value).reduce((fieldAccumulator, groupedProp) => {
+    const groupedValue = value[groupedProp] as
+      | FieldStringType
+      | FieldBooleanType;
+
+    return {
+      ...fieldAccumulator,
+      [groupedProp]: groupedValue.value,
+    };
+  }, {});
+
+const formatFieldArrayValues = (fieldValue: any) =>
+  (fieldValue as FieldArrayTypes[]).map(item => {
+    return Object.keys(item).reduce((fieldAccumulator, groupedProp) => {
+      const groupedValue = item[groupedProp];
+
+      if (groupedProp === 'address') {
+        return {
+          ...fieldAccumulator,
+          create: {
+            [groupedProp]: Object.keys(groupedValue).reduce(
+              (addressAccumulator, addressProp) => {
+                const addressValue = groupedValue[
+                  addressProp
+                ] as FieldStringType;
+
+                return {
+                  ...addressAccumulator,
+                  [addressProp]: addressValue.value,
+                };
+              },
+              {}
+            ),
+          },
+        };
+      }
 
       return {
-        ...accumulator,
-        [stateProp]: Object.keys(stateValue).reduce(
-          (stateAccumulator, fieldProp) => {
-            const fieldValue = stateValue[fieldProp];
-
-            if (!fieldValue.hasOwnProperty('value')) {
-              return {
-                ...stateAccumulator,
-                [fieldProp]: Object.keys(fieldValue).reduce(
-                  (fieldAccumulator, groupedProp) => {
-                    const groupedValue = fieldValue[groupedProp] as
-                      | FieldStringType
-                      | FieldBooleanType;
-
-                    return {
-                      ...fieldAccumulator,
-                      [groupedProp]: groupedValue.value,
-                    };
-                  },
-                  {}
-                ),
-              };
-            }
-
-            if (fieldProp === 'parents' || fieldProp === 'insurances') {
-              return {
-                ...stateAccumulator,
-                [fieldProp]: {
-                  create: (fieldValue.value as FieldArrayTypes[]).map(item => {
-                    return Object.keys(item).reduce(
-                      (fieldAccumulator, groupedProp) => {
-                        const groupedValue = item[groupedProp];
-
-                        if (groupedProp === 'address') {
-                          return {
-                            ...fieldAccumulator,
-                            [groupedProp]: Object.keys(groupedValue).reduce(
-                              (addressAccumulator, addressProp) => {
-                                const addressValue = groupedValue[
-                                  addressProp
-                                ] as FieldStringType;
-
-                                return {
-                                  ...addressAccumulator,
-                                  [addressProp]: addressValue.value,
-                                };
-                              },
-                              {}
-                            ),
-                          };
-                        }
-
-                        return {
-                          ...fieldAccumulator,
-                          [groupedProp]: groupedValue.value,
-                        };
-                      },
-                      {}
-                    );
-                  }),
-                },
-              };
-            }
-
-            return { ...stateAccumulator, [fieldProp]: fieldValue.value };
-          },
-          {}
-        ),
+        ...fieldAccumulator,
+        [groupedProp]: groupedValue.value,
       };
+    }, {});
+  });
+
+const formatIntakeValues = (
+  values: IntakeFormValuesType
+): IntakeFormValuesCreateInputType => {
+  const {
+    date,
+    servicesRequested,
+    client,
+    parents,
+    physician,
+    insurances,
+  } = values;
+
+  const formattedClient = formatSimpleValues(client);
+
+  return {
+    create: {
+      date: date.value,
+      servicesRequested: {
+        set: servicesRequested.value,
+      },
+      client: {
+        create: {
+          ...formattedClient,
+          parents: {
+            create: formatFieldArrayValues(parents.value),
+          },
+          physician: {
+            create: formatSimpleValues(physician),
+          },
+          insurances: {
+            create: formatFieldArrayValues(insurances.value),
+          },
+        },
+      },
     },
-    {} as IntakeFormPayload
+  } as IntakeFormValuesCreateInputType;
+};
+
+const formatIntakeQuestions = (
+  values: IntakeFormQuestionsType
+): IntakeFormQuestionsCreateInputType => {
+  return {
+    create: Object.keys(values).reduce((accumulator, fieldProp) => {
+      const fieldValue = values[fieldProp];
+
+      if (!fieldValue.hasOwnProperty('value')) {
+        return {
+          ...accumulator,
+          [fieldProp]: {
+            create: formatSimpleValues(fieldValue as CreateTypes),
+          },
+        };
+      }
+
+      return { ...accumulator, [fieldProp]: fieldValue.value };
+    }, {}),
+  } as IntakeFormQuestionsCreateInputType;
+};
+
+const formatIntakePayload = ({
+  intakeFormValues,
+  intakeFormQuestions,
+}: MergeState): IntakeFormPayload => {
+  const formattedValues = formatIntakeValues(
+    intakeFormValues as IntakeFormValuesType
+  );
+  const formattedQuestions = formatIntakeQuestions(
+    intakeFormQuestions as IntakeFormQuestionsType
   );
 
-  const updatedParents = formattedPayload.intakeFormValues.parents.create.map(
+  const updatedParents = formattedValues.create.client.create.parents.create.map(
     (parent, index) => {
       const { isInSameHousehold } = parent;
 
       if (index > 0 && isInSameHousehold) {
         return {
           ...parent,
-          address: formattedPayload.intakeFormValues.parents.create[0].address,
+          address:
+            formattedValues.create.client.create.parents.create[0].address,
         };
       }
 
@@ -100,8 +157,11 @@ const formatIntakePayload = (stateToFormat: MergeState) => {
     }
   );
 
-  console.log({ formattedPayload, updatedParents });
-  return formattedPayload;
+  console.log({ formattedValues, formattedQuestions, updatedParents });
+  return {
+    intakeFormValues: formattedValues,
+    intakeFormQuestions: formattedQuestions,
+  };
 };
 
 export default formatIntakePayload;
