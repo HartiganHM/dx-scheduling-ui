@@ -1,22 +1,23 @@
 import {
+  ConcernPayloadType,
+  ConcernType,
+  DiagnosisPayloadType,
   DiagnosisType,
   FieldStringType,
   FieldBooleanType,
   FieldArrayTypes,
   IntakeFormPayload,
+  IntakeFormQuestionsCreateInputType,
+  IntakeFormQuestionsType,
+  IntakeFormValuesCreateInputType,
+  IntakeFormValuesType,
   MergeState,
+  ParentType,
   PersonalInformationType,
   PhysicianType,
-  ConcernType,
-  IntakeFormValuesType,
-  IntakeFormQuestionsType,
-  IntakeFormQuestionsCreateInputType,
-  IntakeFormValuesCreateInputType,
   PayloadArrayType,
-  DiagnosisPayloadType,
   PersonalInformationPayloadType,
   PhysicianPayloadType,
-  ConcernPayloadType,
 } from 'shared/types/types';
 
 type CreateTypes =
@@ -78,6 +79,23 @@ const formatFieldArrayValues = (
     }, {});
   }) as PayloadArrayType[];
 
+const formatParents = (parents: ParentType[]): ParentType[] => {
+  const updatedParents = parents.map((parent, index) => {
+    const { isInSameHousehold } = parent;
+
+    if (index > 0 && isInSameHousehold) {
+      return {
+        ...parent,
+        address: parents[0].address,
+      };
+    }
+
+    return parent;
+  });
+
+  return updatedParents;
+};
+
 const formatIntakeValues = (
   values: IntakeFormValuesType
 ): IntakeFormValuesCreateInputType => {
@@ -91,6 +109,14 @@ const formatIntakeValues = (
   } = values;
 
   const formattedClient = formatCreateTypes(client);
+  const hasParentInSameHousehold = !!parents.value.find(
+    parent => parent.isInSameHousehold
+  );
+
+  const parentValues =
+    parents.value.length > 1 && hasParentInSameHousehold
+      ? formatParents(parents.value)
+      : parents.value;
 
   return {
     create: {
@@ -102,7 +128,7 @@ const formatIntakeValues = (
         create: {
           ...formattedClient,
           parents: {
-            create: formatFieldArrayValues(parents.value),
+            create: formatFieldArrayValues(parentValues),
           },
           physician: {
             create: formatCreateTypes(physician),
@@ -148,23 +174,7 @@ const formatIntakePayload = ({
     intakeFormQuestions as IntakeFormQuestionsType
   );
 
-  const updatedParents = formattedValues.create.client.create.parents.create.map(
-    (parent, index) => {
-      const { isInSameHousehold } = parent;
-
-      if (index > 0 && isInSameHousehold) {
-        return {
-          ...parent,
-          address:
-            formattedValues.create.client.create.parents.create[0].address,
-        };
-      }
-
-      return parent;
-    }
-  );
-
-  console.log({ formattedValues, formattedQuestions, updatedParents });
+  console.log({ formattedValues, formattedQuestions });
   return {
     intakeFormValues: formattedValues,
     intakeFormQuestions: formattedQuestions,
