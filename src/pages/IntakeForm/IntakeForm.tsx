@@ -82,7 +82,6 @@ const IntakeForm: FC = () => {
       dispatch
     );
 
-
     if (isValid) {
       const payload = formatIntakePayload({
         intakeFormValues,
@@ -91,6 +90,8 @@ const IntakeForm: FC = () => {
 
       await submitIntakeForm({ variables: { input: payload } });
     }
+
+    return null;
   };
 
   const { buttons, icons, labels, services } = copyContent.intakeForm;
