@@ -5,7 +5,7 @@ import { Button, Checkbox, Input } from '@f-design/component-library';
 
 import { useStateValue } from 'components';
 import { copyContent, defaultParentValues } from 'shared/data';
-import CREATE_INTAKE_FORM from 'shared/mutations/createIntakeForm';
+import CREATE_CLIENT_INTAKE from 'shared/mutations/createClientIntake';
 import { ActionTypesEnum, ServicesType } from 'shared/types/types';
 import { validateIntakeForm, formatIntakePayload } from './utilities';
 
@@ -23,7 +23,7 @@ import {
 import './IntakeForm.scss';
 
 const IntakeForm: FC = () => {
-  const [submitIntakeForm, { data }] = useMutation(CREATE_INTAKE_FORM);
+  const [submitIntakeForm, { data }] = useMutation(CREATE_CLIENT_INTAKE);
   const [{ intakeFormValues, intakeFormQuestions }, dispatch] = useStateValue();
 
   const { date, servicesRequested, parents } = intakeFormValues;
@@ -82,7 +82,7 @@ const IntakeForm: FC = () => {
       dispatch
     );
 
-    console.log({ isValid })
+    console.log({ isValid });
 
     if (isValid) {
       const payload = formatIntakePayload({
@@ -93,7 +93,7 @@ const IntakeForm: FC = () => {
       console.log(payload);
       await submitIntakeForm({ variables: { input: payload } });
 
-      console.log({ data })
+      console.log({ data });
     }
   };
 

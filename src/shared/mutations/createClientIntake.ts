@@ -97,9 +97,9 @@ import { gql } from '@apollo/client';
 }
 */
 
-const CREATE_INTAKE_FORM = gql`
-  mutation createIntakeFormValues($input: IntakeFormPayload!) {
-    createIntakeFormValues(input: $input) {
+const CREATE_CLIENT_INTAKE = gql`
+  mutation createClientIntake($input: ClientIntakeCreateInput!) {
+    createClientIntake(input: $input) {
       id
       intakeFormValues {
         id
@@ -181,4 +181,4 @@ const CREATE_INTAKE_FORM = gql`
   }
 `;
 
-export default CREATE_INTAKE_FORM;
+export default CREATE_CLIENT_INTAKE;
