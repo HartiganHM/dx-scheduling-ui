@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { gql, useQuery } from '@apollo/client';
 import { CircleLoader } from '@f-design/component-library';
 
 type PermissionsProps = {
