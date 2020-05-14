@@ -59,6 +59,15 @@ const PrimaryCareProviderInputs: FC = (): ReactElement => {
           errorMessage={physician.phoneNumber.error}
           onChange={handleUpdatePhysicianInputValues}
         />
+
+        <Input
+          id="pcp-practice"
+          name="practice"
+          label={labels.practice}
+          value={physician.practice.value}
+          errorMessage={physician.practice.error}
+          onChange={handleUpdatePhysicianInputValues}
+        />
       </div>
     </ExpansionPanel>
   );

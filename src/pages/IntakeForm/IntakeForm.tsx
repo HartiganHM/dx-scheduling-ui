@@ -1,6 +1,6 @@
 import React, { FC, ChangeEvent } from 'react';
 import classnames from 'classnames';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { Button, Checkbox, Input } from '@f-design/component-library';
 
 import { useStateValue } from 'components';
@@ -76,18 +76,25 @@ const IntakeForm: FC = () => {
       },
     });
 
-  const handleSubmit = (): void => {
+  const handleSubmit = async () => {
     const isValid = validateIntakeForm(
       { intakeFormValues, intakeFormQuestions },
       dispatch
     );
 
-    // if (isValid) {
-    const payload = formatIntakePayload({
-      intakeFormValues,
-      intakeFormQuestions,
-    });
-    // }
+    console.log({ isValid })
+
+    if (isValid) {
+      const payload = formatIntakePayload({
+        intakeFormValues,
+        intakeFormQuestions,
+      });
+
+      console.log(payload);
+      await submitIntakeForm({ variables: { input: payload } });
+
+      console.log({ data })
+    }
   };
 
   const { buttons, icons, labels, services } = copyContent.intakeForm;

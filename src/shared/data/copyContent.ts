@@ -109,6 +109,7 @@ export default {
       firstName: 'First',
       lastName: 'Last',
       phoneNumber: 'Phone Number',
+      practice: 'Practice',
     },
   },
   referralInputs: {
