@@ -1,4 +1,10 @@
-import React, { Fragment, ReactElement, FC } from 'react';
+import React, {
+  Fragment,
+  ReactElement,
+  FC,
+  ChangeEvent,
+  useEffect,
+} from 'react';
 
 import {
   Checkbox,
@@ -14,6 +20,7 @@ import {
   FieldInsurancesType,
   FieldParentsType,
   InsuranceType,
+  ParentType,
 } from 'shared/types/types';
 import {
   handleSelectInsurance,
@@ -24,22 +31,56 @@ import {
 
 const InsuranceInputs: FC = (): ReactElement => {
   const [{ intakeFormValues }, dispatch] = useStateValue();
-
   const { insurances, parents } = intakeFormValues;
+  const { heading, labels, providers } = copyContent.insuranceInputs;
+
+  useEffect(() => {
+    const numberOfInsured = insurances.value.filter(
+      insurance => insurance.insured.value
+    ).length;
+    const numberOfDobRequired = parents.value.filter(
+      parent => parent.dob.required
+    ).length;
+
+    if (numberOfInsured !== numberOfDobRequired) {
+      insurances.value.forEach(insurance =>
+        handleUpdateInsuredParentDobRequired(insurance.insured.value)
+      );
+    }
+  }, [insurances]);
 
   const handleUpdateFormValues = (
     key: string,
-    newInsurances: FieldInsurancesType | FieldParentsType
+    updatedValues: FieldInsurancesType | FieldParentsType
   ): void =>
     dispatch({
       type: ActionTypesEnum.UpdateIntakeValues,
       intakeFormValues: {
         ...intakeFormValues,
-        [key]: newInsurances,
+        [key]: updatedValues,
       },
     });
 
-  const { heading, labels, providers } = copyContent.insuranceInputs;
+  const handleUpdateInsuredParentDobRequired = (name: string): void => {
+    const updatedParents = parents.value.map(parent => {
+      const { firstName } = parent;
+
+      if (name.includes(firstName.value)) {
+        return {
+          ...parent,
+          dob: {
+            ...parent.dob,
+            required: true,
+          },
+        };
+      }
+    });
+
+    handleUpdateFormValues('parents', {
+      ...intakeFormValues.parents,
+      value: updatedParents as ParentType[],
+    });
+  };
 
   const renderInsurance = (
     insurance: InsuranceType,
@@ -55,8 +96,8 @@ const InsuranceInputs: FC = (): ReactElement => {
       }));
     const parentNames = parentOptions.map(({ value }) => value);
 
-    const matchingParent = parents.value.find(
-      ({ firstName }) => firstName.value === insured.value
+    const matchingParent = parents.value.find(({ firstName }) =>
+      insured.value.includes(firstName.value)
     );
     const selectedOption = matchingParent && {
       value: insured.value,
@@ -74,7 +115,7 @@ const InsuranceInputs: FC = (): ReactElement => {
             label={labels.idNumber}
             value={idNumber.value}
             errorMessage={idNumber.error}
-            onChange={(event): void =>
+            onChange={(event: ChangeEvent<HTMLInputElement>): void =>
               handleUpdateFormValues(
                 'insurances',
                 handleUpdateInsuranceInputValues(event, index, insurances)
@@ -87,7 +128,7 @@ const InsuranceInputs: FC = (): ReactElement => {
             label={labels.groupNumber}
             value={groupNumber.value}
             errorMessage={groupNumber.error}
-            onChange={(event): void =>
+            onChange={(event: ChangeEvent<HTMLInputElement>): void =>
               handleUpdateFormValues(
                 'insurances',
                 handleUpdateInsuranceInputValues(event, index, insurances)
@@ -100,12 +141,12 @@ const InsuranceInputs: FC = (): ReactElement => {
             selected={selectedOption}
             options={parentOptions}
             errorMessage={insured.error}
-            onSelect={({ value }): void =>
+            onSelect={({ value }: { value: string; label: string }): void => {
               handleUpdateFormValues(
                 'insurances',
                 handleUpdateInsured(value, index, insurances)
-              )
-            }
+              );
+            }}
           />
 
           <Input
@@ -115,7 +156,7 @@ const InsuranceInputs: FC = (): ReactElement => {
             value={(matchingParent && matchingParent.dob.value) || ''}
             disabled={!insured.value}
             errorMessage={matchingParent && matchingParent.dob.error}
-            onChange={(event): void =>
+            onChange={(event: ChangeEvent<HTMLInputElement>): void =>
               handleUpdateFormValues(
                 'parents',
                 handleUpdateParentInputValues(
@@ -145,7 +186,7 @@ const InsuranceInputs: FC = (): ReactElement => {
           label={labels.providers}
           options={insuranceOptions}
           errorMessage={insurances.error}
-          onChange={(event): void =>
+          onChange={(event: ChangeEvent<HTMLInputElement>): void =>
             handleUpdateFormValues(
               'insurances',
               handleSelectInsurance(event, insurances)
