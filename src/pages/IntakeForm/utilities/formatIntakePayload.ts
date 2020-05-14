@@ -18,6 +18,7 @@ import {
   PayloadArrayType,
   PersonalInformationPayloadType,
   PhysicianPayloadType,
+  ClientPayloadType,
 } from 'shared/types/types';
 
 type CreateTypes =
@@ -44,6 +45,25 @@ const formatCreateTypes = (value: CreateTypes): CreatePayloadTypes =>
     };
   }, {}) as CreatePayloadTypes;
 
+const formateClientGender = (client: ClientPayloadType): ClientPayloadType =>
+  Object.keys(client).reduce((accumulator, field) => {
+    if (field === 'gender' && client.otherGender) {
+      return {
+        ...accumulator,
+        gender: client.otherGender,
+      };
+    }
+
+    if (field !== 'otherGender') {
+      return {
+        ...accumulator,
+        [field]: client[field] as string,
+      };
+    }
+
+    return accumulator;
+  }, {} as ClientPayloadType);
+
 const formatFieldArrayValues = (
   fieldValue: FieldArrayTypes[]
 ): PayloadArrayType[] =>
@@ -54,8 +74,8 @@ const formatFieldArrayValues = (
       if (groupedProp === 'address') {
         return {
           ...fieldAccumulator,
-          create: {
-            [groupedProp]: Object.keys(groupedValue).reduce(
+          [groupedProp]: {
+            create: Object.keys(groupedValue).reduce(
               (addressAccumulator, addressProp) => {
                 const addressValue = groupedValue[
                   addressProp
@@ -108,7 +128,9 @@ const formatIntakeValues = (
     insurances,
   } = values;
 
-  const formattedClient = formatCreateTypes(client);
+  const formattedClient = formateClientGender(
+    formatCreateTypes(client) as ClientPayloadType
+  );
   const hasParentInSameHousehold = !!parents.value.find(
     parent => parent.isInSameHousehold
   );
