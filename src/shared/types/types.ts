@@ -191,8 +191,12 @@ export interface CurrentlyViewing {
 
 // GQL Input Types
 export interface IntakeFormPayload {
-  intakeFormValues: IntakeFormValuesPayload;
-  intakeFormQuestions: IntakeFormQuestionsPayload;
+  intakeFormValues: IntakeFormValuesCreateInputType;
+  intakeFormQuestions: IntakeFormQuestionsCreateInputType;
+}
+
+export interface IntakeFormValuesCreateInputType {
+  create: IntakeFormValuesPayload;
 }
 
 export interface IntakeFormValuesPayload {
@@ -217,12 +221,14 @@ export interface ClientPayloadType extends PersonalInformationPayloadType {
   school: string;
   grade: string;
   parents: ParentCreateInputType;
-  insurances: InsuranceCreatePayloadType;
   physician: PhysicianCreateInputType;
+  insurances: InsuranceCreatePayloadType;
 }
 
+export type PayloadArrayType = ParentPayloadType | InsurancePayloadType;
+
 export interface ParentCreateInputType {
-  create: [ParentPayloadType];
+  create: ParentPayloadType[];
 }
 
 export interface ParentPayloadType extends PersonalInformationPayloadType {
@@ -254,7 +260,7 @@ export interface PhysicianPayloadType extends PersonalInformationPayloadType {
 }
 
 export interface InsuranceCreatePayloadType {
-  create: InsurancePayloadType;
+  create: InsurancePayloadType[];
 }
 
 export interface InsurancePayloadType {
@@ -266,6 +272,10 @@ export interface InsurancePayloadType {
 
 export interface ServicesCreateInputType {
   set: ServicesType[];
+}
+
+export interface IntakeFormQuestionsCreateInputType {
+  create: IntakeFormQuestionsPayload;
 }
 
 export interface IntakeFormQuestionsPayload {
