@@ -174,7 +174,6 @@ const formatIntakePayload = ({
     intakeFormQuestions as IntakeFormQuestionsType
   );
 
-  console.log({ formattedValues, formattedQuestions });
   return {
     intakeFormValues: formattedValues,
     intakeFormQuestions: formattedQuestions,
