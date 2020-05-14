@@ -150,8 +150,6 @@ const validateIntakeForm = (
     {}
   );
 
-  console.log({ mergeState });
-
   if (hasErrors) {
     dispatch({
       type: ActionTypesEnum.MergeState,

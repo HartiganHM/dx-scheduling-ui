@@ -77,8 +77,6 @@ const handleToggleIsInSameHousehold = (
     newAddressWithoutRequired as AddressType
   );
 
-  console.log({ newAddressWithoutRequired, newParents });
-
   return newParents;
 };
 

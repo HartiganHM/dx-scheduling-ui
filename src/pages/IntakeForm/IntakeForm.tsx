@@ -82,7 +82,6 @@ const IntakeForm: FC = () => {
       dispatch
     );
 
-    console.log({ isValid });
 
     if (isValid) {
       const payload = formatIntakePayload({
@@ -90,10 +89,7 @@ const IntakeForm: FC = () => {
         intakeFormQuestions,
       });
 
-      console.log(payload);
       await submitIntakeForm({ variables: { input: payload } });
-
-      console.log({ data });
     }
   };
 
