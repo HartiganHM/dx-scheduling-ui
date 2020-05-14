@@ -98,47 +98,83 @@ import { gql } from '@apollo/client';
 */
 
 const CREATE_INTAKE_FORM = gql`
-  mutation createIntakeFormValues($input: IntakeFormValuesCreateInput!) {
+  mutation createIntakeFormValues($input: IntakeFormPayload!) {
     createIntakeFormValues(input: $input) {
       id
-      date
-      servicesRequested
-      client {
+      intakeFormValues {
         id
-        firstName
-        lastName
-        dob
-        gender
-        school
-        grade
-        parents {
+        date
+        servicesRequested
+        client {
           id
           firstName
           lastName
-          phoneNumber
-          email
-          isInSameHousehold
-          address {
+          dob
+          gender
+          school
+          grade
+          parents {
             id
-            street
-            city
-            state
-            zip
+            firstName
+            lastName
+            phoneNumber
+            email
+            isInSameHousehold
+            dob
+            address {
+              id
+              street
+              city
+              state
+              zip
+            }
+          }
+          physician {
+            id
+            firstName
+            lastName
+            practice
+            phoneNumber
+          }
+          insurances {
+            id
+            idNumber
+            groupNumber
+            provider
+            insured
           }
         }
-        insurances {
-          id
-          idNumber
-          groupNumber
-          provider
-          insured
-        }
-        physician {
+      }
+      intakeFormQuestions {
+        id
+        creditCardInfoSaved
+        ratesDiscussed
+        preferredTimes
+        needs
+        hasReferral
+        priorTherapy
+        schoolSupport
+        priorTreatments
+        referralConcernMatch
+        referral {
           id
           firstName
           lastName
-          practice
-          phoneNumber
+        }
+        diagnosis {
+          id
+          name
+          provider
+          date
+          comments
+        }
+        concerns {
+          id
+          areas
+          communication
+          motor
+          sensory
+          cognitive
         }
       }
     }
