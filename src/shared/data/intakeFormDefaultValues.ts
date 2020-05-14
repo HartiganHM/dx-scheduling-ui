@@ -43,12 +43,12 @@ export const defaultParentValues = {
   },
   isInSameHousehold: {
     value: false,
-    required: true,
+    required: false,
     error: '',
   },
   dob: {
     value: '',
-    required: true,
+    required: false,
     error: '',
   },
 };
