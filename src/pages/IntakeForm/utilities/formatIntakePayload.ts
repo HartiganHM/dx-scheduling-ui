@@ -8,25 +8,30 @@ import {
   PersonalInformationType,
   PhysicianType,
   ConcernType,
-  FieldServicesType,
   IntakeFormValuesType,
   IntakeFormQuestionsType,
   IntakeFormQuestionsCreateInputType,
   IntakeFormValuesCreateInputType,
-  ParentPayloadType,
+  PayloadArrayType,
+  DiagnosisPayloadType,
+  PersonalInformationPayloadType,
+  PhysicianPayloadType,
+  ConcernPayloadType,
 } from 'shared/types/types';
 
 type CreateTypes =
   | DiagnosisType
   | PersonalInformationType
   | PhysicianType
-  | DiagnosisType
-  | FieldStringType
-  | FieldBooleanType
-  | ConcernType
-  | FieldServicesType;
+  | ConcernType;
 
-const formatSimpleValues = (value: CreateTypes) =>
+type CreatePayloadTypes =
+  | DiagnosisPayloadType
+  | PersonalInformationPayloadType
+  | PhysicianPayloadType
+  | ConcernPayloadType;
+
+const formatCreateTypes = (value: CreateTypes): CreatePayloadTypes =>
   Object.keys(value).reduce((fieldAccumulator, groupedProp) => {
     const groupedValue = value[groupedProp] as
       | FieldStringType
@@ -36,9 +41,11 @@ const formatSimpleValues = (value: CreateTypes) =>
       ...fieldAccumulator,
       [groupedProp]: groupedValue.value,
     };
-  }, {});
+  }, {}) as CreatePayloadTypes;
 
-const formatFieldArrayValues = (fieldValue: any) =>
+const formatFieldArrayValues = (
+  fieldValue: FieldArrayTypes[]
+): PayloadArrayType[] =>
   (fieldValue as FieldArrayTypes[]).map(item => {
     return Object.keys(item).reduce((fieldAccumulator, groupedProp) => {
       const groupedValue = item[groupedProp];
@@ -69,7 +76,7 @@ const formatFieldArrayValues = (fieldValue: any) =>
         [groupedProp]: groupedValue.value,
       };
     }, {});
-  });
+  }) as PayloadArrayType[];
 
 const formatIntakeValues = (
   values: IntakeFormValuesType
@@ -83,7 +90,7 @@ const formatIntakeValues = (
     insurances,
   } = values;
 
-  const formattedClient = formatSimpleValues(client);
+  const formattedClient = formatCreateTypes(client);
 
   return {
     create: {
@@ -98,7 +105,7 @@ const formatIntakeValues = (
             create: formatFieldArrayValues(parents.value),
           },
           physician: {
-            create: formatSimpleValues(physician),
+            create: formatCreateTypes(physician),
           },
           insurances: {
             create: formatFieldArrayValues(insurances.value),
@@ -120,7 +127,7 @@ const formatIntakeQuestions = (
         return {
           ...accumulator,
           [fieldProp]: {
-            create: formatSimpleValues(fieldValue as CreateTypes),
+            create: formatCreateTypes(fieldValue as CreateTypes),
           },
         };
       }
