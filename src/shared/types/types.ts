@@ -215,14 +215,20 @@ export interface ClientCreateInputType {
 }
 
 export interface ClientPayloadType extends PersonalInformationPayloadType {
+  [key: string]:
+    | string
+    | ParentCreateInputType
+    | PhysicianCreateInputType
+    | InsuranceCreatePayloadType
+    | undefined;
   dob: string;
   gender: string;
-  otherGender: string;
   school: string;
   grade: string;
   parents: ParentCreateInputType;
   physician: PhysicianCreateInputType;
   insurances: InsuranceCreatePayloadType;
+  otherGender?: string;
 }
 
 export type PayloadArrayType = ParentPayloadType | InsurancePayloadType;
