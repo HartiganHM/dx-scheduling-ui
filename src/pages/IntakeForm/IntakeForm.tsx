@@ -23,7 +23,7 @@ import {
 import './IntakeForm.scss';
 
 const IntakeForm: FC = () => {
-  const [submitIntakeForm, { data }] = useMutation(CREATE_CLIENT_INTAKE);
+  const [submitIntakeForm] = useMutation(CREATE_CLIENT_INTAKE);
   const [{ intakeFormValues, intakeFormQuestions }, dispatch] = useStateValue();
 
   const { date, servicesRequested, parents } = intakeFormValues;
