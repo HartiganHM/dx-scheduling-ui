@@ -25,7 +25,7 @@ export interface MergeState {
 }
 
 // Errors
-export interface Errors {
+export interface Error {
   [key: string]: string;
 }
 

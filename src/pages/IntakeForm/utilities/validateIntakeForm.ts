@@ -1,13 +1,18 @@
 import { Dispatch } from 'react';
 
+import copyContent from 'shared/data/copyContent';
+
 import {
   Actions,
   ActionTypesEnum,
-  MergeState,
+  Error,
   FieldArrayTypes,
   FieldStringType,
   FieldBooleanType,
+  MergeState,
 } from 'shared/types/types';
+
+const { errorMessages } = copyContent;
 
 const validateIntakeForm = (
   stateToValidate: MergeState,
@@ -39,7 +44,7 @@ const validateIntakeForm = (
                         ...fieldAccumulator,
                         [groupedProp]: {
                           ...groupedValue,
-                          error: 'Object error',
+                          error: (errorMessages as Error)[groupedProp],
                         },
                       };
                     }
@@ -59,7 +64,7 @@ const validateIntakeForm = (
                   ...stateAccumulator,
                   [fieldProp]: {
                     ...fieldValue,
-                    error: 'Array error',
+                    error: (errorMessages as Error)[fieldProp],
                   },
                 };
               } else if (
@@ -81,7 +86,7 @@ const validateIntakeForm = (
                               ...fieldAccumulator,
                               [groupedProp]: {
                                 ...groupedValue,
-                                error: 'Array object error',
+                                error: (errorMessages as Error)[groupedProp],
                               },
                             };
                           } else if (groupedProp === 'address') {
@@ -102,7 +107,9 @@ const validateIntakeForm = (
                                       ...addressAccumulator,
                                       [addressProp]: {
                                         ...addressValue,
-                                        error: 'Address error',
+                                        error: (errorMessages as Error)[
+                                          groupedProp
+                                        ],
                                       },
                                     };
                                   }
@@ -135,7 +142,7 @@ const validateIntakeForm = (
                   ...stateAccumulator,
                   [fieldProp]: {
                     ...fieldValue,
-                    error: 'Field Error',
+                    error: (errorMessages as Error)[fieldProp],
                   },
                 };
               }
