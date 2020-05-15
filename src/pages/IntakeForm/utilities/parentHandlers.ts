@@ -65,6 +65,7 @@ const handleToggleIsInSameHousehold = (
       [value]: {
         ...sameHouseholdParents.value[index].address[value],
         required: !checked,
+        error: '',
       },
     }),
     {}
