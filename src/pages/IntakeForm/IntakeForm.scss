@@ -1,0 +1,42 @@
+@import '../../styles/main';
+
+.intake-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__field-title {
+    margin: 0;
+    margin-left: 1rem;
+    &:first-child {
+      margin-top: 1rem;
+    }
+  }
+  &__form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
+  &__field-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    padding: 1rem;
+    &-text-area {
+      align-items: end;
+    }
+  }
+  &__controls-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-top: 1px solid $gray-07;
+    background-color: $brand-xx-light;
+  }
+  &__add-button-icon {
+    margin-right: 0.5rem;
+  }
+  &__delete-button {
+    margin-left: 1rem;
+  }
+}

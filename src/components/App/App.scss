@@ -1,0 +1,26 @@
+@import '../../styles/main';
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  color: $gray-19;
+  & > :first-child {
+    flex: 1;
+  }
+}
+
+.dx-app {
+  height: 100%;
+}
