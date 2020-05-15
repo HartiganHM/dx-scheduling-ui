@@ -189,6 +189,14 @@ export interface CurrentlyViewing {
   backPath?: string;
 }
 
+export interface CurrentlyViewingByPathProps {
+  title: string;
+}
+
+export interface CurrentlyViewingByPath {
+  [key: string]: CurrentlyViewingByPathProps;
+}
+
 // GQL Input Types
 export interface IntakeFormPayload {
   intakeFormValues: IntakeFormValuesCreateInputType;

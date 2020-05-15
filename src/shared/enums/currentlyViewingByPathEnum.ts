@@ -1,4 +1,6 @@
-const currentlyViewingByPathEnum: any = {
+import { CurrentlyViewingByPath } from 'shared/types/types';
+
+const currentlyViewingByPathEnum: CurrentlyViewingByPath = {
   '/administration': {
     title: 'User Administration',
   },

@@ -76,7 +76,7 @@ const IntakeForm: FC = () => {
       },
     });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void | null> => {
     const isValid = validateIntakeForm(
       { intakeFormValues, intakeFormQuestions },
       dispatch
