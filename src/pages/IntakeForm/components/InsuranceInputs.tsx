@@ -3,7 +3,6 @@ import React, {
   ReactElement,
   FC,
   ChangeEvent,
-  useCallback,
   useEffect,
 } from 'react';
 
@@ -35,47 +34,6 @@ const InsuranceInputs: FC = (): ReactElement => {
   const { insurances, parents } = intakeFormValues;
   const { heading, labels, providers } = copyContent.insuranceInputs;
 
-  const handleUpdateFormValues = useCallback(
-    (
-      key: string,
-      updatedValues: FieldInsurancesType | FieldParentsType
-    ): void =>
-      dispatch({
-        type: ActionTypesEnum.UpdateIntakeValues,
-        intakeFormValues: {
-          ...intakeFormValues,
-          [key]: updatedValues,
-        },
-      }),
-    [dispatch, intakeFormValues]
-  );
-
-  const handleUpdateInsuredParentDobRequired = useCallback(
-    (name: string): void => {
-      const updatedParents = parents.value.map(parent => {
-        const { firstName } = parent;
-
-        if (name.includes(firstName.value)) {
-          return {
-            ...parent,
-            dob: {
-              ...parent.dob,
-              required: true,
-            },
-          };
-        }
-
-        return parent;
-      });
-
-      handleUpdateFormValues('parents', {
-        ...intakeFormValues.parents,
-        value: updatedParents as ParentType[],
-      });
-    },
-    [handleUpdateFormValues, intakeFormValues.parents, parents.value]
-  );
-
   useEffect(() => {
     const numberOfInsured = insurances.value.filter(
       insurance => insurance.insured.value
@@ -89,8 +47,43 @@ const InsuranceInputs: FC = (): ReactElement => {
         handleUpdateInsuredParentDobRequired(insurance.insured.value)
       );
     }
-  }, [handleUpdateInsuredParentDobRequired, insurances.value, parents.value]);
+    /*eslint-disable-next-line react-hooks/exhaustive-deps*/
+  }, [insurances.value]);
 
+  const handleUpdateFormValues = (
+    key: string,
+    updatedValues: FieldInsurancesType | FieldParentsType
+  ): void =>
+    dispatch({
+      type: ActionTypesEnum.UpdateIntakeValues,
+      intakeFormValues: {
+        ...intakeFormValues,
+        [key]: updatedValues,
+      },
+    });
+
+  const handleUpdateInsuredParentDobRequired = (name: string): void => {
+    const updatedParents = parents.value.map(parent => {
+      const { firstName } = parent;
+
+      if (name.includes(firstName.value)) {
+        return {
+          ...parent,
+          dob: {
+            ...parent.dob,
+            required: true,
+          },
+        };
+      }
+
+      return parent;
+    });
+
+    handleUpdateFormValues('parents', {
+      ...intakeFormValues.parents,
+      value: updatedParents as ParentType[],
+    });
+  };
   const renderInsurance = (
     insurance: InsuranceType,
     index: number
