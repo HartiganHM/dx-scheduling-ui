@@ -108,7 +108,7 @@ const validateIntakeForm = (
                                       [addressProp]: {
                                         ...addressValue,
                                         error: (errorMessages as Error)[
-                                          groupedProp
+                                          addressProp
                                         ],
                                       },
                                     };
