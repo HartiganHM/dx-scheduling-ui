@@ -35,17 +35,19 @@ const InsuranceInputs: FC = (): ReactElement => {
   const { heading, labels, providers } = copyContent.insuranceInputs;
 
   useEffect(() => {
-    const numberOfInsured = insurances.value.filter(
-      insurance => insurance.insured.value
-    ).length;
-    const numberOfDobRequired = parents.value.filter(
-      parent => parent.dob.required
-    ).length;
+    const insuredNames = insurances.value.reduce(
+      (accumulator, insurance) =>
+        !!insurance.insured.value &&
+        !accumulator.includes(insurance.insured.value)
+          ? [...accumulator, insurance.insured.value]
+          : accumulator,
+      [] as string[]
+    );
+    const numberOfDobCaptured = parents.value.filter(parent => parent.dob.value)
+      .length;
 
-    if (numberOfInsured !== numberOfDobRequired) {
-      insurances.value.forEach(insurance =>
-        handleUpdateInsuredParentDobRequired(insurance.insured.value)
-      );
+    if (insuredNames.length !== numberOfDobCaptured) {
+      handleUpdateInsuredParentDobRequired(insuredNames);
     }
     /*eslint-disable-next-line react-hooks/exhaustive-deps*/
   }, [insurances.value]);
@@ -62,11 +64,11 @@ const InsuranceInputs: FC = (): ReactElement => {
       },
     });
 
-  const handleUpdateInsuredParentDobRequired = (name: string): void => {
+  const handleUpdateInsuredParentDobRequired = (names: string[]): void => {
     const updatedParents = parents.value.map(parent => {
-      const { firstName } = parent;
+      const { firstName, lastName } = parent;
 
-      if (name.includes(firstName.value)) {
+      if (names.includes(`${firstName.value} ${lastName.value}`)) {
         return {
           ...parent,
           dob: {
@@ -76,7 +78,14 @@ const InsuranceInputs: FC = (): ReactElement => {
         };
       }
 
-      return parent;
+      return {
+        ...parent,
+        dob: {
+          ...parent.dob,
+          required: false,
+          error: '',
+        },
+      };
     });
 
     handleUpdateFormValues('parents', {
