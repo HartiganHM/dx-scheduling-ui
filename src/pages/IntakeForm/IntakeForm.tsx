@@ -103,36 +103,38 @@ const IntakeForm: FC = () => {
 
   return (
     <div className="intake-form">
-      <div className="intake-form__field-container">
-        <Input
-          type="date"
-          name="date"
-          label={labels.date}
-          value={date.value}
-          onChange={handleUpdateDate}
-          errorMessage={date.error}
-        />
+      <div className="intake-form__form-container">
+        <div className="intake-form__field-container">
+          <Input
+            type="date"
+            name="date"
+            label={labels.date}
+            value={date.value}
+            onChange={handleUpdateDate}
+            errorMessage={date.error}
+          />
 
-        <Checkbox
-          label={labels.servicesRequested}
-          onChange={handleSelectServices}
-          options={serviceOptions}
-          errorMessage={servicesRequested.error}
-        />
+          <Checkbox
+            label={labels.servicesRequested}
+            onChange={handleSelectServices}
+            options={serviceOptions}
+            errorMessage={servicesRequested.error}
+          />
+        </div>
+
+        <div className="intake-form__contacts">
+          <ClientInputs />
+          <ParentInputs />
+          <PrimaryCareProviderInputs />
+          <InsuranceInputs />
+          <GeneralQuestionsInputs />
+          {hasReferral.value && <ReferralInputs />}
+          <DiagnosisInputs />
+          <ConcernInputs />
+        </div>
       </div>
 
-      <div className="intake-form__contacts">
-        <ClientInputs />
-        <ParentInputs />
-        <PrimaryCareProviderInputs />
-        <InsuranceInputs />
-        <GeneralQuestionsInputs />
-        {hasReferral.value && <ReferralInputs />}
-        <DiagnosisInputs />
-        <ConcernInputs />
-      </div>
-
-      <div className="intake-form__parent-controls-container">
+      <div className="intake-form__controls-container">
         <Button onClick={handleAddParent} type="outline">
           <i
             className={classnames({
